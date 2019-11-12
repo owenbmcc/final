@@ -36,6 +36,6 @@ function draw() {
 	}
 
     if (scene == 'marsii'){
-        marsii(250, 200, 150);
+        marsii();
     }
 }
