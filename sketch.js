@@ -11,11 +11,12 @@ function setup() {
 	
 	var sceneSelector = createSelect();
 	sceneSelector.option('owen');
+	sceneSelector.option('nick');
 	sceneSelector.changed(selectScene);
 }
 
 function selectScene() {
-	scene = sceneSelector.value;
+	scene = this.value();
 }
 
 
@@ -23,5 +24,9 @@ function selectScene() {
 function draw() {
 	if (scene == 'owen') {
 		owen();
+	}
+    
+    if (scene == 'nick') {
+		nick();
 	}
 }
