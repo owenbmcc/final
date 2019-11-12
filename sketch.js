@@ -29,8 +29,13 @@ function draw() {
 	if (scene == 'owen') {
 		owen();
 	}
+
     
     if (scene == 'nick') {
 		nick();
 	}
+
+    if (scene == 'marsii'){
+        marsii();
+    }
 }
