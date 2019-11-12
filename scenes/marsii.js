@@ -40,6 +40,7 @@ function marsii() {
     
     background('midnight');
 	textSize(100);
+    fill('black');
 	textAlign(CENTER, CENTER);
 	text("Naomi's Scene", width/2, height/2);
 	text("Space game", width/2, height/2 + 100);
@@ -49,22 +50,24 @@ function marsii() {
     fill('plum')
     noStroke();
     ellipse(250, 200, 150); //face
-    fill('black');
-    stroke('white');
-    //rotate();
-    ellipse(50, 200, 50, 100); //left eye
-    ellipse(50, 200, 50, 100); //right eye
-    noStroke();
+   
     fill('plum');
-    triangle(200, 375, 250, 200, 250, 375); //body
+    triangle(200, 375, 250, 200, 300, 375); //body
     strokeWeight(10);
     stroke('plum');
     line(250, 80, 250, 200);
     noStroke();
     ellipse(250, 80, 50); //antenna top
-
+     fill('black');
+    stroke('white');
+    strokeWeight(1);
+    ellipse(220, 200, 35, 70); //left eye
+    ellipse(280, 200, 35, 70); //right eye
+     noStroke();
+    fill('plum');
     rect(220, 360, 15, 50); //left leg
     rect(260, 360, 15, 50); //right leg
+    fill('black');
 }
 
 
