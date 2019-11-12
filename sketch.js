@@ -17,7 +17,7 @@ function setup() {
 }
 
 function selectScene() {
-	scene = sceneSelector.value;
+	scene = this.value();
 }
 
 
