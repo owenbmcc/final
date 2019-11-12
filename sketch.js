@@ -11,6 +11,8 @@ function setup() {
 	
 	var sceneSelector = createSelect();
 	sceneSelector.option('owen');
+    sceneSelector.option('marsii');
+    
 	sceneSelector.changed(selectScene);
 }
 
