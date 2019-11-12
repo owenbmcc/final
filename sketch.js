@@ -11,7 +11,11 @@ function setup() {
 	
 	var sceneSelector = createSelect();
 	sceneSelector.option('owen');
+
 	sceneSelector.option('nick');
+    sceneSelector.option('marsii');
+    
+
 	sceneSelector.changed(selectScene);
 }
 
