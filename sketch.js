@@ -11,8 +11,11 @@ function setup() {
 	
 	var sceneSelector = createSelect();
 	sceneSelector.option('owen');
+
+	sceneSelector.option('nick');
     sceneSelector.option('marsii');
     
+
 	sceneSelector.changed(selectScene);
 }
 
@@ -26,6 +29,12 @@ function draw() {
 	if (scene == 'owen') {
 		owen();
 	}
+
+    
+    if (scene == 'nick') {
+		nick();
+	}
+
     if (scene == 'marsii'){
         marsii(250, 200, 150);
     }
