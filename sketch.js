@@ -27,6 +27,6 @@ function draw() {
 		owen();
 	}
     if (scene == 'marsii'){
-        marsii();
+        marsii(250, 200, 150);
     }
 }

@@ -1,4 +1,4 @@
-function setup() {
+/*function setup() {
     createCanvas(800, 800);
     //background('black');
     //alien(600, 200, 150, 0, 0);
@@ -9,6 +9,7 @@ function setup() {
     text(100,10, "Just something to have here")
 
 }
+*/
 /*
 function gren(x) {
 //function gren(x, y, size)
@@ -35,7 +36,7 @@ function gren(x) {
 }
 */
 
-function gren(x, y, size) {
+function marsii(x, y, size) {
     fill('plum')
     noStroke();
     ellipse(x, y, size); //face
