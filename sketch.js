@@ -26,4 +26,7 @@ function draw() {
 	if (scene == 'owen') {
 		owen();
 	}
+    if (scene == 'marsii'){
+        marsii();
+    }
 }
