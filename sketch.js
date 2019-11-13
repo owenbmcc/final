@@ -5,7 +5,6 @@
 */
 
 var scene = 'rpg';
-var scenes = ['owen', 'marsii', 'rpg'];
 
 var sceneObjects = {};
 sceneObjects['owen'] = new owen();
@@ -25,6 +24,7 @@ function setup() {
 	}
 
 	var sceneSelector = createSelect();
+	var scenes = Object.keys(sceneObjects);
 	for (let i = 0; i < scenes.length; i++) {
 		sceneSelector.option(scenes[i]);
 	}
