@@ -1,5 +1,5 @@
 function ekaterina() {
-	background(100);
+	background("purple");
 	textSize(120);
 	textAlign(CENTER, CENTER);
 	text("Ekaterina's Scene", width/2, height/2);
