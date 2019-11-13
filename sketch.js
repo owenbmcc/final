@@ -6,20 +6,29 @@
 
 var scene = 'owen';
 
+var sceneManager = {};
+sceneManager['owen'] = new owen();
+sceneManager['nick'] = new Scene();
+sceneManager['marsii'] = new Scene();
+sceneManager['nelson'] = new Scene();
+sceneManager['ekaterina'] = new Scene();
+sceneManager['jonathan'] = new Scene();
+sceneManager['maryam'] = new Scene();
+
+function preload() {
+	for (var scene in sceneManager) {
+		sceneManager[scene].preload();	
+	}
+}
+
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	
 	var sceneSelector = createSelect();
-	sceneSelector.option('owen');
-
-	sceneSelector.option('nick');
-    sceneSelector.option('marsii');
-    sceneSelector.option('nelson');
-    sceneSelector.option('ekaterina');
-    sceneSelector.option('jonathan');
-    sceneSelector.option('maryam');
-
-
+	var scenes = Object.keys(sceneManager);
+	for (var i = 0; i < scenes.length; i++) {
+		sceneSelector.option(scenes[i]);
+	}
 	sceneSelector.changed(selectScene);
 }
 
@@ -27,37 +36,6 @@ function selectScene() {
 	scene = this.value();
 }
 
-
-
 function draw() {
-	if (scene == 'owen') {
-		owen();
-	}
-
-    
-    if (scene == 'nick') {
-		nick();
-	}
-
-    if (scene == 'marsii'){
-        marsii();
-    }
-
-    
-    if (scene == 'nelson'){
-        nelson();
-    }
-
-    if (scene == 'ekaterina') {
-		ekaterina();
-	}
-
-    if (scene == 'jonathan'){
-        jonathan();
-    }
-    
-    if (scene =='maryam'){
-        maryam();    
-    }
-
+	sceneManager[scene].draw();
 }
