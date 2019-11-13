@@ -1,8 +1,4 @@
 class owen extends Scene {
-	setup() {
-
-	}
-
 	draw() {
 		background(51);
 		textSize(100);

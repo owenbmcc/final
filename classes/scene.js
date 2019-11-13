@@ -3,6 +3,10 @@ class Scene {
 
 	}
 
+	preload() {
+		
+	}
+
 	setup() {
 
 	}

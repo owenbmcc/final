@@ -1,14 +1,15 @@
-class rpg {
-	constructor() {
-		this.character = new Character();
+class rpg extends Scene {
+	preload() {
+		this.characterImage = loadImage('images/char.png');
 	}
 
-	preload() {
-		this.character.preload();
+	setup() {
+		this.character = new Character();
+		this.character.img = this.characterImage;
 	}
 
 	draw() {
-		background('blue');
+		background('lightblue');
 		this.character.update();
 		this.character.move();
 		this.character.display();

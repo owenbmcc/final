@@ -4,8 +4,9 @@
 	fall 2019
 */
 
-var scene = 'owen';
+var scene = 'rpg';
 var scenes = ['owen', 'marsii', 'rpg'];
+
 var sceneObjects = {};
 sceneObjects['owen'] = new owen();
 sceneObjects['rpg'] = new rpg();
@@ -18,6 +19,10 @@ function preload() {
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
+
+	for (var scene in sceneObjects) {
+		sceneObjects[scene].setup();
+	}
 
 	var sceneSelector = createSelect();
 	for (let i = 0; i < scenes.length; i++) {

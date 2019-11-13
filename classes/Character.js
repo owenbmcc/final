@@ -1,22 +1,15 @@
 class Character extends Thing {
-	constructor(img) {
-		super(width/2, height - 100, 100, 0, 0);
-		this.img = img;
+
+	constructor() {
+		super(width/2, height/2, 50, 8, 8);
 	}
-	
+
 	display() {
 		stroke(255, 0, 255);
 		noFill();
 		strokeWeight(1);
+		imageMode(CENTER);
 		image(this.img, this.x, this.y);
-		
-//		noStroke();
-		fill(0, 0, 255);
-		triangle(
-			this.x, this.y - this.size/2, 
-			this.x + this.size/2, this.y + this.size/2, 
-			this.x - this.size/2, this.y + this.size/2
-		);
 	}
 	
 	move() {
