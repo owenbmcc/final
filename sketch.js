@@ -14,8 +14,12 @@ function setup() {
 
 	sceneSelector.option('nick');
     sceneSelector.option('marsii');
+
     sceneSelector.option('nelson');
     
+
+    sceneSelector.option('ekaterina');
+
     
 
 	sceneSelector.changed(selectScene);
@@ -40,8 +44,15 @@ function draw() {
     if (scene == 'marsii'){
         marsii();
     }
+
     
     if (scene == 'nelson'){
         nelson();
     }
+
+    if (scene == 'ekaterina') {
+		ekaterina();
+	}
+
+
 }
