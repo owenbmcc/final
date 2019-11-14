@@ -4,7 +4,7 @@ class Scenery extends Thing {
 		this.img = img;
 	}
 
-	display() {
-		image(this.img, this.x, this.y);
+	display(x, y) {
+		image(this.img, this.x + x, this.y + y);
 	}
 }

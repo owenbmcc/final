@@ -17,8 +17,16 @@ class rpg extends Scene {
 
 	draw() {
 		background('lightblue');
-		this.character.update();
-		this.character.move();
+		
+		this.map.move();
+		this.map.update();
+		this.map.draw();
+		
+		this.map.collide(this.character);
+		
+//		this.character.update();
+//		this.character.move();
 		this.character.display();
+		
 	}
 }

@@ -5,9 +5,6 @@ class Character extends Thing {
 	}
 
 	display() {
-		stroke(255, 0, 255);
-		noFill();
-		strokeWeight(1);
 		imageMode(CENTER);
 		image(this.img, this.x, this.y);
 	}
