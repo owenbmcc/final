@@ -15,6 +15,8 @@ sceneManager['ekaterina'] = new Scene();
 sceneManager['jonathan'] = new Scene();
 sceneManager['maryam'] = new Scene();
 sceneManager['adonis'] = new adonis();
+sceneManager['maryam'] = new maryam();
+
 
 function preload() {
 	for (var scene in sceneManager) {
