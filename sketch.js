@@ -13,7 +13,7 @@ sceneManager['marsii'] = new Scene();
 sceneManager['nelson'] = new Scene();
 sceneManager['ekaterina'] = new Scene();
 sceneManager['jonathan'] = new Scene();
-sceneManager['maryam'] = new Scene();
+sceneManager['maryam'] = new maryam();
 
 function preload() {
 	for (var scene in sceneManager) {
