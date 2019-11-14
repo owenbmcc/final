@@ -5,6 +5,7 @@ class Character extends Thing {
 	}
 
 	display() {
+		super.display(this.x, this.y);
 		imageMode(CENTER);
 		image(this.img, this.x, this.y);
 	}

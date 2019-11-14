@@ -5,6 +5,16 @@ class Thing {
 		this.size = size;
 		this.speedX = speedX;
 		this.speedY = speedY;
+		this.debug = false;
+	}
+
+	display(x, y) {
+		if (this.debug) {
+			noFill();
+			strokeWeight(1);
+			stroke(0, 255, 0);
+			ellipse(x, y, this.size);
+		}
 	}
 		
 	update() {

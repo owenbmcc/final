@@ -10,5 +10,13 @@
 			],
 			"img":"images/thing.png"
 		}
+	},
+	"characters": {
+		"banana": {
+			"x": 200, 
+			"y": 400,
+			"img": "images/banana.png",
+			"dialog": "Hello, I'm a banana."
+		}
 	}
 }

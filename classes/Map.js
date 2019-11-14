@@ -1,6 +1,6 @@
 class Map {
 	constructor(src) {
-		this.sprites = { scenery: {} };
+		this.sprites = { scenery: {}, characters: {} };
 		this.src = src;
 		
 	}
@@ -20,6 +20,14 @@ class Map {
 						_this.sprites.scenery[key].push(new Scenery(position.x, position.y, img));
 					}
 				}
+
+				var characters = data.characters;
+				for (var key in characters) {
+					var character = characters[key];
+					var img = loadImage(character.img);
+					console.log(img);
+					_this.sprites.characters[key] = new NPC(character.x, character.y, img, character.dialog);
+				}
 			});
 	}
 	
@@ -28,6 +36,17 @@ class Map {
 		this.y = height/2;
 		this.speedX = 0;
 		this.speedY = 0;
+
+		for (var key in this.sprites.scenery) {
+			var list = this.sprites.scenery[key];
+			for (var i = 0; i < list.length; i++) {
+				list[i].setup();
+			}
+		}
+
+		for (var key in this.sprites.characters) {
+			this.sprites.characters[key].setup();
+		}
 	}
 	
 	collide(other) {
@@ -37,9 +56,16 @@ class Map {
 				var d = dist(list[i].x + this.x, list[i].y + this.y, other.x, other.y);
 				var s = list[i].size + other.size;
 				if (d < s/2) {
-					console.log('collide');
+					// console.log('collide');
 				}
 			}
+		}
+
+		for (var key in this.sprites.characters) {
+			var character = this.sprites.characters[key];
+			var d = dist(this.x + character.x, this.y + character.y, other.x, other.y);
+			var s = character.size + other.size;
+			character.displayDialog = (d < s/2);
 		}
 	}
 
@@ -49,6 +75,10 @@ class Map {
 			for (var i = 0; i < list.length; i++) {
 				list[i].display(this.x, this.y);
 			}
+		}
+
+		for (var key in this.sprites.characters) {
+			this.sprites.characters[key].display(this.x, this.y);
 		}
 	}
 	

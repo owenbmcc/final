@@ -11,6 +11,7 @@ class rpg extends Scene {
 
 	setup() {
 		this.character = new Character();
+		this.character.debug = true;
 		this.character.img = this.characterImage;
 		this.map.setup();
 	}

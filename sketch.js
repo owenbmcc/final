@@ -6,25 +6,25 @@
 
 var scene = 'rpg';
 
-var sceneObjects = {};
-sceneObjects['owen'] = new owen();
-sceneObjects['rpg'] = new rpg();
+var sceneManager = {};
+sceneManager['owen'] = new owen();
+sceneManager['rpg'] = new rpg();
 
 function preload() {
-	for (var scene in sceneObjects) {
-		sceneObjects[scene].preload();
+	for (var scene in sceneManager) {
+		sceneManager[scene].preload();
 	}
 }
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 
-	for (var scene in sceneObjects) {
-		sceneObjects[scene].setup();
+	for (var scene in sceneManager) {
+		sceneManager[scene].setup();
 	}
 
 	var sceneSelector = createSelect();
-	var scenes = Object.keys(sceneObjects);
+	var scenes = Object.keys(sceneManager);
 	for (let i = 0; i < scenes.length; i++) {
 		sceneSelector.option(scenes[i]);
 	}
@@ -36,5 +36,5 @@ function selectScene() {
 }
 
 function draw() {
-	sceneObjects[scene].draw();
+	sceneManager[scene].draw();
 }
