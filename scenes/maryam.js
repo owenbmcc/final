@@ -8,7 +8,6 @@ class maryam extends Scene {
 	draw() {
 		background('blue');
 		
-        
 		this.character.update();
 		this.character.move();
 		this.character.display();
