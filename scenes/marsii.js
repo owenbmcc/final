@@ -2,7 +2,7 @@ class marsii extends Scene {
 
     preload() {
         this.character = new Character();
-        this.character.img = loadImage('images/character.png');
+        this.character.img = loadImage('images/astronaut.png');
     }
 
     function marsii() {
