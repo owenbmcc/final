@@ -11,7 +11,7 @@ sceneManager['owen'] = new owen();
 sceneManager['nick'] = new Scene();
 sceneManager['marsii'] = new Scene();
 sceneManager['nelson'] = new Scene();
-sceneManager['ekaterina'] = new Scene();
+sceneManager['ekaterina'] = new ekaterina();
 sceneManager['jonathan'] = new Scene();
 sceneManager['maryam'] = new Scene();
 sceneManager['adonis'] = new adonis();
@@ -26,6 +26,8 @@ function preload() {
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
+	mySound.setVolume(0.1);
+  	mySound.play();
 	
 	var sceneSelector = createSelect();
 	var scenes = Object.keys(sceneManager);
