@@ -2,7 +2,7 @@ class Map {
 	constructor(src) {
 		this.sprites = { scenery: {}, characters: {}, obstacles: {} };
 		this.src = src;
-		
+		this.isColliding = false;
 	}
 
 	preload() {
@@ -62,6 +62,7 @@ class Map {
 			}
 		}
 
+
 		for (var key in this.sprites.characters) {
 			this.sprites.characters[key].setup();
 		}
@@ -69,13 +70,16 @@ class Map {
 	}
 
 	collide(other) {
+		var isColliding = false;
 		for (var key in this.sprites.obstacles) {
 			var list = this.sprites.obstacles[key];
 			for (var i = 0; i < list.length; i++) {
-				console.log(list[i].sprite.collide(other.sprite) )
-				list[i].sprite.collide(other.sprite);
+				if (other.sprite.collide(list[i].sprite)) {
+					isColliding = true;
+				}
 			}
 		}
+		this.isColliding = isColliding;
 
 		for (var key in this.sprites.characters) {
 			var character = this.sprites.characters[key];
@@ -105,8 +109,10 @@ class Map {
 	}
 
 	update() {
-		this.x += this.speedX;
-		this.y += this.speedY;
+		if (!this.isColliding) {
+			this.x += this.speedX;
+			this.y += this.speedY;
+		}
 
 		
 		for (var key in this.sprites.obstacles) {
