@@ -18,33 +18,42 @@ class rpg extends Scene {
 		this.character.img = this.characterImage;
 		this.map.setup();
 	}
+	
+	start() {
+		camera.on();
+		camera.position.x = 0;
+		camera.position.y = 0;
+	}
 
 	draw() {
 		background('lightblue');
-
 		
-		this.map.update();
+//		this.map.update();
 		this.map.draw();
 		this.map.collide(this.character);
 		
 		this.character.display();
+		this.character.update();
 
 		/* user input */
 		if (keyIsDown(RIGHT_ARROW)) {
-			this.map.speedX = -5;
+			this.character.speedX = 5;
 		} else if (keyIsDown(LEFT_ARROW)) {
-			this.map.speedX = 5;
+			this.character.speedX = -5;
 		} else {
-			this.map.speedX = 0;
+			this.character.speedX = 0;
 		}
 		
 		if (keyIsDown(DOWN_ARROW)) {
-			this.map.speedY = -5;
+			this.character.speedY = 5;
 		} else if (keyIsDown(UP_ARROW)) {
-			this.map.speedY = 5;	
+			this.character.speedY = -5;	
 		} else {
-			this.map.speedY = 0;	
+			this.character.speedY = 0;	
 		}
+		
+		camera.position.x = this.character.sprite.position.x;
+		camera.position.y = this.character.sprite.position.y;
 		
 	}
 }

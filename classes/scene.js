@@ -1,17 +1,8 @@
 class Scene {
-	constructor() {
-
-	}
-
-	preload() {
-		
-	}
-
-	setup() {
-
-	}
-
-	draw() {
-		
-	}
+	constructor() {}
+	preload() {}
+	setup() {}
+	start() {}
+	draw() {}
+	end() {}
 }

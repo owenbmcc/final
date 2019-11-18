@@ -1,6 +1,10 @@
 class Map {
 	constructor(src) {
-		this.sprites = { scenery: {}, characters: {}, obstacles: {} };
+		this.sprites = {
+			scenery: {},
+			characters: {},
+			obstacles: {}
+		};
 		this.src = src;
 		this.isColliding = false;
 	}
@@ -8,10 +12,10 @@ class Map {
 	preload() {
 		var _this = this;
 		fetch(this.src)
-			.then(function(response) {
+			.then(function (response) {
 				return response.json();
-			}).then(function(data) {
-				
+			}).then(function (data) {
+
 				var scenery = data.scenery;
 				for (var key in scenery) {
 
@@ -43,8 +47,8 @@ class Map {
 	}
 
 	setup() {
-		this.x = width/2;
-		this.y = height/2;
+		this.x = width / 2;
+		this.y = height / 2;
 		this.speedX = 0;
 		this.speedY = 0;
 
@@ -74,9 +78,7 @@ class Map {
 		for (var key in this.sprites.obstacles) {
 			var list = this.sprites.obstacles[key];
 			for (var i = 0; i < list.length; i++) {
-				if (other.sprite.collide(list[i].sprite)) {
-					isColliding = true;
-				}
+				other.sprite.collide(list[i].sprite);
 			}
 		}
 		this.isColliding = isColliding;
@@ -88,7 +90,7 @@ class Map {
 	}
 
 	draw() {
-		
+
 		for (var key in this.sprites.obstacles) {
 			var list = this.sprites.obstacles[key];
 			for (var i = 0; i < list.length; i++) {
@@ -112,29 +114,28 @@ class Map {
 		if (!this.isColliding) {
 			this.x += this.speedX;
 			this.y += this.speedY;
-		}
 
-		
-		for (var key in this.sprites.obstacles) {
-			var list = this.sprites.obstacles[key];
-			for (var i = 0; i < list.length; i++) {
-				list[i].sprite.position.x = list[i].x + this.x;
-				list[i].sprite.position.y = list[i].y + this.y;
+			for (var key in this.sprites.obstacles) {
+				var list = this.sprites.obstacles[key];
+				for (var i = 0; i < list.length; i++) {
+					list[i].sprite.position.x = list[i].x + this.x;
+					list[i].sprite.position.y = list[i].y + this.y;
+				}
 			}
-		}
 
-		for (var key in this.sprites.scenery) {
-			var list = this.sprites.scenery[key];
-			for (var i = 0; i < list.length; i++) {
-				list[i].sprite.position.x = list[i].x + this.x;
-				list[i].sprite.position.y = list[i].y + this.y;
+			for (var key in this.sprites.scenery) {
+				var list = this.sprites.scenery[key];
+				for (var i = 0; i < list.length; i++) {
+					list[i].sprite.position.x = list[i].x + this.x;
+					list[i].sprite.position.y = list[i].y + this.y;
+				}
 			}
-		}
 
-		for (var key in this.sprites.characters) {
-			const ch = this.sprites.characters[key]
-			ch.sprite.position.x = ch.x + this.x;
-			ch.sprite.position.y = ch.y + this.y;
+			for (var key in this.sprites.characters) {
+				const ch = this.sprites.characters[key]
+				ch.sprite.position.x = ch.x + this.x;
+				ch.sprite.position.y = ch.y + this.y;
+			}
 		}
 	}
 }

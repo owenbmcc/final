@@ -32,7 +32,9 @@ function setup() {
 }
 
 function selectScene() {
+	sceneManager[scene].start();
 	scene = this.value();
+	sceneManager[scene].end();
 }
 
 function draw() {

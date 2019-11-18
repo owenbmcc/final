@@ -9,7 +9,7 @@ class Thing {
 	}
 		
 	update() {
-		this.x += this.speedX;
-		this.y += this.speedY;
+		this.sprite.position.x += this.speedX;
+		this.sprite.position.y += this.speedY;
 	}
 }
