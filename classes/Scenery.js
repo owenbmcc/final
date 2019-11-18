@@ -1,17 +1,19 @@
 class Scenery extends Thing {
-	constructor(x, y, img) {
+	constructor(x, y, anim) {
 		super(x, y, 100);
-		this.img = img;
-		console.log(img);
-		this.debug = true;
+		this.sprite = createSprite(x, y);
+		this.anim = loadAnimation(anim);
 	}
 
 	setup() {
-		this.size = this.img.width;
+		this.sprite.addAnimation('default', this.anim);
 	}
 
-	display(x, y) {
-		super.display(this.x + x, this.y + y);
-		image(this.img, this.x + x, this.y + y);
+	display() {
+		this.sprite.display();
+	}
+
+	collide(other) {
+		this.sprite.collide(other.sprite);
 	}
 }

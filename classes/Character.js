@@ -1,30 +1,14 @@
 class Character extends Thing {
-
-	constructor() {
+	constructor(anims) {
 		super(width/2, height/2, 50, 8, 8);
+		this.sprite = createSprite(width/2, height/2);
+		for (var a in anims) {
+			this.sprite.addAnimation(a, anims[a]);
+		}
 	}
 
 	display() {
-		super.display(this.x, this.y);
-		imageMode(CENTER);
-		image(this.img, this.x, this.y);
+		this.sprite.display();
 	}
 	
-	move() {
-		if (keyIsDown(RIGHT_ARROW)) {
-			this.speedX = 5;
-		} else if (keyIsDown(LEFT_ARROW)) {
-			this.speedX = -5;
-		} else {
-			this.speedX = 0;
-		}
-		
-		if (keyIsDown(DOWN_ARROW)) {
-			this.speedY = 5;
-		} else if (keyIsDown(UP_ARROW)) {
-			this.speedY = -5;	
-		} else {
-			this.speedY = 0;	
-		}
-	}
 }

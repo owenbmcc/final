@@ -11,6 +11,17 @@
 			"img":"images/thing.png"
 		}
 	},
+	"obstacles": {
+		"ground": {
+			"positions": [
+				{ "x": 0, "y": 400 }
+			],
+			"width": 162,
+			"height": 54,
+			"frames": 1,
+			"img": "images/ground.png"
+		}
+	},
 	"characters": {
 		"banana": {
 			"x": 200, 

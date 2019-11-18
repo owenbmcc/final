@@ -5,14 +5,13 @@ class NPC extends Scenery {
 		this.displayDialog = false;
 	}
 
-	display(x, y) {
-		super.display(x, y);
-		console.log(this.displayDialog);
+	display() {
+		super.display();
 		if (this.displayDialog) {
 			fill(0);
 			noStroke();
 			textSize(20);
-			text(this.dialog, this.x + x, this.y + y);
+			text(this.dialog, this.sprite.position.x, this.sprite.position.y);
 		}
 	}
 }
