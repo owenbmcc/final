@@ -1,8 +1,17 @@
 class owen extends Scene {
 
 	preload() {
-		this.character = new Character();
-		this.character.img = loadImage('images/character.png');
+		
+//		this.character.img = loadImage('images/character.png');
+		// sprite sheet - src, width, height, number of sprites
+		this.walk = loadSpriteSheet('images/owen/walk.png', 68, 104, 5);
+	}
+	
+	setup() {
+		const animations = {
+			walk: loadAnimation(this.walk)
+		};
+		this.character = new Character(animations);
 	}
 	
 	draw() {
