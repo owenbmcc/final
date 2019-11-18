@@ -5,7 +5,7 @@ class marsii extends Scene {
         this.character.img = loadImage('images/astronaut.png');
     }
 
-    function marsii() {
+    draw() {
 
         background('DodgerBlue');
         textSize(100);
@@ -19,3 +19,4 @@ class marsii extends Scene {
         this.character.move();
         this.character.display();
     }
+}

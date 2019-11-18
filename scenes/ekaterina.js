@@ -1,17 +1,19 @@
-var gif_createImg;
 class ekaterina extends Scene {
+	
 	preload() {
-		gif_createImg = createImg("LION.gif");
-		soundFormats('mp3', 'ogg');
-  		mySound = loadSound('Roar.mp3');
+//		this.gif_createImg = createImg("images/LION.gif");
 		this.character = new Character();
 		this.character.img = loadImage('images/LION.gif');
 		this.character.sound = loadSound('sounds/Roar.mp3');
 	}
 	
+	start() {
+		this.character.sound.play();	
+	}
+	
 	draw() {
       background(141, 148, 255);
-  	  gif_createImg.position(width / 2, 280);
+//  	  gif_createImg.position(width / 2, 280);
       textSize(100);
       strokeWeight(10);
       stroke(17, 0, 255);

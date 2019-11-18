@@ -11,6 +11,11 @@ class Scene {
 		
 	}
 	
+	
+	start() {
+		
+	}
+	
 	draw() {
 		
 	}

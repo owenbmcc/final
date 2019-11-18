@@ -26,8 +26,8 @@ function preload() {
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
-	mySound.setVolume(0.1);
-  	mySound.play();
+
+	
 	
 	var sceneSelector = createSelect();
 	var scenes = Object.keys(sceneManager);
@@ -39,8 +39,14 @@ function setup() {
 
 function selectScene() {
 	scene = this.value();
+	sceneManager[scene].start();
 }
 
 function draw() {
 	sceneManager[scene].draw();
 }
+
+
+
+
+
