@@ -27,7 +27,9 @@ function preload() {
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 
-	
+	for (var scene in sceneManager) {
+		sceneManager[scene].setup();	
+	}
 	
 	var sceneSelector = createSelect();
 	var scenes = Object.keys(sceneManager);
@@ -35,6 +37,7 @@ function setup() {
 		sceneSelector.option(scenes[i]);
 	}
 	sceneSelector.changed(selectScene);
+	
 }
 
 function selectScene() {

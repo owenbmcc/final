@@ -14,7 +14,6 @@ class marsii extends Scene {
         text("Naomi's Scene", width / 2, height / 2);
         text("Space game", width / 2, height / 2 + 100);
 
-
         this.character.update();
         this.character.move();
         this.character.display();
