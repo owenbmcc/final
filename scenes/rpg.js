@@ -46,5 +46,7 @@ class rpg extends Scene {
 			this.map.speedY = 0;	
 		}
 		
+//		console.log(this.character.sprite.position.x, this.map.x);
+		
 	}
 }

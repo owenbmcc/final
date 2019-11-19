@@ -70,16 +70,17 @@ class Map {
 	}
 
 	collide(other) {
-		var isColliding = false;
 		for (var key in this.sprites.obstacles) {
 			var list = this.sprites.obstacles[key];
 			for (var i = 0; i < list.length; i++) {
 				if (other.sprite.collide(list[i].sprite)) {
-					isColliding = true;
+					this.isColliding = true; /* *** */
 				}
 			}
 		}
-		this.isColliding = isColliding;
+		
+
+		
 
 		for (var key in this.sprites.characters) {
 			var character = this.sprites.characters[key];
