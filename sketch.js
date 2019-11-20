@@ -38,9 +38,14 @@ function setup() {
 	}
 	sceneSelector.changed(selectScene);
 	
+	
+	scene = 'owen';
+	sceneManager[scene].start();
+	
 }
 
 function selectScene() {
+	sceneManager[scene].end();
 	scene = this.value();
 	sceneManager[scene].start();
 }

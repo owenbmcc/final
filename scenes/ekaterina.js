@@ -32,7 +32,7 @@ class ekaterina extends Scene {
 		text("...meow...", width / 2, 200);
 
 		this.character.update();
-		this.character.move();
+//		this.character.move();
 		this.character.display();
 	}
 
