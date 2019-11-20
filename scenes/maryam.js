@@ -2,7 +2,7 @@ class maryam extends Scene {
 
 	preload() {
 		this.character = new Character();
-		this.character.img = loadImage('images/orange.png');
+		this.character.img = loadImage('images/maryam/orange.png');
 	}
 	
 	draw() {
