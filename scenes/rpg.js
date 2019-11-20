@@ -23,7 +23,8 @@ class rpg extends Scene {
 		background('lightblue');
 
 		
-		this.map.update();
+		this.map.update(this.character);
+		
 		this.map.draw();
 		this.map.collide(this.character);
 		
@@ -46,7 +47,9 @@ class rpg extends Scene {
 			this.map.speedY = 0;	
 		}
 		
-//		console.log(this.character.sprite.position.x, this.map.x);
-		
 	}
 }
+
+
+
+

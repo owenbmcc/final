@@ -70,6 +70,7 @@ class Map {
 	}
 
 	collide(other) {
+		this.isColliding = false;
 		for (var key in this.sprites.obstacles) {
 			var list = this.sprites.obstacles[key];
 			for (var i = 0; i < list.length; i++) {
@@ -78,9 +79,6 @@ class Map {
 				}
 			}
 		}
-		
-
-		
 
 		for (var key in this.sprites.characters) {
 			var character = this.sprites.characters[key];
@@ -109,10 +107,20 @@ class Map {
 		}
 	}
 
-	update() {
+	update(character) {
 		if (!this.isColliding) {
 			this.x += this.speedX;
 			this.y += this.speedY;
+			
+			var deltaX = character.x - character.sprite.position.x;
+			if (deltaX > 2 || deltaX < -2) {
+				character.sprite.position.x += deltaX > 0 ? 5/2 : -5/2;
+			}
+			
+			var deltaY = character.y - character.sprite.position.y;
+			if (deltaY > 2 || deltaY < -2) {
+				character.sprite.position.y += deltaY > 0 ? 5/2 : -5/2;
+			}
 		}
 
 		
