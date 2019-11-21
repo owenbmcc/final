@@ -10,5 +10,9 @@ class Character extends Thing {
 	display() {
 		this.sprite.display();
 	}
+	
+	changeAnimation(animation) {
+		this.sprite.changeAnimation(animation);	
+	}
 
 }
