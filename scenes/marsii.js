@@ -2,6 +2,10 @@ class marsii extends Scene {
 
     preload() {
         this.character = new Character();
+       // this.walkleft = loadSpriteSheet('images/marsii/astwalkl.png', 68, 128, 8);
+        // this.walkright = loadSpriteSheet('images/marsii/astwalkr.png', 68, 128, 8);
+        // this.walkup = loadSpriteSheet('images/marsii/astwalku.png', 68, 128, 8)
+        // this.walkdown = loadSpriteSheet('images/marsii/astwalkd.png', 68, 128, 8)
         this.character.img = loadImage('images/astronaut.png');
     }
 
