@@ -1,12 +1,12 @@
 class marsii extends Scene {
 
     preload() {
-        this.character = new Character();
+        //this.character = new Character();
         
          this.walkright = loadSpriteSheet('images/marsii/astwalkr.png', 64, 128, 8);
          this.walkleft = loadSpriteSheet('images/marsii/astwalkl.png', 64, 128, 8);
-         this.walkup = loadSpriteSheet('images/marsii/astwalku.png', 64, 128, 8)
-         this.walkdown = loadSpriteSheet('images/marsii/astwalkd.png', 64, 128, 8)
+         this.walkup = loadSpriteSheet('images/marsii/astwalku.png', 64, 128, 8);
+         this.walkdown = loadSpriteSheet('images/marsii/astwalkd.png', 64, 128, 8);
          this.idle = loadSpriteSheet('images/marsii/astidle.png', 64, 128, 6);
         //this.character.img = loadImage('images/marsii/astwalkl.png');
     }
@@ -14,7 +14,6 @@ class marsii extends Scene {
     setup() {
 		const animations = {
            
-			
             walkright: loadAnimation(this.walkright),
             walkleft: loadAnimation(this.walkleft),
             walkup: loadAnimation(this.walkup),
@@ -23,6 +22,7 @@ class marsii extends Scene {
 			idle: loadAnimation(this.idle)
             
 		};
+        
 		this.character = new Character(animations);
 		this.character.changeAnimation('idle');
 	}
@@ -46,6 +46,7 @@ class marsii extends Scene {
         var isWalkingL = false;
         var isWalkingU = false;
         var isWalkingD = false;
+        
 		if (keyIsDown(RIGHT_ARROW)) {
 			this.character.speedX = 5;
 			isWalkingR = true;
