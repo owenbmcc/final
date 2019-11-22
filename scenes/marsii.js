@@ -1,4 +1,6 @@
 class marsii extends Scene {
+    
+   
 
     preload() {
         //this.character = new Character();
@@ -8,10 +10,13 @@ class marsii extends Scene {
          this.walkup = loadSpriteSheet('images/marsii/astwalku.png', 64, 128, 8);
          this.walkdown = loadSpriteSheet('images/marsii/astwalkd.png', 64, 128, 8);
          this.idle = loadSpriteSheet('images/marsii/astidle.png', 64, 128, 6);
+         this.startSet = loadImage('images/marsii/spacegstartset.png');
         //this.character.img = loadImage('images/marsii/astwalkl.png');
     }
     
     setup() {
+        //createCanvas(800,800)
+            //background('');
 		const animations = {
            
             walkright: loadAnimation(this.walkright),
@@ -28,8 +33,8 @@ class marsii extends Scene {
 	}
     
     draw() {
-
-        background('DodgerBlue');
+        
+        background(this.startSet);
         textSize(10);
         fill('black');
         textAlign(CENTER, 100);
@@ -40,7 +45,7 @@ class marsii extends Scene {
         this.character.update();
 		this.character.display();
 		
-		/* user input - move character around */
+		///* user input - move character around 
 		
         var isWalkingR = false;
         var isWalkingL = false;
@@ -79,4 +84,5 @@ class marsii extends Scene {
 			this.character.changeAnimation('idle');
 		}
     }
+   
 }
