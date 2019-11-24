@@ -1,22 +1,19 @@
 class marsii extends Scene {
 
 
-
     preload() {
-        //this.character = new Character();
 
         this.walkright = loadSpriteSheet('images/marsii/astwalkr.png', 64, 128, 8);
         this.walkleft = loadSpriteSheet('images/marsii/astwalkl.png', 64, 128, 8);
         this.walkup = loadSpriteSheet('images/marsii/astwalku.png', 64, 128, 8);
         this.walkdown = loadSpriteSheet('images/marsii/astwalkd.png', 64, 128, 8);
         this.idle = loadSpriteSheet('images/marsii/astidle.png', 64, 128, 6);
-        this.startSet = loadImage('images/marsii/testset.png');
+        //this.startSet = loadImage('images/marsii/testset.png');
 
     }
 
     setup() {
 
-        //background('');
         const animations = {
 
             walkright: loadAnimation(this.walkright),
@@ -35,7 +32,6 @@ class marsii extends Scene {
 
     draw() {
 
-    }
     /*
     //bg = this.startSet;
          //.5 zoom is zooming out (50% of the normal size)
@@ -46,18 +42,18 @@ class marsii extends Scene {
    // camera.position.x = character.position.x;
    // camera.position.y = character.position.y;
    */
-    //createCanvas(1200,1000);
-    background(this.startSet);
+    
+    //background(this.startSet);
     textSize(10);
     background('DarkBlue');
     fill('black');
     textAlign(CENTER, 100);
     text("Naomi's Scene", width / 2, height / 2);
 
-    this.character.update();
-    this.character.display();
+		this.character.update();
+		this.character.display();
 
-    ///* user input - move character around 
+    // user input - move character around 
 
     var isWalkingR = false;
     var isWalkingL = false;
@@ -98,5 +94,6 @@ class marsii extends Scene {
 
 
 }
+
 
 }
