@@ -7,7 +7,8 @@ class marsii extends Scene {
         this.walkleft = loadSpriteSheet('images/marsii/astwalkl.png', 64, 128, 8);
         this.walkup = loadSpriteSheet('images/marsii/astwalku.png', 64, 128, 8);
         this.walkdown = loadSpriteSheet('images/marsii/astwalkd.png', 64, 128, 8);
-        this.idle = loadSpriteSheet('images/marsii/astidle.png', 64, 128, 6);
+        this.idle = loadSpriteSheet('images/marsii/astidleslow.png', 64, 128, 12);
+        //this.idle = loadSpriteSheet('images/marsii/astidle.png', 64, 128, 6);
         //this.startSet = loadImage('images/marsii/testset.png');
 
     }
@@ -31,18 +32,22 @@ class marsii extends Scene {
     }
 
     draw() {
-
-    /*
-    //bg = this.startSet;
-         //.5 zoom is zooming out (50% of the normal size)
+        
   if(mouseIsPressed)
     camera.zoom = 0.5;
   else
     camera.zoom = 1;
-   // camera.position.x = character.position.x;
-   // camera.position.y = character.position.y;
-   */
+    /*
+    //bg = this.startSet;
+         //.5 zoom is zooming out (50% of the normal size)
+
     
+   */
+        
+        //camera.position.x = this.sprite.position.x;
+		//camera.position.y = this.sprite.position.y;
+
+        
     //background(this.startSet);
     textSize(10);
     background('DarkBlue');
@@ -92,7 +97,8 @@ class marsii extends Scene {
         this.character.changeAnimation('idle');
     }
 
-
+        //camera.position.x = this.character.positionX;
+        //camera.position.y = this.character.positionY;
 }
 
 
