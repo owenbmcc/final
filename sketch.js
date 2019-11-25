@@ -48,6 +48,7 @@ function selectScene() {
 	sceneManager[scene].end();
 	scene = this.value();
 	sceneManager[scene].start();
+	this.elt.blur();
 }
 
 function draw() {

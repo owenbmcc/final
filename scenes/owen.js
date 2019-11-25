@@ -70,7 +70,8 @@ class owen extends Scene {
 		
 		if (isWalking) {
 			this.character.changeAnimation('walk');
-			random(this.walkSounds).play();
+			if (this.walkSounds.every(sound => sound.isPlaying() == false))
+				random(this.walkSounds).play();
 		} else {
 			this.character.changeAnimation('idle');
 		}
