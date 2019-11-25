@@ -18,7 +18,8 @@ class owen extends Scene {
 		this.walkSounds[1].playMode('sustain');
 		this.walkSounds[2].playMode('sustain');
 
-
+		this.map = new Map();
+		this.map.preload('data/owen.json');
 
 	}
 	
@@ -29,13 +30,15 @@ class owen extends Scene {
 		};
 		this.character = new Character(animations);
 		this.character.changeAnimation('idle');
+		
+		this.map.setup();
 
 	}
 	
 	start() {
 //		this.bg.play();
 //		this.bg.loop();
-
+		this.map.start();
 	}
 	
 	end() {
@@ -75,11 +78,18 @@ class owen extends Scene {
 		
 		if (isWalking) {
 			this.character.changeAnimation('walk');
-			if (this.walkSounds.every(sound => sound.isPlaying() == false))
+			if (this.walkSounds.every(sound => sound.isPlaying() == false)) {
 				random(this.walkSounds).play();
+			}
 		} else {
 			this.character.changeAnimation('idle');
 		}
+		
+		/* update map */
+		this.map.collide(this.character);
+		this.map.move(this.character);
+//		this.map.update(this.character);
+		this.map.display();
 
 		/* update character */
 		this.character.update();
@@ -87,3 +97,6 @@ class owen extends Scene {
 
 	}
 }
+
+
+
