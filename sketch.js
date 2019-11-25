@@ -9,7 +9,7 @@ var scene = 'owen';
 var sceneManager = {};
 sceneManager['owen'] = new owen();
 sceneManager['nick'] = new Scene();
-sceneManager['marsii'] = new Scene();
+sceneManager['marsii'] = new marsii();
 sceneManager['nelson'] = new Scene();
 sceneManager['ekaterina'] = new ekaterina();
 sceneManager['jonathan'] = new Scene();
@@ -39,8 +39,8 @@ function setup() {
 	sceneSelector.changed(selectScene);
 	
 	
-	scene = 'owen';
-	sceneManager[scene].start();
+	// scene = 'owen';
+	// sceneManager[scene].start();
 	
 }
 
@@ -48,6 +48,7 @@ function selectScene() {
 	sceneManager[scene].end();
 	scene = this.value();
 	sceneManager[scene].start();
+	this.elt.blur();
 }
 
 function draw() {

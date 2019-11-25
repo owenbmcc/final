@@ -1,18 +1,26 @@
 class Character extends Thing {
-	constructor(animations) {
-		super(width/2, height/2, 100, 0, 0);
+	constructor(anims) {
+		super();
 		this.sprite = createSprite(width/2, height/2);
-		for (var a in animations) {
-			this.sprite.addAnimation(a, animations[a]);
+		for (var a in anims) {
+			this.sprite.addAnimation(a, anims[a]);
 		}
 	}
-	
+
 	display() {
 		this.sprite.display();
 	}
-	
-	changeAnimation(animation) {
-		this.sprite.changeAnimation(animation);	
+
+	changeAnimation(label) {
+		this.sprite.changeAnimation(label);
 	}
 
+	get x() {
+		return this.sprite.position.x;
+	}
+
+	get y() {
+		return this.sprite.position.y;
+	}
+	
 }

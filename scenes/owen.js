@@ -17,6 +17,9 @@ class owen extends Scene {
 		this.walkSounds[0].playMode('sustain');
 		this.walkSounds[1].playMode('sustain');
 		this.walkSounds[2].playMode('sustain');
+
+
+
 	}
 	
 	setup() {
@@ -26,11 +29,13 @@ class owen extends Scene {
 		};
 		this.character = new Character(animations);
 		this.character.changeAnimation('idle');
+
 	}
 	
 	start() {
 //		this.bg.play();
 //		this.bg.loop();
+
 	}
 	
 	end() {
@@ -39,12 +44,12 @@ class owen extends Scene {
 	
 	draw() {
 		background(220);
+
+		/* some instructions */
 		textAlign(CENTER);
 		textSize(20);
 		text('move the character with arrows', width/2, 100);
-
-		this.character.update();
-		this.character.display();
+		
 		
 		/* user input - move character around */
 		var isWalking = false;
@@ -70,9 +75,15 @@ class owen extends Scene {
 		
 		if (isWalking) {
 			this.character.changeAnimation('walk');
-			random(this.walkSounds).play();
+			if (this.walkSounds.every(sound => sound.isPlaying() == false))
+				random(this.walkSounds).play();
 		} else {
 			this.character.changeAnimation('idle');
 		}
+
+		/* update character */
+		this.character.update();
+		this.character.display();
+
 	}
 }
