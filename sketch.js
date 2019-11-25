@@ -39,8 +39,8 @@ function setup() {
 	sceneSelector.changed(selectScene);
 	
 	
-	scene = 'owen';
-	sceneManager[scene].start();
+	// scene = 'owen';
+	// sceneManager[scene].start();
 	
 }
 
