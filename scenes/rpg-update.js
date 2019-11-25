@@ -1,4 +1,4 @@
-class rpg extends Scene {
+class rpgUpdate extends Scene {
 	constructor() {
 		super();
 		this.map = new Map('scenes/rpg.json');
@@ -24,7 +24,7 @@ class rpg extends Scene {
 	}
 
 	draw() {
-		background('lightblue');
+		background('lightgreen');
 
 		/* user input */
 		if (keyIsDown(RIGHT_ARROW)) {
@@ -44,9 +44,10 @@ class rpg extends Scene {
 		}
 		
 
-		this.map.draw();
+		this.map.display();
 		this.map.collide(this.character);
-		this.map.move(this.character);
+		// this.map.move(this.character);
+		this.map.update(this.character);
 		
 		this.character.display();
 		this.character.update();
