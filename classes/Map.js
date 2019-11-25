@@ -37,7 +37,7 @@ class Map {
 					}
 				}
 
-				var characters = data.characters;
+				var characters = data.npc;
 				for (var key in characters) {
 					var c = characters[key];
 					var spriteSheet = loadSpriteSheet(c.img, c.width, c.height, c.frames);
