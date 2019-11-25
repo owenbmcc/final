@@ -14,37 +14,38 @@ class Map {
 				
 				var scenery = data.scenery;
 				for (var key in scenery) {
-
-					var img = loadImage(scenery[key].img);
+					var s = scenery[key];
+					var spriteSheet = loadSpriteSheet(s.img, s.width, s.height, s.frames);
 					_this.sprites.scenery[key] = [];
-					for (var i = 0; i < scenery[key].positions.length; i++) {
-						var position = scenery[key].positions[i];
-						_this.sprites.scenery[key].push(new Scenery(position.x, position.y, img));
+					for (var i = 0; i < s.positions.length; i++) {
+						var position = s.positions[i];
+						_this.sprites.scenery[key].push(new Scenery(position.x, position.y, spriteSheet));
 					}
 				}
 
 				var obstacles = data.obstacles;
 				for (var key in obstacles) {
-					var obs = obstacles[key];
-					var spriteSheet = loadSpriteSheet(obs.img, obs.width, obs.height, obs.frames);
+					var o = obstacles[key];
+					var spriteSheet = loadSpriteSheet(o.img, o.width, o.height, o.frames);
 					_this.sprites.obstacles[key] = [];
-					for (var i = 0; i < obs.positions.length; i++) {
+					for (var i = 0; i < o.positions.length; i++) {
+						var position = o.positions[i];
 						_this.sprites.obstacles[key].push(new Scenery(position.x, position.y, spriteSheet));
 					}
 				}
 
 				var characters = data.characters;
 				for (var key in characters) {
-					var character = characters[key];
-					var img = loadImage(character.img);
-					_this.sprites.characters[key] = new NPC(character.x, character.y, img, character.dialog);
+					var c = characters[key];
+					var spriteSheet = loadSpriteSheet(c.img, c.width, c.height, c.frames);
+					_this.sprites.characters[key] = new NPC(c.x, c.y, spriteSheet, c.dialog);
 				}
 			});
 	}
 
 	setup() {
-		this.x = width/2;
-		this.y = height/2;
+		this.x = 0;
+		this.y = 0;
 		this.speedX = 0;
 		this.speedY = 0;
 
@@ -66,7 +67,6 @@ class Map {
 		for (var key in this.sprites.characters) {
 			this.sprites.characters[key].setup();
 		}
-
 	}
 
 	collide(other) {
@@ -107,7 +107,16 @@ class Map {
 		}
 	}
 
-	update(character) {
+	move(character) {
+		console.log(character.x);
+		if (character.x < 0) {
+			this.x += width/2;
+			character.x = width/2;
+		}
+
+	}
+
+	offset(character) {
 		if (!this.isColliding) {
 			this.x += this.speedX;
 			this.y += this.speedY;
@@ -122,7 +131,9 @@ class Map {
 				character.sprite.position.y += deltaY > 0 ? 5/2 : -5/2;
 			}
 		}
+	}
 
+	update() {
 		
 		for (var key in this.sprites.obstacles) {
 			var list = this.sprites.obstacles[key];

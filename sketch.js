@@ -4,11 +4,12 @@
 	fall 2019
 */
 
-var scene = 'rpg';
+var scene = 'rpg2';
 
 var sceneManager = {};
 sceneManager['owen'] = new owen();
 sceneManager['rpg'] = new rpg();
+sceneManager['rpg2'] = new rpg2();
 
 function preload() {
 	for (var scene in sceneManager) {
