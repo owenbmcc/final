@@ -10,8 +10,10 @@ class marsii extends Scene {
         this.walkdown = loadSpriteSheet('images/marsii/astwalkd.png', 64, 128, 8);
         this.idle = loadSpriteSheet('images/marsii/astidleslow.png', 64, 128, 12);
         //this.idle = loadSpriteSheet('images/marsii/astidle.png', 64, 128, 6);
-        //this.startSet = loadImage('images/marsii/testset.png');
-
+        //this.startSet = loadImage('images/marsii/testmap.png', 4830 , 3150);
+		this.map = new Map();
+        this.map.preload('data/marsii.json');
+		
     }
 
     setup() {
@@ -31,8 +33,18 @@ class marsii extends Scene {
         this.character = new Character(animations);
         this.character.changeAnimation('idle');
 
+        this.map.setup();
     }
-
+    	start() {
+//		this.bg.play();
+//		this.bg.loop();
+		this.map.start();
+	}
+	
+	end() {
+		//this.bg.pause();	
+	}
+	
     draw() {
 
         //map maybe big, helps to have camera
@@ -53,13 +65,13 @@ class marsii extends Scene {
 
         //background(this.startSet);
         textSize(10);
-        background('DarkBlue');
+        //background('DarkBlue');
         fill('black');
         textAlign(CENTER, 100);
         text("Naomi's Scene", width / 2, height / 2);
 
-        this.character.update();
-        this.character.display();
+        //this.character.update();
+        //this.character.display();
 
         // user input - move character around 
 
@@ -99,7 +111,15 @@ class marsii extends Scene {
         } else {
             this.character.changeAnimation('idle');
         }
-
+		/* update map */
+		this.map.collide(this.character);
+		this.map.move(this.character);
+//		this.map.update(this.character);
+		this.map.display();
+        
+        /* update character */
+		this.character.update();
+		this.character.display();
     }
 
 
