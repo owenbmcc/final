@@ -1,17 +1,21 @@
 class NPC extends Scenery {
-	constructor(x, y, img, dialog) {
-		super(x, y, img);
+	constructor(x, y, anim, dialog) {
+		super(x, y, anim);
 		this.dialog = dialog;
 		this.displayDialog = false;
 	}
 
 	display() {
 		super.display();
+		this.fontStyle();
 		if (this.displayDialog) {
-			fill(0);
-			noStroke();
-			textSize(20);
-			text(this.dialog, this.sprite.position.x, this.sprite.position.y);
+			text(this.dialog, this.x + this.sprite.width, this.y);
 		}
+	}
+	
+	fontStyle() {
+		textSize(20);
+		fill(0);
+		noStroke();
 	}
 }

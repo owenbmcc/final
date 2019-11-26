@@ -20,6 +20,9 @@ class owen extends Scene {
 
 		this.map = new Map();
 		this.map.preload('data/owen.json');
+		
+		var spriteSheet = loadSpriteSheet('images/owen/cat.png', 100, 88, 1);
+		this.npc = new NPC(100, 400, spriteSheet, "Hit Enter");
 
 	}
 	
@@ -32,6 +35,13 @@ class owen extends Scene {
 		this.character.changeAnimation('idle');
 		
 		this.map.setup();
+		this.npc.setup();
+		
+		this.npc.fontStyle = function() {
+			textSize(50);
+			fill('yellow');
+			noStroke();
+		};
 
 	}
 	
@@ -83,6 +93,14 @@ class owen extends Scene {
 			}
 		} else {
 			this.character.changeAnimation('idle');
+		}
+		
+		this.npc.display();
+		if (this.npc.overlap(this.character)) {
+			this.npc.displayDialog = true;
+			if (keyIsDown(ENTER)) {
+				changeScene('marsii');	
+			}
 		}
 		
 		/* update map */

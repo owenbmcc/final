@@ -45,10 +45,14 @@ function setup() {
 }
 
 function selectScene() {
-	sceneManager[scene].end();
-	scene = this.value();
-	sceneManager[scene].start();
+	changeScene(this.value());
 	this.elt.blur();
+}
+
+function changeScene(_scene) {
+	sceneManager[scene].end();
+	scene = _scene;
+	sceneManager[scene].start();
 }
 
 function draw() {
