@@ -1,6 +1,6 @@
 class Scenery extends Thing {
 	constructor(x, y, anim) {
-		super(x, y);
+		super();
 		this.sprite = createSprite(x, y);
 		this.anim = loadAnimation(anim);
 	}

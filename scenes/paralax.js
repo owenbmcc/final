@@ -2,12 +2,16 @@ class paralax extends Scene {
 	constructor() {
 		super();
 		this.map = new ParalaxMap('scenes/paralax.json');
-
 	}
 
 	preload() {
 		this.characterDefault = loadSpriteSheet('images/test.png', 160, 160, 2);
 		this.map.preload();
+		
+		this.link = new ParalaxScenery(500, 600, 'images/test.png', 0.5);
+		this.link.sprite.onMousePressed = function() {
+			console.log('click');	
+		};
 	}
 
 	setup() {
@@ -29,6 +33,9 @@ class paralax extends Scene {
 		this.map.collide(this.character);
 
 		this.map.paralax(paralaxScroll);
+		
+		this.link.display();
+		
 		
 		this.character.display();
 

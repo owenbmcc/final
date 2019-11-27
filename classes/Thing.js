@@ -1,5 +1,5 @@
 class Thing {
-	constructor(x, y, speedX, speedY) {
+	constructor(speedX, speedY) {
 		this.speedX = speedX;
 		this.speedY = speedY;
 		this.debug = false;
