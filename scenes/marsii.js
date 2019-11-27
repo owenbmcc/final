@@ -1,74 +1,126 @@
-/*function setup() {
-    createCanvas(800, 800);
-    //background('black');
-    //alien(600, 200, 150, 0, 0);
-    gren(250,200,150);
-    //semi-working but flawed
-    //gren(250, 200, 150);
-    textSize(20)
-    text(100,10, "Just something to have here")
+class marsii extends Scene {
+
+
+    preload() {
+
+        //Main character - Astronaut
+        this.walkright = loadSpriteSheet('images/marsii/astwalkr.png', 64, 128, 8);
+        this.walkleft = loadSpriteSheet('images/marsii/astwalkl.png', 64, 128, 8);
+        this.walkup = loadSpriteSheet('images/marsii/astwalku.png', 64, 128, 8);
+        this.walkdown = loadSpriteSheet('images/marsii/astwalkd.png', 64, 128, 8);
+        this.idle = loadSpriteSheet('images/marsii/astidleslow.png', 64, 128, 12);
+        //this.idle = loadSpriteSheet('images/marsii/astidle.png', 64, 128, 6);
+        //this.startSet = loadImage('images/marsii/testmap.png', 4830 , 3150);
+		this.map = new Map();
+        this.map.preload('data/marsii.json');
+		
+    }
+
+    setup() {
+
+
+        const animations = {
+
+            //Main character directional and idle animation
+            walkright: loadAnimation(this.walkright),
+            walkleft: loadAnimation(this.walkleft),
+            walkup: loadAnimation(this.walkup),
+            walkdown: loadAnimation(this.walkdown),
+            idle: loadAnimation(this.idle)
+
+        };
+
+        this.character = new Character(animations);
+        this.character.changeAnimation('idle');
+
+        this.map.setup();
+    }
+    	start() {
+//		this.bg.play();
+//		this.bg.loop();
+		this.map.start();
+	}
+	
+	end() {
+		//this.bg.pause();	
+	}
+	
+    draw() {
+
+        //map maybe big, helps to have camera
+        if (mouseIsPressed)
+            camera.zoom = 0.5;
+        else
+            camera.zoom = 1;
+        /*
+    //bg = this.startSet;
+         //.5 zoom is zooming out (50% of the normal size)
+
+    
+   */
+
+        //camera.position.x = this.sprite.position.x;
+        //camera.position.y = this.sprite.position.y;
+
+
+        //background(this.startSet);
+        textSize(10);
+        //background('DarkBlue');
+        fill('black');
+        textAlign(CENTER, 100);
+        text("Naomi's Scene", width / 2, height / 2);
+
+        //this.character.update();
+        //this.character.display();
+
+        // user input - move character around 
+
+        var isWalkingR = false;
+        var isWalkingL = false;
+        var isWalkingU = false;
+        var isWalkingD = false;
+
+        if (keyIsDown(RIGHT_ARROW)) {
+            this.character.speedX = 5;
+            isWalkingR = true;
+        } else if (keyIsDown(LEFT_ARROW)) {
+            this.character.speedX = -5;
+            isWalkingL = true;
+        } else {
+            this.character.speedX = 0;
+        }
+
+        if (keyIsDown(DOWN_ARROW)) {
+            this.character.speedY = 5;
+            isWalkingD = true;
+        } else if (keyIsDown(UP_ARROW)) {
+            this.character.speedY = -5;
+            isWalkingU = true;
+        } else {
+            this.character.speedY = 0;
+        }
+
+        if (isWalkingR) {
+            this.character.changeAnimation('walkright');
+        } else if (isWalkingL) {
+            this.character.changeAnimation('walkleft');
+        } else if (isWalkingD) {
+            this.character.changeAnimation('walkdown');
+        } else if (isWalkingU) {
+            this.character.changeAnimation('walkup');
+        } else {
+            this.character.changeAnimation('idle');
+        }
+		/* update map */
+		this.map.collide(this.character);
+		this.map.move(this.character);
+//		this.map.update(this.character);
+		this.map.display();
+        
+        /* update character */
+		this.character.update();
+		this.character.display();
+    }
+
 
 }
-*/
-/*
-function gren(x) {
-//function gren(x, y, size)
-//need to make body change properly based on size
-    fill(50, 186, 78);
-    
-    y = x/1.25
-    size = y*.75
-
-    ellipse(x, y, size); //face
-    fill('black');
-    stroke('white');
-    //rotate();
-    ellipse(x - size/5, y, size/5, size/2.5); //left eye
-    ellipse(x + size/5, y, size/5, size/2.5); //right eye
-    noStroke();
-    fill(50, 186, 78);
-    triangle(x-x/5, y*1.875, x, y, x+x/5, y*1.875); //body
-    rect(x - 8, y/2.5, size/10, size/3); //antenna
-    ellipse(x, y/2.5, size/3); //antenna top
-
-    rect(x/1.15, y*1.8, size/10, size/3); //left leg
-    rect(x/.95, y*1.8, size/10, size/3); //right leg
-}
-*/
-
-function marsii() {
-    
-    background('midnight');
-	textSize(100);
-    fill('black');
-	textAlign(CENTER, CENTER);
-	text("Naomi's Scene", width/2, height/2);
-	text("Space game", width/2, height/2 + 100);
-    textSize(20);
-    text("yay aliens", width/2, height/2 + 300);
-    
-    fill('plum')
-    noStroke();
-    ellipse(250, 200, 150); //face
-   
-    fill('plum');
-    triangle(200, 375, 250, 200, 300, 375); //body
-    strokeWeight(10);
-    stroke('plum');
-    line(250, 80, 250, 200);
-    noStroke();
-    ellipse(250, 80, 50); //antenna top
-     fill('black');
-    stroke('white');
-    strokeWeight(1);
-    ellipse(220, 200, 35, 70); //left eye
-    ellipse(280, 200, 35, 70); //right eye
-     noStroke();
-    fill('plum');
-    rect(220, 360, 15, 50); //left leg
-    rect(260, 360, 15, 50); //right leg
-    fill('black');
-}
-
-
-
