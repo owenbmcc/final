@@ -8,6 +8,7 @@ var scene = 'owen';
 
 var sceneManager = {};
 sceneManager['owen'] = new owen();
+sceneManager['paralax'] = new ParalaxScene();
 sceneManager['nick'] = new nick();
 sceneManager['marsii'] = new Scene();
 sceneManager['nick'] = new Scene();
@@ -46,15 +47,24 @@ function setup() {
 	
 }
 
-function selectScene() {
+function changeScene(_scene) {
 	sceneManager[scene].end();
-	scene = this.value();
+	scene = _scene;
 	sceneManager[scene].start();
+}
+
+function selectScene() {
+	changeScene(this.value());
 	this.elt.blur();
 }
 
 function draw() {
-	sceneManager[scene].draw();
+	sceneManager[scene].draw(paralaxScroll);
+}
+
+var paralaxScroll = 0;
+function mouseWheel(event) {
+	paralaxScroll = event.delta;
 }
 
 

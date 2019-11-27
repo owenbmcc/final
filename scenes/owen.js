@@ -20,6 +20,9 @@ class owen extends Scene {
 
 		this.map = new Map();
 		this.map.preload('data/owen.json');
+		
+		var spriteSheet = loadSpriteSheet('images/owen/bird.png', 180, 200, 1);
+		this.sceneLink = new NPC(100, 400, spriteSheet, "Hit Enter to go somewhere new!");
 
 	}
 	
@@ -32,6 +35,7 @@ class owen extends Scene {
 		this.character.changeAnimation('idle');
 		
 		this.map.setup();
+		this.sceneLink.setup();
 
 	}
 	
@@ -83,6 +87,23 @@ class owen extends Scene {
 			}
 		} else {
 			this.character.changeAnimation('idle');
+		}
+		
+		
+		/* check npcs */
+		this.sceneLink.display();
+		if (this.sceneLink.overlap(this.character)) {
+			/* style dialog */
+			textSize(30);
+			textFont("Comic Sans MS");
+			fill('pink');
+			stroke('blue');
+			strokeWeight(4);
+			this.sceneLink.displayDialog();
+			
+			if (keyIsDown(ENTER)) {
+				changeScene('paralax');
+			}
 		}
 		
 		/* update map */
