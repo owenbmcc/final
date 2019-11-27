@@ -11,6 +11,24 @@ class marsii extends Scene {
         this.idle = loadSpriteSheet('images/marsii/astidleslow.png', 64, 128, 12);
         //this.idle = loadSpriteSheet('images/marsii/astidle.png', 64, 128, 6);
         //this.startSet = loadImage('images/marsii/testmap.png', 4830 , 3150);
+      /*  
+        this.walkSounds = [];
+		this.walkSounds[0] = loadSound('sounds/marsii/asttalk.wav');
+		
+		this.walkSounds[0].playMode('sustain');
+        
+        this.talkSounds = [];
+		this.talkSounds[0] = loadSound('sounds/marsii/footsteps.wav');
+
+		this.talkSounds[0].playMode('sustain');
+        
+        this.bgSounds = [];
+		this.bgSounds[0] = loadSound('sounds/marsii/goodjob.wav'); //used when task completed
+        this.bgSounds[1] = loadSound('sounds/marsii/select.wav'); //used when selecting dialogue and path
+
+		this.bgSounds[0].playMode('sustain');
+        this.bgSounds[1].playMode('sustain');
+        */
 		this.map = new Map();
         this.map.preload('data/marsii.json');
 		
@@ -34,8 +52,10 @@ class marsii extends Scene {
         this.character.changeAnimation('idle');
 
         this.map.setup();
+          
     }
-    	start() {
+    /*
+    start() {
 //		this.bg.play();
 //		this.bg.loop();
 		this.map.start();
@@ -44,7 +64,7 @@ class marsii extends Scene {
 	end() {
 		//this.bg.pause();	
 	}
-	
+	*/
     draw() {
 
         //map maybe big, helps to have camera
