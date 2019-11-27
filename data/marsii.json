@@ -9,8 +9,64 @@
 				{ "x": 0, "y": 0 }
 			]
 		}
-	}
+	},
     
+    
+    "npc": {
+		"static": {
+			"img": "images/marsii/npcs/staticAlien.png",
+			"width": 64,
+			"height": 128,
+			"frames": 8,
+			"x": 3000,
+			"y": 400,
+			"dialog": "H?, you need me for energy."
+		}
+	},
+    "npc": {
+		"cosmica": {
+			"img": "images/marsii/npcs/cosmicAlien.png",
+			"width": 64,
+			"height": 128,
+			"frames": 6,
+			"x": 1000,
+			"y": 400,
+			"dialog": "Hey, you need me to mark your map, freeze liquid,  ."
+		}
+	},
+    "npc": {
+		"creep": {
+			"img": "images/marsii/npcs/creepAlien.png",
+			"width": 126,
+			"height": 126,
+			"frames": 5,
+			"x": 1000,
+			"y": 400,
+			"dialog": "Greetings, you need me to lift your ship, or for my translator ."
+		}
+	},
+    "npc": {
+		"branch": {
+			"img": "images/marsii/npcs/plantAlien.png",
+			"width": 64,
+			"height": 128,
+			"frames": 4,
+			"x": 900,
+			"y": 1000,
+			"dialog": "Hello, you need me to for my ship, or to repair yours ."
+		}
+	},
+    "npc": {
+		"liqua": {
+			"img": "images/marsii/npcs/liquidAlien.png",
+			"width": 64,
+			"height": 128,
+			"frames": 4,
+			"x": 2800,
+			"y": 2400,
+			"dialog": "Hi, you need me for a map and tools, or a key ."
+		}
+    }
 }
 
 
