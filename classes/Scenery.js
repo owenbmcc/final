@@ -16,4 +16,8 @@ class Scenery extends Thing {
 	collide(other) {
 		this.sprite.collide(other.sprite);
 	}
+	
+	overlap(other) {
+		return this.sprite.overlap(other.sprite);
+	}
 }
