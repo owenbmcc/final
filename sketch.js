@@ -8,7 +8,7 @@ var scene = 'owen';
 
 var sceneManager = {};
 sceneManager['owen'] = new owen();
-sceneManager['nick'] = new Scene();
+sceneManager['nick'] = new nick();
 sceneManager['marsii'] = new Scene();
 sceneManager['nelson'] = new Scene();
 sceneManager['ekaterina'] = new Scene();
