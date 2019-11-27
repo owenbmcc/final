@@ -108,12 +108,10 @@ class Map {
 	}
 
 	move(character) {
-		console.log(character.x);
 		if (character.x < 0) {
 			this.x += width/2;
 			character.x = width/2;
 		}
-
 	}
 
 	offset(character) {

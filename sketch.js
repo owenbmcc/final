@@ -4,12 +4,16 @@
 	fall 2019
 */
 
-var scene = 'rpg2';
+var scene = 'paralax';
 
 var sceneManager = {};
 sceneManager['owen'] = new owen();
 sceneManager['rpg'] = new rpg();
 sceneManager['rpg2'] = new rpg2();
+sceneManager['paralax'] = new paralax();
+
+var paralaxScroll = 0;
+
 
 function preload() {
 	for (var scene in sceneManager) {
@@ -37,5 +41,9 @@ function selectScene() {
 }
 
 function draw() {
-	sceneManager[scene].draw();
+	sceneManager[scene].draw(paralaxScroll);
+}
+
+function mouseWheel(event) {
+	paralaxScroll = event.delta;
 }

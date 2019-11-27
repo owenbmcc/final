@@ -16,10 +16,28 @@
 			"width": 64,
 			"height": 64,
 			"frames": 1,
-			"img":"images/thing.png"
-		}
-	},
-	"obstacles": {
+			"img":"images/thing.png",
+			"speed": 0.5
+		},
+		"mountain2": {
+			"positions": [
+				{ "x": 100, "y": 0 },
+				{ "x": 200, "y": 0 },
+				{ "x": 300, "y": 0 },
+				{ "x": 400, "y": 0 },
+				{ "x": 500, "y": 0 },
+				{ "x": 600, "y": 0 },
+				{ "x": 700, "y": 0 },
+				{ "x": 800, "y": 0 },
+				{ "x": 900, "y": 0 },
+				{ "x": 1000, "y": 0 }
+			],
+			"width": 64,
+			"height": 64,
+			"frames": 1,
+			"img":"images/thing.png",
+			"speed": 0.25
+		},
 		"ground": {
 			"positions": [
 				{ "x": 0, "y": 200 }
@@ -27,7 +45,8 @@
 			"width": 162,
 			"height": 54,
 			"frames": 1,
-			"img": "images/ground.png"
+			"img": "images/ground.png",
+			"speed": 0.1
 		}
 	},
 	"characters": {
