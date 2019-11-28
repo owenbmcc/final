@@ -30,7 +30,7 @@ class ekaterina extends Scene {
         this.map.preload('data/ekaterina.json');
         
         var spriteSheet = loadSpriteSheet('images/ekaterina/gateway.png', 350, 350, 4);
-		this.sceneLink = new NPC(100, 400, spriteSheet);
+		this.sceneLink = new NPC(-100, 400, spriteSheet);
 	}
 
 	
