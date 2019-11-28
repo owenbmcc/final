@@ -4,11 +4,13 @@
 	fall 2019
 */
 
-var scene = 'nick';
+var scene = 'ekaterina';
 
 var sceneManager = {};
 sceneManager['owen'] = new owen();
 sceneManager['paralax'] = new ParalaxScene();
+sceneManager['mousewins'] = new MousewinsScene();
+sceneManager['lionwins'] = new LionwinsScene();
 sceneManager['nick'] = new nick();
 sceneManager['marsii'] = new Scene();
 sceneManager['marsii'] = new marsii();

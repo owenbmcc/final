@@ -12,8 +12,7 @@ class ekaterina extends Scene {
         this.lionmovesleft = loadSpriteSheet('images/ekaterina/lionmovesleft.png', 500, 500, 11);
 		this.lionidle = loadSpriteSheet('images/ekaterina/lionidle.png', 500, 500, 15),
         
-        this.background = loadImage('images/ekaterina/background.png');
-        this.remixSound = loadSound('sounds/ekaterina/remix.mp3');
+        //this.remixSound = loadSound('sounds/ekaterina/remix.mp3');
         
         this.MouseSounds = [];
 		this.MouseSounds[0] = loadSound('sounds/ekaterina/mousemoves.mp3');
@@ -22,6 +21,16 @@ class ekaterina extends Scene {
         this.LionSounds = [];
         this.LionSounds[0] = loadSound('sounds/ekaterina/lionmoves.mp3');
         this.LionSounds[0].playMode('sustain');
+        
+        this.WinSound = [];
+        this.WinSound[0] = loadSound('sounds/ekaterina/winsound.mp3');
+        this.WinSound[0].playMode('sustain');
+        
+        this.map = new Map();
+        this.map.preload('data/ekaterina.json');
+        
+        var spriteSheet = loadSpriteSheet('images/ekaterina/gateway.png', 350, 350, 4);
+		this.sceneLink = new NPC(100, 400, spriteSheet);
 	}
 
 	
@@ -45,14 +54,15 @@ class ekaterina extends Scene {
         this.characterLion = new Character(animations);
 		this.characterLion.changeAnimation('lionidle');
         
+        this.map.setup();
+        this.sceneLink.setup();
 	}
     
     start() {
-        this.remixSound.play();
+        //this.remixSound.play();
     }
 
 	draw() {
-		background(this.background);
         
         this.characterMouse.update();
 		this.characterMouse.display();
@@ -71,21 +81,21 @@ class ekaterina extends Scene {
         
 		if (keyIsDown(88))//Key X 
         {
-			this.characterLion.speedX = 10;
+			this.characterLion.speedX = 7;
 			isWalkingRightLion = true;
 		} else if (keyIsDown(90))//Key Z 
         {
-			this.characterLion.speedX = -10;
+			this.characterLion.speedX = -7;
 			isWalkingLeftLion = true;
 		} else {
 			this.characterLion.speedX = 0;
 		}
         
         if (keyIsDown(RIGHT_ARROW)) {
-			this.characterMouse.speedX = 10;
+			this.characterMouse.speedX = 7;
 			isWalkingRightMouse = true;
 		} else if (keyIsDown(LEFT_ARROW)) {
-			this.characterMouse.speedX = -10;
+			this.characterMouse.speedX = -7;
 			isWalkingLeftMouse = true;
 		} else {
 			this.characterMouse.speedX = 0;
@@ -117,7 +127,34 @@ class ekaterina extends Scene {
 			this.characterMouse.changeAnimation('mousemovesleft');
             if (this.MouseSounds.every(sound => sound.isPlaying() == false))
                 random(this.MouseSounds).play();
-		} 
-	}
+		}
+        
+        this.map.collide(this.characterMouse, this.characterLion);
+        this.map.move(this.characterMouse, this.characterLion);
+
+		this.map.display();
+        
+        this.characterMouse.update();
+		this.characterMouse.display();
+        
+		this.characterLion.update();
+		this.characterLion.display();
+        
+        this.sceneLink.display();
+		if (this.sceneLink.overlap(this.characterMouse))
+        {
+                changeScene('mousewins');
+                if (this.WinSound.every(sound => sound.isPlaying() == false))
+                random(this.WinSound).play();
+		}
+        
+        this.sceneLink.display();
+		if (this.sceneLink.overlap(this.characterLion)) 
+        {
+				changeScene('lionwins');
+                if (this.WinSound.every(sound => sound.isPlaying() == false))
+                random(this.WinSound).play();
+		}
+}
 
 }
