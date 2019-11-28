@@ -5,7 +5,6 @@ class Map {
 			characters: {},
 			obstacles: {}
 		};
-		this.isColliding = false;
 	}
 
 	preload(src) {
@@ -49,9 +48,6 @@ class Map {
 	}
 
 	setup() {
-		this.x = 0;
-		this.y = 0;
-
 		for (var key in this.sprites.obstacles) {
 			var list = this.sprites.obstacles[key];
 			for (var i = 0; i < list.length; i++) {
@@ -66,11 +62,12 @@ class Map {
 			}
 		}
 
-
 		for (var key in this.sprites.characters) {
 			this.sprites.characters[key].setup();
 		}
 	}
+	
+	
 
 	start() {
 		camera.on();
@@ -126,6 +123,15 @@ class Map {
 
 		var offsetY = floor(character.y / height);
 		camera.position.y = offsetY * height + height/2;
+	}
+	
+	fuck() {
+		console.log('fuck');
+	}
+	
+	addSprite(label, sprite, type) {
+		this.sprites[type][label] = [];
+		this.sprites[type][label].push(sprite);
 	}
 
 
