@@ -8,8 +8,8 @@ class marsii extends Scene {
         this.walkleft = loadSpriteSheet('images/marsii/astwalkl.png', 64, 128, 8);
         this.walkup = loadSpriteSheet('images/marsii/astwalku.png', 64, 128, 8);
         this.walkdown = loadSpriteSheet('images/marsii/astwalkd.png', 64, 128, 8);
-        this.idle = loadSpriteSheet('images/marsii/astidleslow.png', 64, 128, 12);
-        //this.idle = loadSpriteSheet('images/marsii/astidle.png', 64, 128, 6);
+        //this.idle = loadSpriteSheet('images/marsii/astidleslow.png', 64, 128, 12);
+        this.idle = loadSpriteSheet('images/marsii/astidle.png', 64, 128, 15);
         //this.startSet = loadImage('images/marsii/testmap.png', 4830 , 3150);
       /*  
         this.walkSounds = [];
@@ -29,6 +29,14 @@ class marsii extends Scene {
 		this.bgSounds[0].playMode('sustain');
         this.bgSounds[1].playMode('sustain');
         */
+        
+        var spriteSheet = loadSpriteSheet('/images/marsii/npcs/staticAlien.png', 64, 128, 8);
+		this.sceneLink = new NPC(100, 100, spriteSheet, "Hi. you need me for energy.");
+        
+        var spriteSheet = loadSpriteSheet('/images/marsii/npcs/cosmicAlien.png', 64, 130, 6);
+		this.sceneLink = new NPC(1200, 1200, spriteSheet, "Hi. you need me for my power.");
+
+
 		this.map = new Map();
         this.map.preload('data/marsii.json');
 		
@@ -52,7 +60,7 @@ class marsii extends Scene {
         this.character.changeAnimation('idle');
 
         this.map.setup();
-          
+        this.sceneLink.setup();
     }
     /*
     start() {
@@ -100,10 +108,10 @@ class marsii extends Scene {
         var isWalkingU = false;
         var isWalkingD = false;
 
-        if (keyIsDown(RIGHT_ARROW)) {
+        if (keyIsDown(RIGHT_ARROW) && this.character.x < 1000) {
             this.character.speedX = 5;
             isWalkingR = true;
-        } else if (keyIsDown(LEFT_ARROW)) {
+        } else if (keyIsDown(LEFT_ARROW) && this.character.x > 0) {
             this.character.speedX = -5;
             isWalkingL = true;
         } else {
@@ -131,6 +139,8 @@ class marsii extends Scene {
         } else {
             this.character.changeAnimation('idle');
         }
+        
+
 		/* update map */
 		this.map.collide(this.character);
 		this.map.move(this.character);
@@ -140,7 +150,95 @@ class marsii extends Scene {
         /* update character */
 		this.character.update();
 		this.character.display();
+        
+                		/* check npcs */
+		this.sceneLink.display();
+		if (this.sceneLink.overlap(this.character)) {
+			/* style dialog */
+			textSize(10);
+			fill('purple');
+			stroke('black');
+			strokeWeight(1);
+			this.sceneLink.displayDialog();
+			
+		}
     }
 
 
 }
+/* json stuff I need later
+{
+    "scenery": {
+        "background": {
+			"img":	"images/marsii/testmap.png",
+			"width": 4830,
+			"height": 3150,
+			"frames": 1,
+			"positions": [
+				{ "x": 2415, "y": 1575 }
+			]
+		}
+	},
+    
+    "scenery": {
+        "background": {
+			"img":	"images/marsii/testset.png",
+			"width": 1200,
+			"height": 1000,
+			"frames": 1,
+			"positions": [
+				{ "x": 700, "y": 600 }
+			]
+		}
+	},
+    
+    
+    
+    
+    "npc": {
+		"static": {
+			"img": "images/marsii/npcs/staticAlien.png",
+			"width": 64,
+			"height": 128,
+			"frames": 8,
+			"x": 1000,
+			"y": 400,
+			"dialog": "H?, you need me for energy."
+		},
+		"cosmica": {
+			"img": "images/marsii/npcs/cosmicAlien.png",
+			"width": 64,
+			"height": 128,
+			"frames": 6,
+			"x": 1000,
+			"y": 400,
+			"dialog": "Hey, you need me to mark your map, freeze liquid,  ."
+		},
+		"creep": {
+			"img": "images/marsii/npcs/creepAlien.png",
+			"width": 126,
+			"height": 126,
+			"frames": 5,
+			"x": 1000,
+			"y": 400,
+			"dialog": "Greetings, you need me to lift your ship, or for my translator ."
+		},
+		"branch": {
+			"img": "images/marsii/npcs/plantAlien.png",
+			"width": 64,
+			"height": 128,
+			"frames": 4,
+			"x": 900,
+			"y": 1000,
+			"dialog": "Hello, you need me to for my ship, or to repair yours ."
+		},
+		"liqua": {
+			"img": "images/marsii/npcs/liquidAlien.png",
+			"width": 64,
+			"height": 128,
+			"frames": 4,
+			"x": 2800,
+			"y": 2400,
+			"dialog": "Hi, you need me for a map and tools, or a key ."
+		}
+*/

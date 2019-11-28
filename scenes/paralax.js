@@ -4,14 +4,15 @@ class ParalaxScene extends Scene {
 		this.map.preload('data/paralax.json');
 		
 		var spriteSheet = loadSpriteSheet('images/paralax/another_cat.png', 100, 88, 1);
-		this.cat = new Scenery(300, 600, spriteSheet);
-		
+		this.cat = new ParalaxScenery(300, 600, spriteSheet, 0.15);
+		this.map.addSprite('cat', this.cat, 'scenery');
 		
 	}
 	
 	setup() {
 		this.map.setup();
 		this.cat.setup();
+
 		
 		this.cat.sprite.onMousePressed = function() {
 			changeScene('owen');	
