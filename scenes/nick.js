@@ -20,6 +20,9 @@ class nick extends Scene {
 */
 		this.map = new Map();
 		this.map.preload('data/nick.json');
+        
+        var spriteSheet = loadSpriteSheet('images/nick/ben.png', 32, 32, 1);
+		this.sceneLink = new NPC(800, -100, spriteSheet, "Yo! Let's Battle! *Hit Enter To Battle!*");
 
 	}
 	
@@ -32,6 +35,7 @@ class nick extends Scene {
 		this.character.changeAnimation('idle');
 		
 		this.map.setup();
+        this.sceneLink.setup();
 
 	}
 	
@@ -42,7 +46,7 @@ class nick extends Scene {
 	}
 	
 	end() {
-		this.bg.pause();	
+//		this.bg.pause();	
 	}
 	
 	draw() {
@@ -83,6 +87,27 @@ class nick extends Scene {
 			this.character.changeAnimation('idle');
 		}
 		
+        
+		/* check npcs */
+		this.sceneLink.display();
+		if (this.sceneLink.overlap(this.character)) {
+			/* style dialog */
+			textSize(30);
+			textFont("Arial");
+			fill('red');
+			stroke('black');
+			strokeWeight(4);
+			this.sceneLink.displayDialog();
+			
+			if (keyIsDown(ENTER)) {
+				changeScene('paralax');
+			}
+		}
+        
+        
+        
+        
+        
 		/* update map */
 		this.map.collide(this.character);
 		this.map.move(this.character);
