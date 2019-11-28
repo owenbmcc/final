@@ -24,7 +24,6 @@ class ParalaxMap extends Map {
 			var list = this.sprites.scenery[key];
 			for (var i = 0; i < list.length; i++) {
 				list[i].y -= list[i].speed * delta;
-				// console.log(list[i].y, list[i].speed, delta);
 			}
 		}
 	}
