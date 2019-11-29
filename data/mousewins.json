@@ -1,12 +1,12 @@
 {
        "scenery": {
-        "background": {
+        "mousewins": {
 			"img":	"images/ekaterina/mousewins.png",
-			"width": 10,
-			"height": 10,
-			"frames": 1,
+			"width": 2569,
+			"height": 500,
+			"frames": 0,
 			"positions": [
-				{ "x": 0, "y": 400 }
+				{ "x": 0, "y": 0 }
 			]
             
 		}
