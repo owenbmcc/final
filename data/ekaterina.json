@@ -1,5 +1,5 @@
 {
-       "scenery": {
+    "scenery": {
         "background": {
 			"img":	"images/ekaterina/background.png",
 			"width": 23300,
@@ -11,6 +11,7 @@
             
 		}
 	}
+
 }
 
 

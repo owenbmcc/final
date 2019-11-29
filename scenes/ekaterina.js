@@ -4,13 +4,15 @@ class ekaterina extends Scene {
 	preload() {
         
 		// sprite sheet - src, width, height, number of sprites
-        this.mousemovesright = loadSpriteSheet('images/ekaterina/mousemovesright.png', 200, 200, 4);
-        this.mousemovesleft = loadSpriteSheet('images/ekaterina/mousemovesleft.png', 200, 200, 4);
-        this.mouseidle = loadSpriteSheet('images/ekaterina/mouseidle.png', 200, 200, 15);
+        this.mousemovesright = loadSpriteSheet('images/ekaterina/mousemovesright.png', 150, 93, 4);
+        this.mousemovesleft = loadSpriteSheet('images/ekaterina/mousemovesleft.png', 150, 93, 4);
+        this.mouseidle = loadSpriteSheet('images/ekaterina/mouseidle.png', 100, 106, 15);
+       
         
-        this.lionmovesright = loadSpriteSheet('images/ekaterina/lionmovesright.png', 500, 500, 11);
-        this.lionmovesleft = loadSpriteSheet('images/ekaterina/lionmovesleft.png', 500, 500, 11);
-		this.lionidle = loadSpriteSheet('images/ekaterina/lionidle.png', 500, 500, 15),
+        
+        this.lionmovesright = loadSpriteSheet('images/ekaterina/lionmovesright.png', 400, 212, 11);
+        this.lionmovesleft = loadSpriteSheet('images/ekaterina/lionmovesleft.png', 400, 212, 11);
+		this.lionidle = loadSpriteSheet('images/ekaterina/lionidle.png', 200, 216, 15),
         
         //this.remixSound = loadSound('sounds/ekaterina/remix.mp3');
         
@@ -25,6 +27,9 @@ class ekaterina extends Scene {
         this.WinSound = [];
         this.WinSound[0] = loadSound('sounds/ekaterina/winsound.mp3');
         this.WinSound[0].playMode('sustain');
+        
+        this.obstacles = new Map();
+        this.obstacles.preload('data/obstacles.json');
         
         this.map = new Map();
         this.map.preload('data/ekaterina.json');
@@ -53,6 +58,8 @@ class ekaterina extends Scene {
         
         this.characterLion = new Character(animations);
 		this.characterLion.changeAnimation('lionidle');
+        
+        this.obstacles.setup();
         
         this.map.setup();
         this.sceneLink.setup();
@@ -129,10 +136,14 @@ class ekaterina extends Scene {
                 random(this.MouseSounds).play();
 		}
         
-        this.map.collide(this.characterMouse, this.characterLion);
-        this.map.move(this.characterMouse, this.characterLion);
+        this.obstacles.collide(this.characterLion);
+        this.obstacles.move(this.characterLion);
+        
+        this.obstacles.collide(this.characterMouse);
+        this.obstacles.move(this.characterMouse);
 
-		this.map.display();
+        this.map.display();
+        this.obstacles.display();
         
         this.characterMouse.update();
 		this.characterMouse.display();

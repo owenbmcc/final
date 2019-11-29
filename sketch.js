@@ -4,7 +4,7 @@
 	fall 2019
 */
 
-var scene = 'owen';
+var scene = 'ekaterina';
 
 var sceneManager = {};
 sceneManager['owen'] = new owen();
