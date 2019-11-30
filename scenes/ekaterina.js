@@ -53,10 +53,10 @@ class ekaterina extends Scene {
 		};
 
         
-        this.characterMouse = new Character(animations);
+        this.characterMouse = new Mouse(animations);
         this.characterMouse.changeAnimation('mouseidle');
         
-        this.characterLion = new Character(animations);
+        this.characterLion = new Lion(animations);
 		this.characterLion.changeAnimation('lionidle');
         
         this.obstacles.setup();
@@ -135,21 +135,21 @@ class ekaterina extends Scene {
             if (this.MouseSounds.every(sound => sound.isPlaying() == false))
                 random(this.MouseSounds).play();
 		}
+          
+        this.obstacles.collide(this.characterMouse);
+        this.obstacles.move(this.characterMouse);
         
         this.obstacles.collide(this.characterLion);
         this.obstacles.move(this.characterLion);
-        
-        this.obstacles.collide(this.characterMouse);
-        this.obstacles.move(this.characterMouse);
 
         this.map.display();
         this.obstacles.display();
         
+        this.characterLion.update();
+		this.characterLion.display();
+        
         this.characterMouse.update();
 		this.characterMouse.display();
-        
-		this.characterLion.update();
-		this.characterLion.display();
         
         this.sceneLink.display();
 		if (this.sceneLink.overlap(this.characterMouse))
