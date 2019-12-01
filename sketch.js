@@ -4,7 +4,7 @@
 	fall 2019
 */
 
-var scene = 'owen';
+var scene = 'ekaterina';
 
 var sceneManager = {};
 sceneManager['owen'] = new owen();
@@ -43,7 +43,7 @@ function setup() {
 	sceneSelector.changed(selectScene);
 	
 	
-	// scene = 'owen';
+	changeScene('ekaterina')
 	// sceneManager[scene].start();
 	
 }

@@ -28,6 +28,11 @@ class ekaterina extends Scene {
         this.WinSound[0] = loadSound('sounds/ekaterina/winsound.mp3');
         this.WinSound[0].playMode('sustain');
         
+
+        /*
+			you don't need two maps
+			you can combine obstacles and scenery in one map
+        */
         this.obstacles = new Map();
         this.obstacles.preload('data/obstacles.json');
         
@@ -41,22 +46,37 @@ class ekaterina extends Scene {
 	
 	setup() {
         
-		const animations = {
-            
+
+        /* 
+        	different character should have different animation sets 
+        	you should not be making your own classes for characters if the only difference is the position of the character
+        	see below
+        	also i recommend just using this.lion and this.mouse for simpler variable names
+        */
+		const mouseAnimations = {
             mousemovesright: loadAnimation(this.mousemovesright),
             mousemovesleft: loadAnimation(this.mousemovesleft),
             mouseidle: loadAnimation(this.mouseidle),
-            
+        };
+
+        this.characterMouse = new Character(mouseAnimations);
+        /* 
+			position should be set relative to the screen
+			otherwise the y could be cropped out
+        */
+        this.characterMouse.x = width - 100;
+        this.characterMouse.y = height/2;
+        this.characterMouse.changeAnimation('mouseidle');
+
+        const lionAnimations = {
             lionmovesright: loadAnimation(this.lionmovesright),
             lionmovesleft: loadAnimation(this.lionmovesleft),
 			lionidle: loadAnimation(this.lionidle),
 		};
 
-        
-        this.characterMouse = new Mouse(animations);
-        this.characterMouse.changeAnimation('mouseidle');
-        
-        this.characterLion = new Lion(animations);
+		this.characterLion = new Character(lionAnimations);
+		this.characterLion.x = 540;
+		this.characterLion.y = 400;
 		this.characterLion.changeAnimation('lionidle');
         
         this.obstacles.setup();
@@ -66,16 +86,23 @@ class ekaterina extends Scene {
 	}
     
     start() {
+    	/* need to start the map */
+    	this.map.start();
+
+    	/* 
+    		if you don't use map.move or map.update this will center the map
+    	*/
+    	this.map.center();
+
         //this.remixSound.play();
     }
 
 	draw() {
-        
-        this.characterMouse.update();
-		this.characterMouse.display();
-        
-        this.characterLion.update();
-		this.characterLion.display();
+		// this.characterMouse.update();
+		// this.characterMouse.display();
+		// 
+		// this.characterLion.update();
+		// this.characterLion.display();
         
 
 		/* user input - move character around */
@@ -107,44 +134,54 @@ class ekaterina extends Scene {
 		} else {
 			this.characterMouse.speedX = 0;
 		}
-		
-		
+
+		/* need the else statement at the end for both */
 		if (isWalkingRightLion) {
 			this.characterLion.changeAnimation('lionmovesright');
+            if (this.LionSounds.every(sound => sound.isPlaying() == false))
+                random(this.LionSounds).play();
+		} else if (isWalkingLeftLion) {
+			this.characterLion.changeAnimation('lionmovesleft');
             if (this.LionSounds.every(sound => sound.isPlaying() == false))
                 random(this.LionSounds).play();
 		} else {
 			this.characterLion.changeAnimation('lionidle');
 		}
         
-        if (isWalkingLeftLion) {
-			this.characterLion.changeAnimation('lionmovesleft');
-            if (this.LionSounds.every(sound => sound.isPlaying() == false))
-                random(this.LionSounds).play();
-		} 
+       
         
         if (isWalkingRightMouse) {
 			this.characterMouse.changeAnimation('mousemovesright');
             if (this.MouseSounds.every(sound => sound.isPlaying() == false))
                 random(this.MouseSounds).play();
-		} else {
-			this.characterMouse.changeAnimation('mouseidle');
-		}
-        if (isWalkingLeftMouse) {
+		} else if (isWalkingLeftMouse) {
 			this.characterMouse.changeAnimation('mousemovesleft');
             if (this.MouseSounds.every(sound => sound.isPlaying() == false))
                 random(this.MouseSounds).play();
+		} else {
+			this.characterMouse.changeAnimation('mouseidle');
 		}
-          
-        this.obstacles.collide(this.characterMouse);
-        this.obstacles.move(this.characterMouse);
-        
-        this.obstacles.collide(this.characterLion);
-        this.obstacles.move(this.characterLion);
 
-        this.map.display();
-        this.obstacles.display();
+		/*
+			obstacles map cant move based on both characters
+			needs to be one or neither
+			lets discuss in class	
+		*/
+          
+		this.obstacles.collide(this.characterMouse);
+		this.obstacles.move(this.characterMouse);
+		
+		this.obstacles.collide(this.characterLion);
+		this.obstacles.move(this.characterLion);
+
+
+
+		this.map.display();
+		this.obstacles.display();
         
+
+        /* this is happening twice for some reason
+        	commented it out up top */
         this.characterLion.update();
 		this.characterLion.display();
         
@@ -167,9 +204,14 @@ class ekaterina extends Scene {
                 random(this.WinSound).play();
 		}
         
+        /* 
+        	don't do this it will reload the entire site
+        	you can just restart the scene
+        */
         if (keyIsDown(ENTER)) {
-            location.reload();
-			}
+            // location.reload(); 
+            changeScene('ekaterina');
+		}
 }
 
 }

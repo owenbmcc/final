@@ -14,13 +14,5 @@ class Character extends Thing {
 	changeAnimation(label) {
 		this.sprite.changeAnimation(label);
 	}
-
-	get x() {
-		return this.sprite.position.x;
-	}
-
-	get y() {
-		return this.sprite.position.y;
-	}
 	
 }

@@ -67,8 +67,6 @@ class Map {
 		}
 	}
 	
-	
-
 	start() {
 		camera.on();
 		camera.position.x = 0;
@@ -125,14 +123,14 @@ class Map {
 		camera.position.y = offsetY * height + height/2;
 	}
 	
-	fuck() {
-		console.log('fuck');
+	center() {
+		camera.position.x = width/2;
+    	camera.position.y = width/2;
 	}
 	
 	addSprite(label, sprite, type) {
 		this.sprites[type][label] = [];
 		this.sprites[type][label].push(sprite);
 	}
-
 
 }
