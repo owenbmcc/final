@@ -166,6 +166,10 @@ class ekaterina extends Scene {
                 if (this.WinSound.every(sound => sound.isPlaying() == false))
                 random(this.WinSound).play();
 		}
+        
+        if (keyIsDown(ENTER)) {
+            location.reload();
+			}
 }
 
 }
