@@ -168,12 +168,18 @@ class ekaterina extends Scene {
 			lets discuss in class	
 		*/
           
-		this.obstacles.collide(this.characterMouse);
-		this.obstacles.move(this.characterMouse);
+		this.characterLion.update();
+		this.characterMouse.update();
 		
-		this.obstacles.collide(this.characterLion);
-		this.obstacles.move(this.characterLion);
-
+//		this.obstacles.collide(this.characterLion);
+//		this.obstacles.collide(this.characterMouse);
+		
+		
+		if (this.characterLion.x > this.characterMouse.x) {
+			this.obstacles.move(this.characterLion);
+		} else {
+			this.obstacles.move(this.characterMouse);
+		}
 
 
 		this.map.display();
@@ -182,11 +188,13 @@ class ekaterina extends Scene {
 
         /* this is happening twice for some reason
         	commented it out up top */
-        this.characterLion.update();
+        
 		this.characterLion.display();
         
-        this.characterMouse.update();
+        
 		this.characterMouse.display();
+		
+		
         
         this.sceneLink.display();
 		if (this.sceneLink.overlap(this.characterMouse))

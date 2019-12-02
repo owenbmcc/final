@@ -29,11 +29,13 @@ class marsii extends Scene {
 		this.bgSounds[0].playMode('sustain');
         this.bgSounds[1].playMode('sustain');
         */
-        var spriteSheet = loadSpriteSheet('/images/marsii/npcs/staticAlien.png', 64, 128, 8);
-		this.sceneLink = new NPC(100, 100, spriteSheet, "Hi. you need me for energy.");
         
-        var spriteSheet = loadSpriteSheet('/images/marsii/npcs/cosmicAlien.png', 64, 130, 6);
-		this.sceneLink = new NPC(1200, 1200, spriteSheet, "Hi. you need me for my power.");
+        var staticAlienSheet = loadSpriteSheet('/images/marsii/npcs/staticAlien.png', 64, 128, 8);
+		this.staticAlien = new NPC(100, -800, staticAlienSheet, "Hi. you need me for energy.");
+        
+        var cosmicAlienSheet = loadSpriteSheet('/images/marsii/npcs/cosmicAlien.png', 64, 130, 6);
+		this.cosmicAlien = new NPC(1000, 1200, cosmicAlienSheet, "Hi. you need me for my power.");
+
 		this.map = new Map();
         this.map.preload('data/marsii.json');
 
@@ -57,9 +59,11 @@ class marsii extends Scene {
         this.character.changeAnimation('idle');
 
         this.map.setup();
-        this.sceneLink.setup();
+        
+		this.cosmicAlien.setup();
+		this.staticAlien.setup();
     }
-    /*
+
     start() {
 //		this.bg.play();
 //		this.bg.loop();
@@ -69,7 +73,7 @@ class marsii extends Scene {
 	end() {
 		//this.bg.pause();	
 	}
-	*/
+	
     draw() {
 
         //map maybe big, helps to have camera
@@ -105,7 +109,7 @@ class marsii extends Scene {
         var isWalkingU = false;
         var isWalkingD = false;
 
-        if (keyIsDown(RIGHT_ARROW) && this.character.x < 1000) {
+        if (keyIsDown(RIGHT_ARROW) && this.character.x < 1300) {
             this.character.speedX = 5;
             isWalkingR = true;
         } else if (keyIsDown(LEFT_ARROW) && this.character.x > 0) {
@@ -148,15 +152,18 @@ class marsii extends Scene {
 		this.character.update();
 		this.character.display();
         
-               		/* check npcs */
-		this.sceneLink.display();
-		if (this.sceneLink.overlap(this.character)) {
-			// style dialog 
+
+         /* check npcs */
+		this.staticAlien.display();
+		
+		this.cosmicAlien.display();
+		if (this.cosmicAlien.overlap(this.character)) {
+			/* style dialog */
 			textSize(10);
 			fill('purple');
 			stroke('black');
 			strokeWeight(1);
-			this.sceneLink.displayDialog();
+			this.cosmicAlien.displayDialog();
 			
 		}
 
