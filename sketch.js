@@ -4,7 +4,7 @@
 	fall 2019
 */
 
-var scene = 'owen';
+var scene = 'paralax';
 
 var sceneManager = {};
 sceneManager['owen'] = new owen();
@@ -23,24 +23,25 @@ sceneManager['maryam'] = new maryam();
 
 function preload() {
 	for (var s in sceneManager) {
-		sceneManager[s].preload();	
+		sceneManager[s].preload();
 	}
 }
 
 function setup() {
-	createCanvas(windowWidth, windowHeight);
+	var canvas = createCanvas(windowWidth, windowHeight);
+	canvas.drawingContext.miterLimit = 2;
 
 	for (var s in sceneManager) {
-		sceneManager[s].setup();	
+		sceneManager[s].setup();
 	}
-	
+
 	var sceneSelector = createSelect();
 	var scenes = Object.keys(sceneManager);
 	for (var i = 0; i < scenes.length; i++) {
 		sceneSelector.option(scenes[i]);
 	}
 	sceneSelector.changed(selectScene);
-	
+
 	sceneManager[scene].start();
 }
 
@@ -60,11 +61,7 @@ function draw() {
 }
 
 var paralaxScroll = 0;
+
 function mouseWheel(event) {
 	paralaxScroll = event.delta;
 }
-
-
-
-
-
