@@ -4,10 +4,11 @@
 	fall 2019
 */
 
-var scene = 'owen';
+var scene = 'combat';
 
 var sceneManager = {};
 sceneManager['owen'] = new owen();
+sceneManager['combat'] = new Combat();
 sceneManager['paralax'] = new ParalaxScene();
 sceneManager['mousewins'] = new MousewinsScene();
 sceneManager['lionwins'] = new LionwinsScene();
