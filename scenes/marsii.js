@@ -29,17 +29,14 @@ class marsii extends Scene {
 		this.bgSounds[0].playMode('sustain');
         this.bgSounds[1].playMode('sustain');
         */
-        
         var spriteSheet = loadSpriteSheet('/images/marsii/npcs/staticAlien.png', 64, 128, 8);
 		this.sceneLink = new NPC(100, 100, spriteSheet, "Hi. you need me for energy.");
         
         var spriteSheet = loadSpriteSheet('/images/marsii/npcs/cosmicAlien.png', 64, 130, 6);
 		this.sceneLink = new NPC(1200, 1200, spriteSheet, "Hi. you need me for my power.");
-
-
 		this.map = new Map();
         this.map.preload('data/marsii.json');
-		
+
     }
 
     setup() {
@@ -151,10 +148,10 @@ class marsii extends Scene {
 		this.character.update();
 		this.character.display();
         
-                		/* check npcs */
+               		/* check npcs */
 		this.sceneLink.display();
 		if (this.sceneLink.overlap(this.character)) {
-			/* style dialog */
+			// style dialog 
 			textSize(10);
 			fill('purple');
 			stroke('black');
@@ -162,6 +159,7 @@ class marsii extends Scene {
 			this.sceneLink.displayDialog();
 			
 		}
+
     }
 
 
@@ -242,3 +240,13 @@ class marsii extends Scene {
 			"dialog": "Hi, you need me for a map and tools, or a key ."
 		}
 */
+/*
+        var spriteSheet = loadSpriteSheet('/images/marsii/npcs/staticAlien.png', 64, 128, 8);
+		this.sceneLinkS = new NPC(-900, 420, spriteSheet, "Hi. you need me for energy.");
+        
+        var spriteSheet = loadSpriteSheet('/images/marsii/npcs/cosmicAlien.png', 64, 130, 6);
+		this.sceneLink = new NPC(1200, 1200, spriteSheet, "Hi");
+
+        var spriteSheet = loadSpriteSheet('/images/marsii/npcs/liquidAlien.png', 64, 128, 4);
+		this.sceneLinkL = new NPC(200, 1200, spriteSheet, "Hi");
+        */
