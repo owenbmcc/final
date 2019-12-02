@@ -73,6 +73,12 @@ class Map {
 		camera.position.y = 0;
 	}
 
+	end() {
+		camera.position.x = 0;
+		camera.position.y = 0;
+	}
+
+
 	collide(other) {
 		var isColliding = false;
 		for (var key in this.sprites.obstacles) {
@@ -85,7 +91,9 @@ class Map {
 
 		for (var key in this.sprites.characters) {
 			var character = this.sprites.characters[key];
-			character.displayDialog = character.sprite.overlap(other.sprite);
+			if (character.sprite.overlap(other.sprite)) {
+				character.displayDialog();
+			}
 		}
 	}
 

@@ -4,7 +4,7 @@
 	fall 2019
 */
 
-var scene = 'ekaterina';
+var scene = 'owen';
 
 var sceneManager = {};
 sceneManager['owen'] = new owen();
@@ -12,27 +12,26 @@ sceneManager['paralax'] = new ParalaxScene();
 sceneManager['mousewins'] = new MousewinsScene();
 sceneManager['lionwins'] = new LionwinsScene();
 sceneManager['nick'] = new nick();
-sceneManager['marsii'] = new Scene();
 sceneManager['marsii'] = new marsii();
 sceneManager['nelson'] = new Scene();
 sceneManager['ekaterina'] = new ekaterina();
 sceneManager['jonathan'] = new Scene();
-sceneManager['maryam'] = new Scene();
 sceneManager['adonis'] = new adonis();
 sceneManager['maryam'] = new maryam();
 
 
+
 function preload() {
-	for (var scene in sceneManager) {
-		sceneManager[scene].preload();	
+	for (var s in sceneManager) {
+		sceneManager[s].preload();	
 	}
 }
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 
-	for (var scene in sceneManager) {
-		sceneManager[scene].setup();	
+	for (var s in sceneManager) {
+		sceneManager[s].setup();	
 	}
 	
 	var sceneSelector = createSelect();
@@ -42,10 +41,7 @@ function setup() {
 	}
 	sceneSelector.changed(selectScene);
 	
-	
-	changeScene('ekaterina')
-	// sceneManager[scene].start();
-	
+	sceneManager[scene].start();
 }
 
 function changeScene(_scene) {

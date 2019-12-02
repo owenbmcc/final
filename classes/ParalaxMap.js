@@ -19,11 +19,26 @@ class ParalaxMap extends Map {
 			});
 	}
 
+	setup() {
+		for (var key in this.sprites.scenery) {
+			var list = this.sprites.scenery[key];
+			for (var i = 0; i < list.length; i++) {
+				list[i].setup();
+			}
+		}
+	}
+
+	start() {
+		camera.position.x = 0;
+		camera.position.y = 0;
+	}
+
 	paralax(delta) {
 		for (var key in this.sprites.scenery) {
 			var list = this.sprites.scenery[key];
 			for (var i = 0; i < list.length; i++) {
 				list[i].y -= list[i].speed * delta;
+				list[i].sprite.mouseUpdate();
 			}
 		}
 	}
