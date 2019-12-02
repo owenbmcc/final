@@ -24,7 +24,6 @@ class owen extends Scene {
 		var spriteSheet = loadSpriteSheet('images/owen/bird.png', 180, 200, 1);
 		this.sceneLink = new NPC(100, 400, spriteSheet, "Hit Enter to go somewhere new!");
 		
-		
 
 	}
 	
@@ -40,8 +39,8 @@ class owen extends Scene {
 		this.sceneLink.setup();
 		
 		this.sceneLink.sprite.onMousePressed = function() {
-			console.log('fuck');
-		}
+			console.log('click');
+		};
 
 	}
 	
@@ -52,7 +51,8 @@ class owen extends Scene {
 	}
 	
 	end() {
-		this.bg.pause();	
+		// this.bg.pause();	
+		this.map.end();
 	}
 	
 	draw() {

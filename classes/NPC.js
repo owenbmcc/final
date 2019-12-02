@@ -9,6 +9,6 @@ class NPC extends Scenery {
 	}
 	
 	displayDialog() {
-		text(this.dialog, this.sprite.position.x, this.sprite.position.y, this.sprite.width);
+		text(this.dialog, this.sprite.position.x + this.sprite.width/2, this.sprite.position.y, this.sprite.width);
 	}
 }
