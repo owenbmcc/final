@@ -31,10 +31,19 @@ class marsii extends Scene {
         */
         
         var staticAlienSheet = loadSpriteSheet('/images/marsii/npcs/staticAlien.png', 64, 128, 8);
-		this.staticAlien = new NPC(100, -800, staticAlienSheet, "Hi. you need me for energy.");
+		this.staticAlien = new NPC(400, -600, staticAlienSheet, "Hi. you need me for energy.");
         
         var cosmicAlienSheet = loadSpriteSheet('/images/marsii/npcs/cosmicAlien.png', 64, 130, 6);
-		this.cosmicAlien = new NPC(1000, 1200, cosmicAlienSheet, "Hi. you need me for my power.");
+		this.cosmicAlien = new NPC(-2700, -570, cosmicAlienSheet, "Hi. you need me for my power.");
+        
+        var liquidAlienSheet = loadSpriteSheet('/images/marsii/npcs/liquidAlien.png', 64, 128, 4);
+		this.liquidAlien = new NPC(200, 1200, liquidAlienSheet, "Hi. what's up");
+       
+        var plantAlienSheet = loadSpriteSheet('/images/marsii/npcs/plantAlien.png', 64, 128, 4);
+		this.plantAlien = new NPC(-1700, 500, plantAlienSheet, "Hi. what's up");
+        
+        var creepAlienSheet = loadSpriteSheet('/images/marsii/npcs/creepAlienB.png', 252, 252, 5);
+		this.creepAlien = new NPC(-1800, 1600, creepAlienSheet, "Hi. you need me for my strength.");
 
 		this.map = new Map();
         this.map.preload('data/marsii.json');
@@ -60,8 +69,12 @@ class marsii extends Scene {
 
         this.map.setup();
         
+        this.liquidAlien.setup();
 		this.cosmicAlien.setup();
 		this.staticAlien.setup();
+        this.plantAlien.setup();
+        this.creepAlien.setup();
+        
     }
 
     start() {
@@ -78,7 +91,7 @@ class marsii extends Scene {
 
         //map maybe big, helps to have camera
         if (mouseIsPressed)
-            camera.zoom = 0.5;
+            camera.zoom = 0.3;
         else
             camera.zoom = 1;
         /*
@@ -109,21 +122,21 @@ class marsii extends Scene {
         var isWalkingU = false;
         var isWalkingD = false;
 
-        if (keyIsDown(RIGHT_ARROW) && this.character.x < 1300) {
-            this.character.speedX = 5;
+        if (keyIsDown(RIGHT_ARROW) && this.character.x) {
+            this.character.speedX = 15;
             isWalkingR = true;
-        } else if (keyIsDown(LEFT_ARROW) && this.character.x > 0) {
-            this.character.speedX = -5;
+        } else if (keyIsDown(LEFT_ARROW) && this.character.x) {
+            this.character.speedX = -15;
             isWalkingL = true;
         } else {
             this.character.speedX = 0;
         }
 
         if (keyIsDown(DOWN_ARROW)) {
-            this.character.speedY = 5;
+            this.character.speedY = 15;
             isWalkingD = true;
         } else if (keyIsDown(UP_ARROW)) {
-            this.character.speedY = -5;
+            this.character.speedY = -15;
             isWalkingU = true;
         } else {
             this.character.speedY = 0;
@@ -155,7 +168,13 @@ class marsii extends Scene {
 
          /* check npcs */
 		this.staticAlien.display();
+        
+        this.liquidAlien.display();
 		
+        this.creepAlien.display();
+        
+        this.plantAlien.display();
+        
 		this.cosmicAlien.display();
 		if (this.cosmicAlien.overlap(this.character)) {
 			/* style dialog */
