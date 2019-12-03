@@ -22,7 +22,7 @@ class nick extends Scene {
 		this.map.preload('data/nick.json');
         
         var spriteSheet = loadSpriteSheet('images/nick/ben.png', 32, 32, 1);
-		this.sceneLink = new NPC(800, -100, spriteSheet, "Yo! Let's Battle! *Hit Enter To Battle!*");
+		this.sceneLink = new NPC(400, 200, spriteSheet, "Yo! Let's Battle! *Hit Enter To Battle!*");
 
 	}
 	
@@ -50,12 +50,14 @@ class nick extends Scene {
 	}
 	
 	draw() {
-		background(220);
+		background("#37a63c");
+        
 
 		/* some instructions */
 		textAlign(CENTER);
 		textSize(20);
-		text('move the character with arrows', width/2, 100);
+		text('move your character with arrows', width/2, 90);
+        text('hit enter when interacting with trainers to battle', width/2, 110);
 		
 		
 		/* user input - move character around */
