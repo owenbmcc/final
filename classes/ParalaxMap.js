@@ -24,21 +24,18 @@ class ParalaxMap extends Map {
 			var list = this.sprites.scenery[key];
 			for (var i = 0; i < list.length; i++) {
 				list[i].setup();
+				list[i].x += width/2;
+				list[i].y += height/2;
 			}
 		}
 	}
 
-	start() {
-		camera.position.x = 0;
-		camera.position.y = 0;
-	}
-
 	paralax(delta) {
+		camera.off();
 		for (var key in this.sprites.scenery) {
 			var list = this.sprites.scenery[key];
 			for (var i = 0; i < list.length; i++) {
 				list[i].y -= list[i].speed * delta;
-				list[i].sprite.mouseUpdate();
 			}
 		}
 	}
