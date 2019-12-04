@@ -22,7 +22,6 @@ class Combat extends Scene {
 			idle: this.npcIdle
 		};
 		this.npc = new Character(npcAnimations);
-		console.log(this.npc);
 		this.npc.x = width - 200;
 		this.npc.y = 200;
 		this.npc.health = 100;
@@ -35,24 +34,30 @@ class Combat extends Scene {
 
 	attack() {
 		if (random(5) > 2) {
-			this.npc.health -= 10;
+			this.npc.health -= 20;
 			this.message = "You damaged " + this.npc.name;
 		} else {
 			this.message = "You missed " + this.npc.name;
 		}
 		this.turn = 'npc';
 		this.messageCounter = 50;
+
+		if (this.npc.health <= 0) {
+			this.message = "You win";
+		}
 	}
 
 	npcAttack() {
 		if (random(6) > 2) {
-			this.player.health -= 10;
+			this.player.health -= 20;
 			this.message = "You got hit by " + this.npc.name;
 		} else {
 			this.message = "You were missed by " + this.npc.name;
 		}
 		this.turn = 'player';
 		this.messageCounter = 50;
+
+		
 	}
 
 	draw() {
