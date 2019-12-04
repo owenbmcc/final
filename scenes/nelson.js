@@ -14,7 +14,7 @@ class nelson extends Scene {
         this.walkSound.playMode('sustain');
 
 
-        this.woodsSheet = loadSpriteSheet('images/Nelson/background.png', 224, 224, 2);
+//        this.woodsSheet = loadSpriteSheet('images/Nelson/background.png', 224, 224, 2);
 
     }
 

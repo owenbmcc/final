@@ -1,0 +1,25 @@
+"obstacles": {
+		"slime": {
+			"img": "images/nelson/",
+			"width": 124,
+			"height": 116,
+			"frames": 3,
+			"positions": [
+				{ "x": 600, "y": -300 },
+				
+			]
+		}
+	},
+
+"obstacles": {
+		"slime": {
+			"img": "images/nelson/",
+			"width": 124,
+			"height": 116,
+			"frames": 3,
+			"positions": [
+				{ "x": 600, "y": -300 },
+				
+			]
+		}
+	},

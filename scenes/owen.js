@@ -24,7 +24,9 @@ class owen extends Scene {
 		var spriteSheet = loadSpriteSheet('images/owen/bird.png', 180, 200, 1);
 		this.sceneLink = new NPC(100, 400, spriteSheet, "Hit Enter to go somewhere new!");
 		
-
+		var jerrySheet = loadSpriteSheet('images/owen/bird.png', 180, 200, 1);
+		this.jerry = new NPC(200, 600, jerrySheet, "Hit Enter to fight Jerry.");
+		
 	}
 	
 	setup() {
@@ -37,10 +39,6 @@ class owen extends Scene {
 		
 		this.map.setup();
 		this.sceneLink.setup();
-		
-		this.sceneLink.sprite.onMousePressed = function() {
-			console.log('click');
-		};
 
 	}
 	
@@ -109,6 +107,21 @@ class owen extends Scene {
 			
 			if (keyIsDown(ENTER)) {
 				changeScene('paralax');
+			}
+		}
+		
+		this.jerry.display();
+		if (this.jerry.overlap(this.character)) {
+			/* style dialog */
+			textSize(30);
+			textFont("Comic Sans MS");
+			fill('pink');
+			stroke('blue');
+			strokeWeight(4);
+			this.jerry.displayDialog();
+			
+			if (keyIsDown(ENTER)) {
+				changeScene('combat');
 			}
 		}
 		
