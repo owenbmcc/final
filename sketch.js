@@ -10,6 +10,7 @@ var scene = 'owen';
 var sceneManager = {};
 sceneManager['owen'] = new owen();
 sceneManager['paralax'] = new ParalaxScene();
+sceneManager['combat'] = new CombatScene();
 sceneManager['mousewins'] = new MousewinsScene();
 sceneManager['lionwins'] = new LionwinsScene();
 sceneManager['nick'] = new nick();

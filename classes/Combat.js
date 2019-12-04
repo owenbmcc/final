@@ -62,7 +62,7 @@ class Combat {
 
 		this.state = 'message';
 		this.turn = character.isPlayer ? 'player' : 'npc';
-		this.counter = 100;
+		this.counter = this.timeout;
 
 		if (character[metric] <= this.metrics[metric].min) {
 			this.metrics[metric].callback(character.isPlayer, this);
@@ -70,6 +70,7 @@ class Combat {
 	}
 
 	display() {
+		camera.off();
 		this.player.display();
 		this.npc.display();
 		if (this.turn == 'player' && this.state == 'turn') {
@@ -85,10 +86,10 @@ class Combat {
 			if (this.counter <= 0) {
 				if (this.turn == 'player') {
 					this.message = this.message = 'It is your turn.';
-					this.counter = 100;
+					this.counter = this.timeout;
 				} else {
 					this.message = this.npc.name + "'s turn.";
-					this.counter = 100;
+					this.counter = this.timeout;
 				}
 				this.state = 'turn';
 			}
@@ -102,7 +103,7 @@ class Combat {
 			}
 		} else if (this.state == 'win') {
 			this.onWin();
-		} else if (this.state == 'end') {
+		} else if (this.state == 'lose') {
 			this.onLose();
 		}
 	}
