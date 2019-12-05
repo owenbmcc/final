@@ -1,5 +1,21 @@
 class nick extends Scene {
 
+    constructor() {
+        super();
+        var attacks1 = [
+            { probability: 0.5, damage: -10 },
+            { probability: 0.2, damage: -20 }
+        ]; 
+        
+        var attacks2 = [
+            { probability: 0.6, damage: -30 },
+            { probability: 0.2, damage: -20 }
+        ];
+        sceneManager['battle1'] = new BattleScene("Ben", attacks1);
+        sceneManager['battle2'] = new BattleScene("Sam", attacks2);
+
+    }
+    
 	preload() {
 //		this.character.img = loadImage('images/character.png');
 		// sprite sheet - src, width, height, number of sprites
@@ -102,7 +118,7 @@ class nick extends Scene {
 			this.sceneLink.displayDialog();
 			
 			if (keyIsDown(ENTER)) {
-				changeScene('ben');
+				changeScene('battle1');
 			}
 		}
         
