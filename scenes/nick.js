@@ -102,7 +102,7 @@ class nick extends Scene {
 			this.sceneLink.displayDialog();
 			
 			if (keyIsDown(ENTER)) {
-				changeScene('paralax');
+				changeScene('ben');
 			}
 		}
         
