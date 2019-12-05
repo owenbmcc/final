@@ -4,6 +4,8 @@ class nelson extends Scene {
 
         this.walk = loadSpriteSheet('images/Nelson/walking.png', 192, 199, 3);
         this.stand = loadSpriteSheet('images/Nelson/standing.png', 192, 206, 2);
+        this.map = new Map();
+        this.map.preload( 'data/nelson.json');
 
         //this.bg = loadSound('sounds/nelson/');
 
@@ -14,19 +16,21 @@ class nelson extends Scene {
         this.walkSound.playMode('sustain');
 
 
-//        this.woodsSheet = loadSpriteSheet('images/Nelson/background.png', 224, 224, 2);
+        //        this.woodsSheet = loadSpriteSheet('images/Nelson/background.png', 224, 224, 2);
 
     }
 
     setup() {
+        
         const animations = {
             walking: loadAnimation(this.walk),
             standing: loadAnimation(this.stand)
         };
         this.character = new Character(animations);
+        console.log(this.character);
         this.character.changeAnimation('standing');
 
-        //this.map.setup();
+        this.map.setup();
         //this.sceneLink.setup();
         //this.woods = new Scenery(width / 2, height / 2, this.woodsSheet);
         //this.woods.sprite.scale = 3;
@@ -36,11 +40,12 @@ class nelson extends Scene {
     start() {
         //		this.bg.play();
         //		this.bg.loop();
-        //this.map.start();
+        this.map.start();
     }
 
     end() {
         this.bg.pause();
+        this.map.end();
     }
 
     draw() {
@@ -83,7 +88,18 @@ class nelson extends Scene {
         } else {
             this.character.changeAnimation('standing');
         }
-
+        
+        
+        this.character.update();
         this.character.display();
+
+        /* update map */
+        this.map.collide(this.character);
+        //this.map.move(this.character);
+        this.map.update(this.character);
+        this.map.display();
+
+        
+        
     }
 }
