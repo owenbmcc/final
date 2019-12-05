@@ -23,6 +23,7 @@ class owen extends Scene {
 		
 		var spriteSheet = loadSpriteSheet('images/owen/bird.png', 180, 200, 1);
 		this.sceneLink = new NPC(100, 400, spriteSheet, "Hit Enter to go somewhere new!");
+        //this.sceneLink.dialogCount = 0;
 		
 		var jerrySheet = loadSpriteSheet('images/owen/bird.png', 180, 200, 1);
 		this.jerry = new NPC(200, 600, jerrySheet, "Hit Enter to fight Jerry.");
@@ -30,6 +31,7 @@ class owen extends Scene {
 	}
 	
 	setup() {
+        //this.hitEnter = false;
 		const animations = {
 			walk: loadAnimation(this.walk),
 			idle: loadAnimation(this.idle)
@@ -103,12 +105,32 @@ class owen extends Scene {
 			fill('pink');
 			stroke('blue');
 			strokeWeight(4);
-			this.sceneLink.displayDialog();
-			
-			if (keyIsDown(ENTER)) {
+			this.sceneLink.displayDialog(); 
+            if (keyIsDown(ENTER)) {
+                
 				changeScene('paralax');
 			}
+            /*
+            var dialog;
+            if (this.sceneLink.dialogCount == 0) {
+                dialog = 'hello';
+            } else if (this.sceneLink.dialogCount == 1) {
+                dialog = 'donut';
+            }
+            text(dialog, this.sceneLink.x, this.sceneLink.y);
+			
+            fill(255);
+            text("hit enter", this.sceneLink.x, this.sceneLink.y + 50);
+            
+			if (keyIsDown(ENTER) && !this.hitEnter) {
+				this.sceneLink.dialogCount++;
+                this.hitEnter = true;
+			} else if (!keyIsDown(ENTER)) {
+                this.hitEnter = false;
+            }
+            */
 		}
+        
 		
 		this.jerry.display();
 		if (this.jerry.overlap(this.character)) {
