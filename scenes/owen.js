@@ -24,8 +24,7 @@ class owen extends Scene {
 		var spriteSheet = loadSpriteSheet('images/owen/bird.png', 180, 200, 1);
 		this.sceneLink = new NPC(100, 400, spriteSheet, "Hit Enter to go somewhere new!");
 		
-		var jerrySheet = loadSpriteSheet('images/owen/bird.png', 180, 200, 1);
-		this.jerry = new NPC(200, 600, jerrySheet, "Hit Enter to fight Jerry.");
+		this.jerry = new NPC(200, 600, spriteSheet, "Hit Enter to fight Jerry.");
 		
 	}
 	
@@ -39,6 +38,7 @@ class owen extends Scene {
 		
 		this.map.setup();
 		this.sceneLink.setup();
+		this.jerry.setup();
 
 	}
 	
