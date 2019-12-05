@@ -14,7 +14,7 @@ class BattleScene extends Scene {
 		this.npcSpriteSheet = loadSpriteSheet('images/nick/ben.png', 68, 104, 1);
 		
 		// action choices graphics
-		this.balloonSheet = loadSpriteSheet('images/paralax/balloon.png', 128, 128, 1);
+		this.slashSheet = loadSpriteSheet('images/nick/slash.png', 80, 80, 1);
 		this.cloudSheet = loadSpriteSheet('images/paralax/cloud.png', 96, 56, 1);
 		this.kiteSheet = loadSpriteSheet('images/paralax/kite.png', 128, 128, 1);
 	}
@@ -48,7 +48,7 @@ class BattleScene extends Scene {
 		});
 		
 		// graphics, metric, probability, damage
-		this.combat.addPlayerAttack(this.balloonSheet, 'health', 0.5, -20);
+		this.combat.addPlayerAttack(this.slashSheet, 'health', 0.5, -20);
 		this.combat.addPlayerAttack(this.cloudSheet, 'health', 0.2, -40);
 		this.combat.addPlayerAttack(this.kiteSheet, 'health', 0.8, -10);
 		
@@ -68,7 +68,7 @@ class BattleScene extends Scene {
 	}
 	
 	draw() {
-		background(220);
+		background('#34c6eb');
 		
 		this.combat.update();
 		this.combat.display();
