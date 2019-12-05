@@ -40,12 +40,12 @@ class CombatScene extends Scene {
 			}
 		});
 		
-		// graphics, metric, probability, damage
-		this.combat.addPlayerAttack(this.balloonSheet, 'health', 0.5, -20);
+		// graphics, metric, probability, damage, optional : success response, failure response
+		this.combat.addPlayerAttack(this.balloonSheet, 'health', 0.5, -20, "The Balloon attack succeeded", "The balloon attack failed.");
 		this.combat.addPlayerAttack(this.cloudSheet, 'health', 0.2, -40);
 		this.combat.addPlayerAttack(this.kiteSheet, 'health', 0.8, -10);
 		
-		this.combat.addNPCAttack('health', 0.2, -20);
+		this.combat.addNPCAttack('health', 0.2, -20, "Jerry got you.", "Jerry missed.");
 		this.combat.addNPCAttack('health', 0.1, -40);
 		
 		this.combat.onWin = function() {

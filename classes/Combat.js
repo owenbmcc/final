@@ -28,44 +28,48 @@ class Combat {
 		};
 	}
 
-	addPlayerAttack(spriteSheet, metric, probability, delta) {
+	addPlayerAttack(spriteSheet, metric, probability, delta, successMsg, failMsg) {
 		const sprite = createSprite(this.player.x, this.player.y + this.player.attacks.length * 100 + 100, 50, 50);
 		sprite.addAnimation('default', spriteSheet);
 
 		this.player.attacks.push({ sprite: sprite });
 
 		sprite.onMousePressed = function() {
-			this.attack(this.npc, metric, probability, delta);
+			this.attack(this.npc, {
+				metric: metric, 
+				probability: probability, 
+				delta: delta, 
+				successMsg: successMsg, 
+				failMsg: failMsg
+			});
 		}.bind(this);
 	}
 
-	addNPCAttack(metric, probability, delta) {
+	addNPCAttack(metric, probability, delta, successMsg, failMsg) {
 		this.npc.attacks.push({
 			metric: metric,
 			probability: probability,
-			delta: delta
+			delta: delta,
+			successMsg: successMsg,
+			failMsg: failMsg 
 		});
 
 	}
 
-	attack(character, metric, probability, delta) {
-		if (random(1) < probability) {
-			character[metric] += delta;
-			this.message = character.isPlayer ? 
-				`You were hit by ${this.npc.name}.` :
-				`You damaged ${this.npc.name}.`;
+	attack(character, attack) {
+		if (random(1) < attack.probability) {
+			character[attack.metric] += attack.delta;
+			this.message = attack.successMsg || "Success!";
 		} else {
-			this.message = character.isPlayer ? 
-				`${this.npc.name} missed you.` :
-				`You missed ${this.npc.name}.`; 
+			this.message = attack.failMsg || "Failed.";
 		}
 
 		this.state = 'message';
 		this.turn = character.isPlayer ? 'player' : 'npc';
 		this.counter = this.timeout;
 
-		if (character[metric] <= this.metrics[metric].min) {
-			this.metrics[metric].callback(character.isPlayer, this);
+		if (character[attack.metric] <= this.metrics[attack.metric].min) {
+			this.metrics[attack.metric].callback(character.isPlayer, this);
 		}
 	}
 
@@ -97,8 +101,7 @@ class Combat {
 			if (this.turn == 'npc') {
 				this.counter--;
 				if (this.counter <= 0) {
-					const attack = random(this.npc.attacks);
-					this.attack(this.player, attack.metric, attack.probability, attack.delta);
+					this.attack(this.player, random(this.npc.attacks));
 				}
 			}
 		} else if (this.state == 'win') {
