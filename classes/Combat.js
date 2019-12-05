@@ -49,7 +49,7 @@ class Combat {
 	}
 
 	attack(character, metric, probability, delta) {
-		if (random(1) > probability) {
+		if (random(1) < probability) {
 			character[metric] += delta;
 			this.message = character.isPlayer ? 
 				`You were hit by ${this.npc.name}.` :
@@ -102,9 +102,11 @@ class Combat {
 				}
 			}
 		} else if (this.state == 'win') {
-			this.onWin();
+			this.counter--;
+			if (this.counter <= 0) this.onWin();
 		} else if (this.state == 'lose') {
-			this.onLose();
+			this.counter--;
+			if (this.counter <= 0) this.onLose();
 		}
 	}
 }
