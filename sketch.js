@@ -5,7 +5,7 @@
 */
 
 
-var scene = 'owen';
+var scene = 'nelson';
 
 var sceneManager = {};
 sceneManager['owen'] = new owen();
@@ -14,6 +14,7 @@ sceneManager['combat'] = new CombatScene();
 sceneManager['mousewins'] = new MousewinsScene();
 sceneManager['lionwins'] = new LionwinsScene();
 sceneManager['nick'] = new nick();
+sceneManager['ben'] = new ben();
 sceneManager['marsii'] = new marsii();
 sceneManager['nelson'] = new nelson();
 sceneManager['ekaterina'] = new ekaterina();

@@ -25,7 +25,7 @@ class CombatScene extends Scene {
 		
 		/* setting up combat */
 		// player, npc, npc name, timeout duration
-		this.combat = new Combat(this.player, this.npc, "Jerry", 50);
+		this.combat = new Combat(this.player, this.npc, "Jerry", 100);
 		// possible states turn, message, win, lose
 		
 		// name, max value, min value, callback
@@ -73,10 +73,10 @@ class CombatScene extends Scene {
 		
 		// this.combat.counter 
 		fill('blue');
-		ellipse(width - 100, height - 100, this.combat.counter * 2);
+		ellipse(width - 100, height - 100, this.combat.counter);
 		noFill();
 		stroke('green');
-		ellipse(width - 100, height - 100, 50 * 2);
+		ellipse(width - 100, height - 100, 100);
 		
 		// this.player.health, this.npc.health
 		fill('red');
