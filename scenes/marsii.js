@@ -29,7 +29,21 @@ class marsii extends Scene {
 		this.bgSounds[0].playMode('sustain');
         this.bgSounds[1].playMode('sustain');
         */
+        //key items
         
+        //var shiprepaired = false;
+        //var key = false;
+        //var shipuprighted = false;
+        //var map = false;
+        //var mapnoted = false;
+        //var shipunattended = false;
+        
+        //quest items
+        
+        //var blackhole = false;
+        //
+        //this.objective.good = "You need", shiprepair, map, shipuprighted;
+        //this.objective.bad = "You need", key, shipunattended;
         var staticAlienSheet = loadSpriteSheet('/images/marsii/npcs/staticAlien.png', 64, 128, 8);
 		this.staticAlien = new NPC(400, -600, staticAlienSheet, "Hi. you need me for energy.");
         
@@ -38,6 +52,7 @@ class marsii extends Scene {
         
         var liquidAlienSheet = loadSpriteSheet('/images/marsii/npcs/liquidAlien.png', 64, 128, 4);
 		this.liquidAlien = new NPC(200, 1200, liquidAlienSheet, "Hi. what's up");
+        this.liquidAlien.dialogCount = 0;
        
         var plantAlienSheet = loadSpriteSheet('/images/marsii/npcs/plantAlien.png', 64, 128, 4);
 		this.plantAlien = new NPC(-1700, 500, plantAlienSheet, "Hi. what's up");
@@ -51,8 +66,7 @@ class marsii extends Scene {
     }
 
     setup() {
-
-
+        this.hitEnter = false;
         const animations = {
 
             //Main character directional and idle animation
@@ -123,20 +137,20 @@ class marsii extends Scene {
         var isWalkingD = false;
 
         if (keyIsDown(RIGHT_ARROW) && this.character.x) {
-            this.character.speedX = 15;
+            this.character.speedX = 5;
             isWalkingR = true;
         } else if (keyIsDown(LEFT_ARROW) && this.character.x) {
-            this.character.speedX = -15;
+            this.character.speedX = -5;
             isWalkingL = true;
         } else {
             this.character.speedX = 0;
         }
 
         if (keyIsDown(DOWN_ARROW)) {
-            this.character.speedY = 15;
+            this.character.speedY = 5;
             isWalkingD = true;
         } else if (keyIsDown(UP_ARROW)) {
-            this.character.speedY = -15;
+            this.character.speedY = -5;
             isWalkingU = true;
         } else {
             this.character.speedY = 0;
@@ -170,6 +184,56 @@ class marsii extends Scene {
 		this.staticAlien.display();
         
         this.liquidAlien.display();
+        if (this.liquidAlien.overlap(this.character)) {
+			/* style dialog */
+			textSize(20);
+			fill('purple');
+			stroke('black');
+			strokeWeight(1);
+            var dialog;
+            if (this.liquidAlien.dialogCount == 0) {
+                dialog = 'hello, human';
+                //human says hello, do you have a map, a ship or the ability to repair a ship? I need help.
+            } else if (this.liquidAlien.dialogCount == 1) {
+                dialog = 'I have a map, what can you give me in return?';
+                //well, what do you want?
+            } else if (this.liquidAlien.dialogCount == 2) {
+                dialog = 'Well maps are pretty valuable, so can you help me achieve a dream?';
+                //maybe i can try. what is it?
+            } else if (this.liquidAlien.dialogCount == 3) {
+                dialog = "I want to see what freezing feels like, but it's hard to find anything cold enough.";
+                //what would be cold enough?
+            } else if (this.liquidAlien.dialogCount == 4) {
+                dialog = "Maybe like a black hole? But it would have to be small and contained.";
+                //that sounds hard to find, is there anything else you would want?
+            } else if (this.liquidAlien.dialogCount == 5) {
+                dialog = "Well I wouldn't mind having another pet";
+                //I'll try to find something.
+            }
+            /*
+            if (blackhole = true;){
+            //there needs to be a good, bad option here. One where you just get the map, one where you freeze her for other items.
+            this.liquidAlien.dialogCount == 7{
+              dialog = "Oh wow, I didn't expect you to find something";
+            }
+            }else {
+            this.liquidAlien.dialogCount == 6 {
+            dialog = "(She has nothing else to say to you right now.)";
+            }
+            }
+            */
+            text(dialog, this.liquidAlien.x, this.liquidAlien.y);
+			
+            fill(255);
+            text("hit enter", this.liquidAlien.x, this.liquidAlien.y + 50);
+            
+			if (keyIsDown(ENTER) && !this.hitEnter) {
+				this.liquidAlien.dialogCount++;
+                this.hitEnter = true;
+			} else if (!keyIsDown(ENTER)) {
+                this.hitEnter = false;
+            }
+		}
 		
         this.creepAlien.display();
         
@@ -178,18 +242,37 @@ class marsii extends Scene {
 		this.cosmicAlien.display();
 		if (this.cosmicAlien.overlap(this.character)) {
 			/* style dialog */
-			textSize(10);
+			textSize(20);
 			fill('purple');
 			stroke('black');
 			strokeWeight(1);
-			this.cosmicAlien.displayDialog();
+            var dialog;
+            if (this.cosmicAlien.dialogCount == 0) {
+                dialog = 'hello, human';
+                //human says hello, do you have a map,  can you help?
+            } else if (this.cosmicAlien.dialogCount == 1) {
+                dialog = 'Maybe';
+            }
+            text(dialog, this.cosmicAlien.x, this.cosmicAlien.y);
+			
+            fill(255);
+            text("hit enter", this.cosmicAlien.x, this.cosmicAlien.y + 50);
+            
+			if (keyIsDown(ENTER) && !this.hitEnter) {
+				this.cosmicAlien.dialogCount++;
+                this.hitEnter = true;
+			} else if (!keyIsDown(ENTER)) {
+                this.hitEnter = false;
+            }
+		}
+			//this.cosmicAlien.displayDialog();
 			
 		}
 
     }
 
 
-}
+
 /* json stuff I need later
 {
     "scenery": {
