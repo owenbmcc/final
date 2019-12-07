@@ -11,7 +11,7 @@ class marsii extends Scene {
         //this.idle = loadSpriteSheet('images/marsii/astidleslow.png', 64, 128, 12);
         this.idle = loadSpriteSheet('images/marsii/astidle.png', 64, 128, 15);
         //this.startSet = loadImage('images/marsii/testmap.png', 4830 , 3150);
-      /*  
+        /*  
         this.walkSounds = [];
 		this.walkSounds[0] = loadSound('sounds/marsii/asttalk.wav');
 		
@@ -30,38 +30,38 @@ class marsii extends Scene {
         this.bgSounds[1].playMode('sustain');
         */
         //key items
-        
+
         //var shiprepaired = false;
         //var key = false;
         //var shipuprighted = false;
         //var map = false;
         //var mapnoted = false;
         //var shipunattended = false;
-        
+
         //quest items
-        
+
         //var blackhole = false;
         //
         //this.objective.good = "You need", shiprepair, map, shipuprighted;
         //this.objective.bad = "You need", key, shipunattended;
         var staticAlienSheet = loadSpriteSheet('/images/marsii/npcs/staticAlien.png', 64, 128, 8);
-		this.staticAlien = new NPC(400, -600, staticAlienSheet, "Hi. you need me for energy.");
-        
-        var cosmicAlienSheet = loadSpriteSheet('/images/marsii/npcs/cosmicAlien.png', 64, 130, 6);
-		this.cosmicAlien = new NPC(-2700, -570, cosmicAlienSheet, "Hi. you need me for my power.");
-        
-        var liquidAlienSheet = loadSpriteSheet('/images/marsii/npcs/liquidAlien.png', 64, 128, 4);
-		this.liquidAlien = new NPC(200, 1200, liquidAlienSheet, "Hi. what's up");
-        this.liquidAlien.dialogCount = 0;
-       
-        var plantAlienSheet = loadSpriteSheet('/images/marsii/npcs/plantAlien.png', 64, 128, 4);
-		this.plantAlien = new NPC(-1700, 500, plantAlienSheet, "Hi. what's up");
-        
-        var creepAlienSheet = loadSpriteSheet('/images/marsii/npcs/creepAlienB.png', 252, 252, 5);
-		this.creepAlien = new NPC(-1800, 1600, creepAlienSheet, "Hi. you need me for my strength.");
+        this.staticAlien = new NPC(400, -600, staticAlienSheet, "Hi. you need me for energy.");
 
-		this.map = new Map();
-        this.map.preload('data/marsii.json');
+        var cosmicAlienSheet = loadSpriteSheet('/images/marsii/npcs/cosmicAlien.png', 64, 130, 6);
+        this.cosmicAlien = new NPC(-2700, -570, cosmicAlienSheet, "Hi. you need me for my power.");
+
+        var liquidAlienSheet = loadSpriteSheet('/images/marsii/npcs/liquidAlien.png', 64, 128, 4);
+        this.liquidAlien = new NPC(200, 1200, liquidAlienSheet, "Hi. what's up");
+        this.liquidAlien.dialogCount = 0;
+
+        var plantAlienSheet = loadSpriteSheet('/images/marsii/npcs/plantAlien.png', 64, 128, 4);
+        this.plantAlien = new NPC(-1700, 500, plantAlienSheet, "Hi. what's up");
+
+        var creepAlienSheet = loadSpriteSheet('/images/marsii/npcs/creepAlienB.png', 252, 252, 5);
+        this.creepAlien = new NPC(-1800, 1600, creepAlienSheet, "Hi. you need me for my strength.");
+
+        //this.map = new Map();
+        //this.map.preload('data/marsii.json');
 
     }
 
@@ -81,26 +81,26 @@ class marsii extends Scene {
         this.character = new Character(animations);
         this.character.changeAnimation('idle');
 
-        this.map.setup();
-        
+        //this.map.setup();
+
         this.liquidAlien.setup();
-		this.cosmicAlien.setup();
-		this.staticAlien.setup();
+        this.cosmicAlien.setup();
+        this.staticAlien.setup();
         this.plantAlien.setup();
         this.creepAlien.setup();
-        
+
     }
 
     start() {
-//		this.bg.play();
-//		this.bg.loop();
-		this.map.start();
-	}
-	
-	end() {
-		//this.bg.pause();	
-	}
-	
+        //		this.bg.play();
+        //		this.bg.loop();
+        this.map.start();
+    }
+
+    end() {
+        //this.bg.pause();	
+    }
+
     draw() {
 
         //map maybe big, helps to have camera
@@ -167,29 +167,29 @@ class marsii extends Scene {
         } else {
             this.character.changeAnimation('idle');
         }
-        
 
-		/* update map */
-		this.map.collide(this.character);
-		this.map.move(this.character);
-//		this.map.update(this.character);
-		this.map.display();
-        
+
+        /* update map */
+        this.map.collide(this.character);
+        this.map.move(this.character);
+        //		this.map.update(this.character);
+        this.map.display();
+
         /* update character */
-		this.character.update();
-		this.character.display();
-        
+        this.character.update();
+        this.character.display();
 
-         /* check npcs */
-		this.staticAlien.display();
-        
+
+        /* check npcs */
+        this.staticAlien.display();
+
         this.liquidAlien.display();
         if (this.liquidAlien.overlap(this.character)) {
-			/* style dialog */
-			textSize(20);
-			fill('purple');
-			stroke('black');
-			strokeWeight(1);
+            /* style dialog */
+            textSize(20);
+            fill('purple');
+            stroke('black');
+            strokeWeight(1);
             var dialog;
             if (this.liquidAlien.dialogCount == 0) {
                 dialog = 'hello, human';
@@ -223,29 +223,29 @@ class marsii extends Scene {
             }
             */
             text(dialog, this.liquidAlien.x, this.liquidAlien.y);
-			
+
             fill(255);
             text("hit enter", this.liquidAlien.x, this.liquidAlien.y + 50);
-            
-			if (keyIsDown(ENTER) && !this.hitEnter) {
-				this.liquidAlien.dialogCount++;
+
+            if (keyIsDown(ENTER) && !this.hitEnter) {
+                this.liquidAlien.dialogCount++;
                 this.hitEnter = true;
-			} else if (!keyIsDown(ENTER)) {
+            } else if (!keyIsDown(ENTER)) {
                 this.hitEnter = false;
             }
-		}
-		
+        }
+
         this.creepAlien.display();
-        
+
         this.plantAlien.display();
-        
-		this.cosmicAlien.display();
-		if (this.cosmicAlien.overlap(this.character)) {
-			/* style dialog */
-			textSize(20);
-			fill('purple');
-			stroke('black');
-			strokeWeight(1);
+
+        this.cosmicAlien.display();
+        if (this.cosmicAlien.overlap(this.character)) {
+            /* style dialog */
+            textSize(20);
+            fill('purple');
+            stroke('black');
+            strokeWeight(1);
             var dialog;
             if (this.cosmicAlien.dialogCount == 0) {
                 dialog = 'hello, human';
@@ -254,22 +254,22 @@ class marsii extends Scene {
                 dialog = 'Maybe';
             }
             text(dialog, this.cosmicAlien.x, this.cosmicAlien.y);
-			
+
             fill(255);
             text("hit enter", this.cosmicAlien.x, this.cosmicAlien.y + 50);
-            
-			if (keyIsDown(ENTER) && !this.hitEnter) {
-				this.cosmicAlien.dialogCount++;
+
+            if (keyIsDown(ENTER) && !this.hitEnter) {
+                this.cosmicAlien.dialogCount++;
                 this.hitEnter = true;
-			} else if (!keyIsDown(ENTER)) {
+            } else if (!keyIsDown(ENTER)) {
                 this.hitEnter = false;
             }
-		}
-			//this.cosmicAlien.displayDialog();
-			
-		}
+        }
+        //this.cosmicAlien.displayDialog();
 
     }
+
+}
 
 
 
