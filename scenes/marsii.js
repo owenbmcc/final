@@ -60,8 +60,8 @@ class marsii extends Scene {
         var creepAlienSheet = loadSpriteSheet('/images/marsii/npcs/creepAlienB.png', 252, 252, 5);
         this.creepAlien = new NPC(-1800, 1600, creepAlienSheet, "Hi. you need me for my strength.");
 
-        //this.map = new Map();
-        //this.map.preload('data/marsii.json');
+        this.map = new Map();
+        this.map.preload('data/marsii.json');
 
     }
 
@@ -81,7 +81,7 @@ class marsii extends Scene {
         this.character = new Character(animations);
         this.character.changeAnimation('idle');
 
-        //this.map.setup();
+        this.map.setup();
 
         this.liquidAlien.setup();
         this.cosmicAlien.setup();
@@ -176,9 +176,10 @@ class marsii extends Scene {
         this.map.display();
 
         /* update character */
+        //console.log
         this.character.update();
         this.character.display();
-
+        
 
         /* check npcs */
         this.staticAlien.display();
