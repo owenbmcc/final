@@ -1,4 +1,4 @@
-{
+{   
     "scenery": {
         "background": {
             "img": "images/marsii/testmap.png",
@@ -13,6 +13,7 @@
 			]
         }
     },
+    
     "obstacles": {
         "ufo": {
             "img": "images/marsii/scenery/ufo.png",
@@ -21,20 +22,8 @@
             "frames": 1,
             "positions": [
                 {
-                    "x": 600,
-                    "y": -300
-                }
-			]
-        },
-        "brokenship": {
-            "img": "images/marsii/scenery/brokenship.png",
-            "width": 353,
-            "height": 188,
-            "frames": 1,
-            "positions": [
-                {
-                    "x": 600,
-                    "y": -300
+                    "x": -2420,
+                    "y": 370
                 }
 			]
         },
@@ -57,8 +46,8 @@
             "frames": 5,
             "positions": [
                 {
-                    "x": 600,
-                    "y": -300
+                    "x": -370,
+                    "y": 1192
                 }
 			]
         },
@@ -81,8 +70,8 @@
             "frames": 1,
             "positions": [
                 {
-                    "x": 600,
-                    "y": -300
+                    "x": 370,
+                    "y": 1000
                 }
 			]
         },
@@ -141,8 +130,8 @@
             "frames": 1,
             "positions": [
                 {
-                    "x": 600,
-                    "y": -300
+                    "x": -200,
+                    "y": 87
                 }
 			]
         },
@@ -177,8 +166,8 @@
             "frames": 1,
             "positions": [
                 {
-                    "x": 600,
-                    "y": -300
+                    "x": 468,
+                    "y": 787
                 }
 			]
         }
