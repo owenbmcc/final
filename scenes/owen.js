@@ -107,7 +107,6 @@ class owen extends Scene {
 			strokeWeight(4);
 			this.sceneLink.displayDialog(); 
             if (keyIsDown(ENTER)) {
-                
 				changeScene('paralax');
 			}
             /*

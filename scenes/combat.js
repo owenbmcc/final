@@ -25,7 +25,7 @@ class CombatScene extends Scene {
 		
 		/* setting up combat */
 		// player, npc, npc name, timeout duration
-		this.combat = new Combat(this.player, this.npc, "Jerry", 100);
+		this.combat = new Combat(this.player, this.npc, "Jerry", 20);
 		// possible states turn, message, win, lose
 		
 		// name, max value, min value, callback
@@ -41,7 +41,7 @@ class CombatScene extends Scene {
 		});
 		
 		// graphics, metric, probability, damage, optional : success response, failure response
-		this.combat.addPlayerAttack(this.balloonSheet, 'health', 0.5, -20, "The Balloon attack succeeded", "The balloon attack failed.");
+		this.combat.addPlayerAttack(this.balloonSheet, 'health', 0.8, -50, "The Balloon attack succeeded", "The balloon attack failed.");
 		this.combat.addPlayerAttack(this.cloudSheet, 'health', 0.2, -40);
 		this.combat.addPlayerAttack(this.kiteSheet, 'health', 0.8, -10);
 		
@@ -56,6 +56,10 @@ class CombatScene extends Scene {
 			changeScene('owen');
 		};
 		
+	}
+	
+	start() {
+		this.combat.reset();
 	}
 	
 	draw() {

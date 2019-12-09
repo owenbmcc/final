@@ -17,6 +17,20 @@ class Combat {
 
 		this.metrics = {};
 	}
+	
+	reset() {
+		this.state = 'turn';
+		this.turn = 'player';
+		this.counter = this.timeout;
+		this.message = "Choose an attack.";
+		
+		for (const metric in this.metrics) {
+			console.log(metric);
+			this.player[metric]	= this.metrics[metric].max;
+			this.npc[metric]	= this.metrics[metric].max;
+
+		}
+	}
 
 	addMetric(label, value, min, callback) {
 		this.player[label] = value;
@@ -24,6 +38,7 @@ class Combat {
 
 		this.metrics[label] = {
 			min: min,
+			max: value,
 			callback: callback
 		};
 	}
