@@ -1,4 +1,10 @@
 class owen extends Scene {
+	
+	constructor() {
+		super();
+		sceneManager['combat-jerry'] = new CombatScene("Jerry");
+        sceneManager['combat-jenny'] = new CombatScene("Jenny");
+	}
 
 	preload() {
 		
@@ -26,6 +32,7 @@ class owen extends Scene {
         //this.sceneLink.dialogCount = 0;
 		
 		this.jerry = new NPC(200, 600, spriteSheet, "Hit Enter to fight Jerry.");
+		this.jenny = new NPC(400, 800, spriteSheet, "Enter to fight Jenny");
 		
 	}
 	
@@ -41,6 +48,7 @@ class owen extends Scene {
 		this.map.setup();
 		this.sceneLink.setup();
 		this.jerry.setup();
+		this.jenny.setup();
 
 	}
 	
@@ -142,9 +150,25 @@ class owen extends Scene {
 			this.jerry.displayDialog();
 			
 			if (keyIsDown(ENTER)) {
-				changeScene('combat');
+				changeScene('combat-jerry');
 			}
 		}
+		
+		this.jenny.display();
+		if (this.jenny.overlap(this.character)) {
+			/* style dialog */
+			textSize(30);
+			textFont("Comic Sans MS");
+			fill('pink');
+			stroke('blue');
+			strokeWeight(4);
+			this.jenny.displayDialog();
+			
+			if (keyIsDown(ENTER)) {
+				changeScene('combat-jenny');
+			}
+		}
+		
 		
 		/* update map */
 		this.map.collide(this.character);
@@ -156,6 +180,14 @@ class owen extends Scene {
 		this.character.update();
 		this.character.display();
 
+	}
+
+	combatResult(result, npcName) {
+		console.log(result, npcName);
+		if (result == 'win' && npcName == 'Jenny') {
+			console.log(this.jenny);
+			this.jenny.remove();
+		}
 	}
 }
 

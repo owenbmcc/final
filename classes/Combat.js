@@ -25,10 +25,8 @@ class Combat {
 		this.message = "Choose an attack.";
 		
 		for (const metric in this.metrics) {
-			console.log(metric);
 			this.player[metric]	= this.metrics[metric].max;
 			this.npc[metric]	= this.metrics[metric].max;
-
 		}
 	}
 
@@ -121,10 +119,10 @@ class Combat {
 			}
 		} else if (this.state == 'win') {
 			this.counter--;
-			if (this.counter <= 0) this.onWin();
+			if (this.counter <= 0) this.onWin(this.npc.name);
 		} else if (this.state == 'lose') {
 			this.counter--;
-			if (this.counter <= 0) this.onLose();
+			if (this.counter <= 0) this.onLose(this.npc.name);
 		}
 	}
 }
