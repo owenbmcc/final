@@ -11,17 +11,20 @@ class BattleScene extends Scene {
 		
 		// character graphics
 		this.playerSpriteSheet = loadSpriteSheet('images/nick/idle.png', 68, 104, 12);
+		this.attack1SpriteSheet = loadSpriteSheet('images/nick/animateslash.png', 80, 88, 3);
 		this.npcSpriteSheet = loadSpriteSheet('images/nick/ben.png', 68, 104, 1);
 		
 		// action choices graphics
 		this.slashSheet = loadSpriteSheet('images/nick/slash.png', 80, 80, 1);
-		this.cloudSheet = loadSpriteSheet('images/paralax/cloud.png', 96, 56, 1);
+		this.cloudSheet = loadSpriteSheet('images/nick/fire.png', 80, 80, 1);
 		this.kiteSheet = loadSpriteSheet('images/paralax/kite.png', 128, 128, 1);
 	}
 	
 	setup() {
 		var playerAnimations = {
-			idle: this.playerSpriteSheet	
+			idle: this.playerSpriteSheet,
+            attack1: this.attack1SpriteSheet
+            
 		};
 		this.player = new Character(playerAnimations, 200, height/2);
 		
@@ -48,7 +51,7 @@ class BattleScene extends Scene {
 		});
 		
 		// graphics, metric, probability, damage
-		this.combat.addPlayerAttack(this.slashSheet, 'health', 0.5, -20);
+		this.combat.addPlayerAttack(this.slashSheet, 'health', 0.5, -20,'success','missed','attack1');
 		this.combat.addPlayerAttack(this.cloudSheet, 'health', 0.2, -40);
 		this.combat.addPlayerAttack(this.kiteSheet, 'health', 0.8, -10);
 		
