@@ -13,7 +13,8 @@ class ParalaxScene extends Scene {
 		this.map.setup();
 		
 		this.cat.setup();
-		this.cat.sprite.onMousePressed = function() {
+		this.cat.onClick = function() {
+			console.log('cat', this);
 			changeScene('owen');	
 		};
 	}
@@ -26,6 +27,7 @@ class ParalaxScene extends Scene {
 		background('pink');
 		this.map.paralax(paralaxScroll);
 		this.map.display();
+		this.cat.update();
 		this.cat.display();
 	}
 }

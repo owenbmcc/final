@@ -6,7 +6,7 @@
 
 
 
-var scene = 'owen';
+var scene = 'paralax';
 
 var sceneManager = {};
 sceneManager['owen'] = new owen();

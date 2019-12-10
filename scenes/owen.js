@@ -114,8 +114,10 @@ class owen extends Scene {
 			stroke('blue');
 			strokeWeight(4);
 			this.sceneLink.displayDialog(); 
-            if (keyIsDown(ENTER)) {
-				changeScene('paralax');
+            
+			if (keyIsDown(ENTER)) {
+//				changeScene('paralax');
+				
 			}
             /*
             var dialog;
@@ -184,7 +186,7 @@ class owen extends Scene {
 
 	combatResult(result, npcName) {
 		console.log(result, npcName);
-		if (result == 'win' && npcName == 'Jenny') {
+		if (result == 'win' && npcName == 'jenny') {
 			console.log(this.jenny);
 			this.jenny.remove();
 		}

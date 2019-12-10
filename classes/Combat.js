@@ -19,6 +19,7 @@ class Combat {
 	}
 	
 	reset() {
+		console.log('reset');
 		this.state = 'turn';
 		this.turn = 'player';
 		this.counter = this.timeout;
@@ -41,8 +42,8 @@ class Combat {
 		};
 	}
 
-	addPlayerAttack(spriteSheet, metric, probability, delta, successMsg, failMsg,playerAnimation) {
-		const sprite = createSprite(this.player.x, this.player.y + this.player.attacks.length * 100 + 100, 50, 50);
+	addPlayerAttack(spriteSheet, metric, probability, delta, successMsg, failMsg, playerAnimation) {
+		const sprite = createSprite(this.player.x + this.player.attacks.length * 100, this.player.y + 100, 50, 50);
 		sprite.addAnimation('default', spriteSheet);
 
 		this.player.attacks.push({ sprite: sprite });
@@ -83,6 +84,8 @@ class Combat {
 		this.turn = character.isPlayer ? 'player' : 'npc';
 		this.counter = this.timeout;
         
+//		console.trace();
+//		console.log(character);
         if(attack.playerAnimation){
             character.changeAnimation(attack.playerAnimation)
         }
