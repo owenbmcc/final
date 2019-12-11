@@ -9,15 +9,20 @@ class BattleScene extends Scene {
 	
 	preload() {
 		
+        this.map = new Map();
+		this.map.preload('data/battle.json');
+        
 		// character graphics
 		this.playerSpriteSheet = loadSpriteSheet('images/nick/idle.png', 68, 104, 12);
 		this.attack1SpriteSheet = loadSpriteSheet('images/nick/animateslash.png', 80, 88, 3);
-		this.npcSpriteSheet = loadSpriteSheet('images/nick/ben.png', 68, 104, 1);
+		this.attack2SpriteSheet = loadSpriteSheet('images/nick/animatefire.png', 60, 51, 7);
+		this.attack2SpriteSheet = loadSpriteSheet('images/nick/animatelightning.png', 69, 66, 4);
+		this.npcSpriteSheet = loadSpriteSheet('images/nick/ben.png', 68, 104, 7);
 		
 		// action choices graphics
 		this.slashSheet = loadSpriteSheet('images/nick/slash.png', 80, 80, 1);
 		this.cloudSheet = loadSpriteSheet('images/nick/fire.png', 80, 80, 1);
-		this.kiteSheet = loadSpriteSheet('images/paralax/kite.png', 128, 128, 1);
+		this.kiteSheet = loadSpriteSheet('images/nick/lightning.png', 80, 80, 1);
 	}
 	
 	setup() {

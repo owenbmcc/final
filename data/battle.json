@@ -1,0 +1,20 @@
+{
+    "scenery": {
+        
+        
+        
+		"house": {
+			"img":	"images/nick/thundercloud.png",
+			"width": 66,
+			"height": 60,
+			"frames": 1,
+			"positions": [
+				{ "x": 50, "y": 100 },
+				
+			]
+		},
+    
+    
+    
+    
+}
