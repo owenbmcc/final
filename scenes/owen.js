@@ -64,7 +64,7 @@ class owen extends Scene {
 	}
 	
 	draw() {
-		background(220);
+//		background(220);
 
 		/* some instructions */
 		textAlign(CENTER);

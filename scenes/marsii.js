@@ -44,25 +44,25 @@ class marsii extends Scene {
         //this.objective.good = "You need", shiprepair, map, shipuprighted;
         //this.objective.bad = "You need", key, shipunattended;
 
-        var staticAlienSheet = loadSpriteSheet('/images/marsii/npcs/staticAlien.png', 64, 128, 8);
+        var staticAlienSheet = loadSpriteSheet('images/marsii/npcs/staticAlien.png', 64, 128, 8);
         this.staticAlien = new NPC(400, -600, staticAlienSheet, "Hi. you need me for energy.");
         this.staticAlien.dialogCount = 0;
 
-        var cosmicAlienSheet = loadSpriteSheet('/images/marsii/npcs/cosmicAlien.png', 64, 130, 6);
+        var cosmicAlienSheet = loadSpriteSheet('images/marsii/npcs/cosmicAlien.png', 64, 130, 6);
         this.cosmicAlien = new NPC(-2700, -570, cosmicAlienSheet, "Hi. you need me for my power.");
         this.cosmicAlien.dialogCount = 0;
 
-        var liquidAlienSheet = loadSpriteSheet('/images/marsii/npcs/liquidAlien.png', 64, 128, 4);
+        var liquidAlienSheet = loadSpriteSheet('images/marsii/npcs/liquidAlien.png', 64, 128, 4);
         //var liquidAlienSheetFrozen = loadSpriteSheet('/images/marsii/npcs/liquidAlienFrozen.png', 64, 128, 1);
         this.liquidAlien = new NPC(200, 1200, liquidAlienSheet, "Hi. what's up");
         this.liquidAlien.dialogCount = 0;
 
-        var plantAlienSheet = loadSpriteSheet('/images/marsii/npcs/plantAlien.png', 64, 128, 4);
+        var plantAlienSheet = loadSpriteSheet('images/marsii/npcs/plantAlien.png', 64, 128, 4);
         this.plantAlien = new NPC(-1700, 500, plantAlienSheet, "Hi. what's up");
         this.plantAlien.dialogCount = 0;
 
 
-        var creepAlienSheet = loadSpriteSheet('/images/marsii/npcs/creepAlienB.png', 252, 252, 5);
+        var creepAlienSheet = loadSpriteSheet('images/marsii/npcs/creepAlienB.png', 252, 252, 5);
         this.creepAlien = new NPC(-1800, 1600, creepAlienSheet, "Hi. you need me for my strength.");
         this.creepAlien.dialogCount = 0;
 

@@ -11,7 +11,6 @@ class Thing {
 
 		if (this.onClick) {
 			this.sprite.mouseUpdate();
-			console.log(this.sprite.mouseIsOver);
 			if (this.sprite.mouseIsOver) {
 				console.log('mouse over');
 			}
