@@ -67,9 +67,13 @@ class marsii extends Scene {
         this.creepAlien.dialogCount = 0;
 
         /*
-        var astShipsheet = loadSpriteSheet('images/marsii/scenery/brokenship.png', 353, 188, 1);
-        this.ship = new NPC(847, 359, astShipSheet, "Your ship");        
+        var astShipsheet = loadSpriteSheet('images/marsii/npcs/brokenship.png', 353, 188, 1);
+        this.ship = new NPC(847, 359, astShipSheet, "Your ship");  
         this.ship.dialogCount = 0;
+        
+        var alienShipsheet = loadSpriteSheet('images/marsii/npcs/ufo.png', 359, 244, 1);
+        this.alienShip = new NPC(847, 359, astShipSheet, "Your ship");  
+        this.alienShip.dialogCount = 0;
         
         
         */
