@@ -81,8 +81,6 @@ class marsii extends Scene {
 
         this.map = new Map();
         this.map.preload('data/marsii.json');
-
-
     }
 
     setup() {
