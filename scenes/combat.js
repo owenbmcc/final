@@ -1,5 +1,10 @@
 class CombatScene extends Scene {
 	
+	constructor(npcName) {
+		super();
+		this.npcName = npcName;	
+	}
+	
 	preload() {
 		
 		// character graphics
@@ -25,7 +30,7 @@ class CombatScene extends Scene {
 		
 		/* setting up combat */
 		// player, npc, npc name, timeout duration
-		this.combat = new Combat(this.player, this.npc, "Jerry", 100);
+		this.combat = new Combat(this.player, this.npc, this.npcName, 20);
 		// possible states turn, message, win, lose
 		
 		// name, max value, min value, callback
@@ -41,21 +46,29 @@ class CombatScene extends Scene {
 		});
 		
 		// graphics, metric, probability, damage, optional : success response, failure response
-		this.combat.addPlayerAttack(this.balloonSheet, 'health', 0.5, -20, "The Balloon attack succeeded", "The balloon attack failed.");
+		
+		this.combat.addPlayerAttack(this.balloonSheet, 'health', 0.8, -50, "The Balloon attack succeeded", "The balloon attack failed.");
 		this.combat.addPlayerAttack(this.cloudSheet, 'health', 0.2, -40);
 		this.combat.addPlayerAttack(this.kiteSheet, 'health', 0.8, -10);
 		
-		this.combat.addNPCAttack('health', 0.2, -20, "Jerry got you.", "Jerry missed.");
+		this.combat.addNPCAttack('health', 0.2, -20, this.npcName + " got you.", this.npcName + " missed.");
 		this.combat.addNPCAttack('health', 0.1, -40);
 		
-		this.combat.onWin = function() {
+		this.combat.onWin = function(npcName) {
+			console.log(npcName);
+			sceneManager['owen'].combatResult('win', npcName);
 			changeScene('owen');	
 		};
 		
-		this.combat.onLose = function() {
+		this.combat.onLose = function(npcName) {
+			sceneManager['owen'].combatResult('lose', npcName);
 			changeScene('owen');
 		};
 		
+	}
+	
+	start() {
+		this.combat.reset();
 	}
 	
 	draw() {

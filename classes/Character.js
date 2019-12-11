@@ -15,4 +15,7 @@ class Character extends Thing {
 		this.sprite.changeAnimation(label);
 	}
 	
+	remove() {
+		this.sprite.remove();	
+	}
 }

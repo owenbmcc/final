@@ -30,51 +30,57 @@ class marsii extends Scene {
         this.bgSounds[1].playMode('sustain');
         */
         //key items
-
-        //var shiprepaired = false;
-        //var key = false;
-        //var shipuprighted = false;
-        //var navimap = false;
-        //var mapnoted = false;
-        //var shipunattended = false;
+        //
+        //        var shiprepaired = false;
+        //        var key = false;
+        //        var shipuprighted = false;
+        //        var navimap = false;
+        //        var mapnoted = false;
+        //        var shipunattended = false;
 
         //quest items
 
-        //var blackhole = false;
-        //var blackholeneed = false;
-        //var fakelog = false;
-        //var reallog = false;
+
         //this.objective.good = "You need", shiprepair, map, shipuprighted;
         //this.objective.bad = "You need", key, shipunattended;
-        var staticAlienSheet = loadSpriteSheet('/images/marsii/npcs/staticAlien.png', 64, 128, 8);
-        this.staticAlien = new NPC(400, -600, staticAlienSheet, "Hi. you need me for energy.");
 
-        var cosmicAlienSheet = loadSpriteSheet('/images/marsii/npcs/cosmicAlien.png', 64, 130, 6);
+        var staticAlienSheet = loadSpriteSheet('images/marsii/npcs/staticAlien.png', 64, 128, 8);
+        this.staticAlien = new NPC(400, -600, staticAlienSheet, "Hi. you need me for energy.");
+        this.staticAlien.dialogCount = 0;
+
+        var cosmicAlienSheet = loadSpriteSheet('images/marsii/npcs/cosmicAlien.png', 64, 130, 6);
         this.cosmicAlien = new NPC(-2700, -570, cosmicAlienSheet, "Hi. you need me for my power.");
         this.cosmicAlien.dialogCount = 0;
 
-        var liquidAlienSheet1 = loadSpriteSheet('/images/marsii/npcs/liquidAlien.png', 64, 128, 4);
-        //var liquidAlienSheet2 = loadSpriteSheet('/images/marsii/npcs/liquidAlienFrozen.png', 64, 128, 1);
-        this.liquidAlien = new NPC(200, 1200, liquidAlienSheet1, "Hi. what's up");
+        var liquidAlienSheet = loadSpriteSheet('images/marsii/npcs/liquidAlien.png', 64, 128, 4);
+
+        //var liquidAlienSheetFrozen = loadSpriteSheet('/images/marsii/npcs/liquidAlienFrozen.png', 64, 128, 1);
+        this.liquidAlien = new NPC(200, 1200, liquidAlienSheet, "Hi. what's up");
         this.liquidAlien.dialogCount = 0;
 
-        var plantAlienSheet = loadSpriteSheet('/images/marsii/npcs/plantAlien.png', 64, 128, 4);
+        var plantAlienSheet = loadSpriteSheet('images/marsii/npcs/plantAlien.png', 64, 128, 4);
         this.plantAlien = new NPC(-1700, 500, plantAlienSheet, "Hi. what's up");
+        this.plantAlien.dialogCount = 0;
+        //-1700, 500
 
-        var creepAlienSheet = loadSpriteSheet('/images/marsii/npcs/creepAlienB.png', 252, 252, 5);
+        var creepAlienSheet = loadSpriteSheet('images/marsii/npcs/creepAlienB.png', 252, 252, 5);
         this.creepAlien = new NPC(-1800, 1600, creepAlienSheet, "Hi. you need me for my strength.");
-        
+        this.creepAlien.dialogCount = 0;
+
         /*
-        var astShipsheet = loadSpriteSheet('images/marsii/scenery/brokenship.png', 353, 188, 1);
-        this.ship = new NPC(847, 359, astShipSheet, "Your ship");        
+        var astShipsheet = loadSpriteSheet('images/marsii/npcs/brokenship.png', 353, 188, 1);
+        this.ship = new NPC(847, 359, astShipSheet, "Your ship");  
+        this.ship.dialogCount = 0;
         
+        var alienShipsheet = loadSpriteSheet('images/marsii/npcs/ufo.png', 359, 244, 1);
+        this.alienShip = new NPC(847, 359, astShipSheet, "Your ship");  
+        this.alienShip.dialogCount = 0;
         
         
         */
 
         this.map = new Map();
         this.map.preload('data/marsii.json');
-
     }
 
     setup() {
@@ -100,6 +106,7 @@ class marsii extends Scene {
         this.staticAlien.setup();
         this.plantAlien.setup();
         this.creepAlien.setup();
+
         //Interactable Objects
         //this.ship.setup();
 
@@ -116,16 +123,17 @@ class marsii extends Scene {
     }
 
     draw() {
-
+        //Debugging stuff
         //map maybe big, helps to have camera
         if (mouseIsPressed)
             camera.zoom = 0.3;
         else
             camera.zoom = 1;
+        //console.log(this.character.x, this.character.y)
         /*
     //bg = this.startSet;
          //.5 zoom is zooming out (50% of the normal size)
-
+            
     
    */
 
@@ -142,7 +150,7 @@ class marsii extends Scene {
 
         //this.character.update();
         //this.character.display();
-        var humandialog;
+
         /*
         for(humandialog;){
             fill('white');
@@ -151,10 +159,26 @@ class marsii extends Scene {
             text(humandialog, this.character.x, this.character.y - 20);
         }
         */
-            
-        text(humandialog, this.character.x, this.character.y - 20);
+
+
         // user input - move character around 
 
+        //let bboxH = font.textBounds(textString, 10, 30, 12);
+        //rect(bbox.x, bbox.y, bbox.w, bbox.h);
+        //let textString = 'Lorem ipsum dolor sit amet.';
+
+        var blackhole = false;
+        var blackholeneed = false;
+        var logneed = false;
+        var fakelog = false;
+        var reallog = false;
+        var icepick = false;
+        var frozenmap = false;
+        var frozenkey = false;
+        var unmarkedmap = false;
+        var markedmap = false;
+
+        // user input - move character around 
         var isWalkingR = false;
         var isWalkingL = false;
         var isWalkingU = false;
@@ -200,24 +224,36 @@ class marsii extends Scene {
         this.map.display();
 
         /* update character */
-        console.log(this.character.x, this.character.y)
+        //console.log(this.character.x, this.character.y)
         this.character.update();
         this.character.display();
 
+        var humanDialog;
 
         /* check npcs */
         this.staticAlien.display();
-         if (this.staticAlien.overlap(this.character)) {
+        if (this.staticAlien.overlap(this.character)) {
             /* style dialog */
+            console.log("Static Alien", this.staticAlien.dialogCount);
             textSize(20);
             fill('gray');
             stroke('black');
             strokeWeight(1);
             var dialog;
-            
-            
-            text(dialog, this.staticAlien.x, this.staticAlien.y);
+            var humanDialogS;
+            if (this.staticAlien.dialogCount == 0) {
+                dialog = 'hi...';
+            } else if (this.staticAlien.dialogCount == 0.5) {
+                humanDialogS = "Hello...? Are you ok?";
+            } else if (this.staticAlien.dialogCount == 1) {
+                dialog = "I don't really know.";
+            } else if (this.staticAlien.dialogCount == 1.5) {
+                humanDialogS = "Okay... well do you have anything I can use to get off this planet?";
+            }
 
+
+            text(dialog, this.staticAlien.x, this.staticAlien.y, 200, 200);
+            text(humanDialogS, this.character.x, this.character.y, 200, 200);
             fill(255);
             text("hit enter", this.staticAlien.x, this.staticAlien.y + 50);
 
@@ -232,77 +268,113 @@ class marsii extends Scene {
         this.liquidAlien.display();
         if (this.liquidAlien.overlap(this.character)) {
             /* style dialog */
-            textSize(20);
-            fill('blue');
+
+            console.log("Liquid Alien", this.liquidAlien.dialogCount);
+            textSize(15);
+            if (this.liquidAlien.dialogCount % 1 == .5) {
+                fill('white');
+                text(humanDialogL, this.character.x, this.character.y - 20, 200, 200);
+            } else {
+                fill('Cyan');
+            }
             stroke('black');
             strokeWeight(1);
             var dialog;
-            var humandialog;
+            var humanDialogL;
             if (this.liquidAlien.dialogCount == 0) {
                 dialog = 'hello';
-                humandialog = "hello, do you have something I can use to get out of here? I need help."
+            } else if (this.liquidAlien.dialogCount == 0.5) {
+                humanDialogL = "hello, do you have something I can use to get out of here? I need help."
             } else if (this.liquidAlien.dialogCount == 1) {
                 dialog = "I have a map. I also have a key, but I don't know what it unlocks. Anyway, what can you give me in return?";
-                humandialog = "(That key probably unlocks something important around here.) Well I do need a map, what do you want?";
+            } else if (this.liquidAlien.dialogCount == 1.5) {
+                humanDialogL = "(That key probably unlocks something important around here.) Well I do need a map, what do you want?";
             } else if (this.liquidAlien.dialogCount == 2) {
                 dialog = 'Well, maps are pretty valuable, so can you help me achieve a dream?';
-                humandialog = "I guess I can try. what is it?";
+            } else if (this.liquidAlien.dialogCount == 2.5) {
+                humanDialogL = "I guess I can try. what is it?";
             } else if (this.liquidAlien.dialogCount == 3) {
                 dialog = "I want to see what freezing feels like, but it's hard to find anything cold enough.";
-                humandialog = "What would be cold enough?";
+            } else if (this.liquidAlien.dialogCount == 3.5) {
+                humanDialogL = "What would be cold enough?";
             } else if (this.liquidAlien.dialogCount == 4) {
                 dialog = "Maybe like a black hole? But it would have to be small and contained. I don't want to completely freeze.";
-                //var blackholeneed = true;
-                humandialog = "that sounds hard to find, is there anything else you would want?";
+                var blackholeneed = true;
+            } else if (this.liquidAlien.dialogCount == 4.5) {
+                humanDialogL = "that sounds hard to find, is there anything else you would want?";
             } else if (this.liquidAlien.dialogCount == 5) {
                 dialog = "Well, I wouldn't mind having another pet (I'll change this later)";
-                humandialog = "I'll try to find something.";
+            } else if (this.liquidAlien.dialogCount == 5.5) {
+                humanDialogL = "I'll try to find something.";
             }
-            /*
-            if (blackhole == true;){
-            //there needs to be a good, bad option here. One where you just get the map, one where you freeze her for other items.
-            this.liquidAlien.dialogCount == 7{
-              dialog = "Did you manage to find something?";
-              
-            //user prompt
-              
-              choice 1: heres the blackhole.
-              choice 2: *throw blackhole into alien and freeze her*
-              choice 3: heres a pet.
-              choice 4: not yet
-              if (keyIsDown(1)) {
-              this.liquidAlien.dialogCount = 8;
-              if (this.liquidAlien.dialogCount == 8) {
-                dialog = "Thank you very much, here's a map.";
-                map = true;
-        } else if (keyIsDown(2)) {
-                this.liquidAlien.dialogCount = 9;
-              if (this.liquidAlien.dialogCount == 9) {
-                dialog = "!!!";
-                //freezes alien
-                liquid 
-                if(knife == true){
-                You break off pieces with key and the 
-                I neeed something to break off the pieces I want
+
+            if (blackhole == false && this.liquidAlien.dialogCount == 6.5) {
+                this.liquidAlien.dialogCount = 6;
+                //there needs to be a good, bad option here. One where you just get the map, one where you freeze her for other items.
+            } else if (blackhole == true) {
+                this.liquidAlien.dialogCount = 7;
+                if (this.liquidAlien.dialogCount == 7) {
+                    dialog = "Did you manage to find something?";
+
+                    //user prompt
+
+                    humanDialogL = "choice [1]: heres the blackhole.choice [2]: *throw blackhole into alien and freeze her* choice [3]: heres a pet. press [4]: not yet"
+                    if (keyIsDown(1)) {
+                        this.liquidAlien.dialogCount = 8;
+                        if (this.liquidAlien.dialogCount == 8) {
+                            dialog = "Thank you very much, here's a map.";
+                            unmarkedmap = true;
+                        }
+                    } else if (keyIsDown(2)) {
+                        this.liquidAlien.dialogCount = 9;
+                        if (this.liquidAlien.dialogCount == 9) {
+                            dialog = "!!!";
+                            //freezes alien
+                            //liquid 
+                            if (icepick == true) {
+
+                                humanDialogL = "You break off pieces with key and the map";
+                                var frozenmap = true;
+                                var frozenkey = true;
+                            } else {
+                                humanDialogL = "I need something to break off the pieces I want"
+                                this.liquidAlien.dialogCount = 15;
+                            }
+
+                        }
+                    } else if (keyIsDown(3)) {
+                        if (this.liquidAlien.dialogCount == 10) {
+                            dialog = "Thank you, here's the map."
+                        }
+                    } else if (keyIsDown(4)) {
+                        this.liquidAlien.dialogCount = 6;
+                    }
                 }
-                
-        }
-              if (this.liquidAlien.dialogCount == 8) {
+
             }
-            }else {
-            this.liquidAlien.dialogCount == 6 {
-            dialog = "(She has nothing else to say to you right now.)";
+
+            if (this.liquidAlien.dialogCount == 6) {
+                dialog = "(She has nothing else to say to you right now.)";
             }
-            }*/
+            if (this.liquidAlien.dialogCount == 15) {
+                if (icepick = false) {
+                    humanDialogL = "You break off pieces with key and the map";
+                    var frozenmap = true;
+                    var frozenkey = true;
+                } else {
+                    dialog = "(You need something sharp to break off pieces)";
+                    this.liquidAlien.dialogCount = 15;
+                }
+            }
 
 
-            text(dialog, this.liquidAlien.x, this.liquidAlien.y);
-
+            text(dialog, this.liquidAlien.x, this.liquidAlien.y, 200, 200);
+            text(humanDialogL, this.character.x, this.character.y - 20, 200, 200);
             fill(255);
             text("hit enter", this.liquidAlien.x, this.liquidAlien.y + 50);
 
             if (keyIsDown(ENTER) && !this.hitEnter) {
-                this.liquidAlien.dialogCount++;
+                this.liquidAlien.dialogCount = this.liquidAlien.dialogCount + 0.5;
                 this.hitEnter = true;
             } else if (!keyIsDown(ENTER)) {
                 this.hitEnter = false;
@@ -310,22 +382,50 @@ class marsii extends Scene {
         }
 
         this.creepAlien.display();
-         if (this.creepAlien.overlap(this.character)) {
+        if (this.creepAlien.overlap(this.character)) {
             /* style dialog */
-            textSize(20);
-            fill('red');
+            console.log("Creep Alien", this.creepAlien.dialogCount);
+            textSize(15);
+            if (this.creepAlien.dialogCount % 1 == .5) {
+                fill('white');
+            } else {
+                fill('red');
+            }
             stroke('black');
             strokeWeight(1);
             var dialog;
-            
-            
-            text(dialog, this.creepAlien.x, this.creepAlien.y);
+            var humanDialogCr;
 
+            if (this.creepAlien.dialogCount == 0) {
+                dialog = "Greetings, I'm suprised you approached me";
+            } else if (this.creepAlien.dialogCount == 0.5) {
+                humanDialogCr = "Oh? Why is that?";
+            } else if (this.creepAlien.dialogCount == 1) {
+                dialog = "Most beings are too intimidated by my apperance. It's pretty saddening. Anyway why did you approach me?";
+            } else if (this.creepAlien.dialogCount == 1.5) {
+                humanDialogCr = "I need to get off this planet. Do you have anything I could use?";
+            } else if (this.creepAlien.dialogCount == 2) {
+                dialog = "Probably not. Unless you need something heated up";
+            } else if (this.creepAlien.dialogCount == 2.5) {
+                humanDialogCr = "You look strong, do you think you can you lift a ship?";
+            } else if (this.creepAlien.dialogCount == 3) {
+                dialog = "Probably, but it would talk a lot of effort, I wouldn't do it unless it was worth it";
+            } else if (this.creepAlien.dialogCount == 3.5) {
+                humanDialogCr = "If I get you something that makes it worth it will you do it?";
+            } else if (this.creepAlien.dialogCount == 4) {
+                dialog = "Sure";
+            } else if (this.creepAlien.dialogCount == 4.5) {
+                humanDialogCr = "( I'll have to find something to make him less intimidating)";
+            }
+
+
+            text(dialog, this.creepAlien.x, this.creepAlien.y, 200, 200);
+            text(humanDialogCr, this.character.x, this.character.y - 20, 200, 200);
             fill(255);
             text("hit enter", this.creepAlien.x, this.creepAlien.y + 50);
 
             if (keyIsDown(ENTER) && !this.hitEnter) {
-                this.creepAlien.dialogCount++;
+                this.creepAlien.dialogCount = this.creepAlien.dialogCount + 0.5;
                 this.hitEnter = true;
             } else if (!keyIsDown(ENTER)) {
                 this.hitEnter = false;
@@ -335,20 +435,24 @@ class marsii extends Scene {
         this.plantAlien.display();
         if (this.plantAlien.overlap(this.character)) {
             /* style dialog */
-            textSize(20);
-            fill('green');
+            textSize(15);
+            if (this.cosmicAlien.dialogCount % 1 == .5) {
+                fill('white');
+            } else {
+                fill('green');
+            }
             stroke('black');
             strokeWeight(1);
             var dialog;
-            
-            
+
+
             text(dialog, this.plantAlien.x, this.plantAlien.y);
 
             fill(255);
             text("hit enter", this.plantAlien.x, this.plantAlien.y + 50);
 
             if (keyIsDown(ENTER) && !this.hitEnter) {
-                this.plantAlien.dialogCount++;
+                this.plantAlien.dialogCount = this.plantAlien.dialogCount + 0.5;
                 this.hitEnter = true;
             } else if (!keyIsDown(ENTER)) {
                 this.hitEnter = false;
@@ -358,67 +462,167 @@ class marsii extends Scene {
         this.cosmicAlien.display();
         if (this.cosmicAlien.overlap(this.character)) {
             /* style dialog */
-            textSize(20);
-            fill('purple');
+
+            textSize(15);
+            if (this.cosmicAlien.dialogCount % 1 == .5) {
+                fill('LightCyan');
+            } else {
+                fill('Lavender');
+            }
+            console.log("Cosmic Alien", this.cosmicAlien.dialogCount);
             stroke('black');
             strokeWeight(1);
             var dialog;
+            var humanDialogC;
             if (this.cosmicAlien.dialogCount == 0) {
-                dialog = "Greetings, human. You are a human, correct?";
-                humandialog = "Yes? How did you know?";
+                dialog = "Hello, human. You are a human, correct?";
+            } else if (this.cosmicAlien.dialogCount == 0.5) {
+                humanDialogC = "Yes? How did you know?";
             } else if (this.cosmicAlien.dialogCount == 1) {
                 dialog = "I don't know much about your race. I would like to know more but it's hard to get info on isolated.";
-                humandialog = "Can you give me something useful in exchange for some info?";
+            } else if (this.cosmicAlien.dialogCount == 1.5) {
+                humanDialogC = "Can you give me something useful in exchange for some info?";
             } else if (this.cosmicAlien.dialogCount == 2) {
                 dialog = "I doubt I have anything you would want, or that you would be able to give enough information for that, but what do you need?"
-                //logneed = true;
-                humandialog = "I need a map, ship repairs and my ship uprighted."; 
-              /*  if (blackholeneed = false;){
-                //"Do you have any of those? "
-                if (this.cosmicAlien.dialogCount == 3) {
-                dialog = "I don't have any of that, but if you do get a map, I'll mark it for you. It's hard to navigate around here";
-                //Thanks, I don't really know how I got here. I'll come back when I have one.
+                if (blackholeneed == false) {
+                    //this.cosmicAlien.dialogCount = 2.5;
+                    if (this.cosmicAlien.dialogCount == 2.5) {
+                        humanDialogC = "I need a map, energy, ship repairs and my ship uprighted. Do you have any of those?";
+                    } else if (this.cosmicAlien.dialogCount == 3) {
+                        dialog = "No, but if you do get a map, I'll mark it for you. It's hard to navigate around here";
+                    } else if (this.cosmicAlien.dialogCount == 3.5) {
+                        humanDialogC = "Thanks, I don't really know how I got here. I'll come back when I have one."
+                    } else if (this.cosmicAlien.dialogCount == 4) {
+                        this.cosmicAlien.dialogCount = 10;
+                    }
+                }
+                if (blackholeneed == true) {
+                    this.cosmicAlien.dialogCount = 5.5;
+                    if (this.cosmicAlien.dialogCount == 5.5) {
+                        humanDialogC = "I need energy, ship repairs and my ship uprighted. I also need a blackhole so I can trade it for a map";
+                    } else if (this.cosmicAlien.dialogCount == 6) {
+                        dialog = "Oh! I can make those, I'll give you one for human info."
+                        logneed = true;
+                    } else if (this.cosmicAlien.dialogCount == 6.5) {
+                        humanDialogC = "Ok. I should have something that should work on my ship. I'll be back."
+                    } else if (this.cosmicAlien.dialogCount == 7) {
+                        this.cosmicAlien.dialogCount = 19
+                    }
+                }
             }
-                } 
-                if(fakelog == true;){
-                 dialog = "Thank you human. I look forward to reading this. Here's a blackhole, be very careful with that.";
-                 //blackhole = true;.
-            }else if(reallog == true;){
-                 dialog = "Thank you very much human. I look forward to reading this. Here's a blackhole, be very careful with that.";
-                 //blackhole = true;.
-            }else{
-            this.cosmicAlien.dialogCount = 4
-            if (this.cosmicAlien.dialogCount == 4) {
-                dialog = "Did you get a log?"
-                //No, I'll be back
+            if (this.cosmicAlien.dialogCount == 10) {
+                if (blackholeneed == true) {
+                    if (this.cosmicAlien.dialogCount == 15.5) {
+                        humanDialogC = "Hey, do you know where I can get a black hole? I need one to trade for a map."
+                    } else if (this.cosmicAlien.dialogCount == 16) {
+                        dialog = "Oh! I can make those, I'll mark your map and give you one for human info."
+                        logneed = true;
+                    } else if (this.cosmicAlien.dialogCount == 16.5) {
+                        humanDialogC = "Ok. I should have something that should work on my ship. I'll be back."
+                    } else if (this.cosmicAlien.dialogCount == 17) {
+                        this.cosmicAlien.dialogCount = 19;
+                    }
+                } else {
+                    this.cosmicAlien.dialogCount = 13;
+                }
+
+                if (this.cosmicAlien.dialogCount == 21) {
+                    dialog = "Did you get the info?";
+                } else if (this.cosmicAlien.dialogCount == 21.5) {
+                    if (fakelog == true || reallog == true) {
+                        humanDialog = "Yup, here you go"
+                    } else if (this.cosmicAlien.dialogCount == 22) {
+                        dialog = "Thank you very much human. I look forward to reading this. Here's a blackhole, be very careful with that.";
+                        blackhole = true;
+                        this.cosmicAlien.dialogCount = 25;
+                    }
+                    this.cosmicAlien.dialogCount = 22.5;
+                } else if (this.cosmicAlien.dialogCount == 22.5) {
+                    humanDialogC = "No, I'll be back";
+                } else if (this.cosmicAlien.dialogCount == 23) {
+                    this.cosmicAlien.dialogCount = 19;
+                }
+                //  dialog = "(She has nothing more to say to you.)"
+
             }
-                
+            if (this.cosmicAlien.dialogCount == 19) {
+                dialog = "She has nothing else to say to you right now"
+            } else if (this.cosmicAlien.dialogCount == 19.5) {
+                this.cosmicAlien.dialogCount = 21;
             }
-                
-                */
+            if (this.cosmicAlien.dialogCount == 13) {
+                dialog = "She has nothing more to say to you right now"
+                this.cosmicAlien.dialogCount = 10;
             }
+
+            if (this.cosmicAlien.dialogCount == 25) {
+                if (unmarkedmap = true) {
+                    dialog = "I see you have the map, I'll mark it";
+                    markedmap = true;
+                    unmarkedmap = false;
+                    this.cosmicAlien.dialogCount = 25;
+                } else {
+                    dialog = "She's grateful, but has nothing more to say to you for now"
+                    this.cosmicAlien.dialogCount = 25;
+                }
+            }
+
             /*
             if(navimap == true && mapnoted == false){
                 dialog = "I see you have a map now, I'll mark it for you so you can find your way home."
                 //thanks
                 mapnoted = true;
             }*/
-            
-            text(dialog, this.cosmicAlien.x, this.cosmicAlien.y);
 
+            text(dialog, this.cosmicAlien.x, this.cosmicAlien.y, 200, 200);
+            text(humanDialogC, this.character.x, this.character.y, 200, 200);
             fill(255);
             text("hit enter", this.cosmicAlien.x, this.cosmicAlien.y + 50);
 
             if (keyIsDown(ENTER) && !this.hitEnter) {
-                this.cosmicAlien.dialogCount++;
+                this.cosmicAlien.dialogCount = this.cosmicAlien.dialogCount + 0.5;
                 this.hitEnter = true;
             } else if (!keyIsDown(ENTER)) {
                 this.hitEnter = false;
             }
         }
+
         //this.cosmicAlien.displayDialog();
+        //
+        //this.ship.display();
+        // if (this.ship.overlap(this.character)) {
+        /* style dialog */
+        /*          textSize(20);
+                  fill('red');
+                  stroke('black');
+                  strokeWeight(1);
+                  var dialog;
+                  var humanDialogSh;
+                  
+                  
+                  
+                  
+                  
+                  text(dialog, this.ship.x, this.ship.y);
+
+                  fill(255);
+                  text(humanDialogSh, this.character.x, this.character.y);
+                  text("hit enter", this.ship.x, this.ship.y + 50);
+
+                   
+                   
+                  if (keyIsDown(ENTER) && !this.hitEnter) {
+                      this.ship.dialogCount++;
+                      this.hitEnter = true;
+                  } else if (!keyIsDown(ENTER)) {
+                      this.hitEnter = false;
+                  }
+              }*/
+
+        text(humanDialog, this.character.x, this.character.y);
 
     }
+
 
 }
 
@@ -524,4 +728,34 @@ class marsii extends Scene {
 			]
         }
     },
-        */
+    /* style dialog */
+/*
+            textSize(20);
+            if (this.cosmicAlien.dialogCount.endsWith('.5'){
+            fill('white');
+        }else{
+            fill('purple');
+        }
+            */
+/*
+                        stroke('black');
+                        strokeWeight(1);
+                        var dialog;
+                        if (this.cosmicAlien.dialogCount == 0) {
+                            dialog = "Greetings, human. You are a human, correct?";
+                        }else if (this.cosmicAlien.dialogCount == 0.5){
+                            humandialog = "Yes? How did you know?";
+                        } else if (this.cosmicAlien.dialogCount == 1) {
+                            dialog = "I don't know much about your race. I would like to know more but it's hard to get info on isolated.";
+                            humandialog = "Can you give me something useful in exchange for some info?";
+                        } else if (this.cosmicAlien.dialogCount == 2) {
+                            dialog = "I doubt I have anything you would want, or that you would be able to give enough information for that, but what do you need?"
+                            //logneed = true;
+                            humandialog = "I need a map, ship repairs and my ship uprighted."; 
+                          /*  if (blackholeneed = false;)
+                                 let font;
+       // font = loadFont('.././p5.min.js/Regular.otf');
+       let font;
+                let bboxL = font.textBounds(dialog, 10, 30, 12);
+                rect(bboxL.x, bboxL.y, bboxL.w, bboxL.h);
+                    */

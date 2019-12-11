@@ -15,6 +15,18 @@
     },
     
     "obstacles": {
+        "ufo": {
+            "img": "images/marsii/scenery/ufo.png",
+            "width": 359,
+            "height": 224,
+            "frames": 1,
+            "positions": [
+                {
+                    "x": -2420,
+                    "y": 370
+                }
+			]
+        },
         "crashtrail": {
             "img": "images/marsii/scenery/crashtrail.png",
             "width": 496,

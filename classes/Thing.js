@@ -4,11 +4,19 @@ class Thing {
 		this.speedY = speedY || 0;
 		this.debug = false;
 	}
-		
+
 	update() {
 		this.sprite.position.x += this.speedX;
 		this.sprite.position.y += this.speedY;
+
+		if (this.onClick) {
+			this.sprite.mouseUpdate();
+			if (this.sprite.mouseIsOver) {
+				console.log('mouse over');
+			}
+		}
 	}
+
 
 	get x() {
 		return this.sprite.position.x;

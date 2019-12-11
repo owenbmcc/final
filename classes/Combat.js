@@ -17,6 +17,19 @@ class Combat {
 
 		this.metrics = {};
 	}
+	
+	reset() {
+		console.log('reset');
+		this.state = 'turn';
+		this.turn = 'player';
+		this.counter = this.timeout;
+		this.message = "Choose an attack.";
+		
+		for (const metric in this.metrics) {
+			this.player[metric]	= this.metrics[metric].max;
+			this.npc[metric]	= this.metrics[metric].max;
+		}
+	}
 
 	addMetric(label, value, min, callback) {
 		this.player[label] = value;
@@ -24,12 +37,13 @@ class Combat {
 
 		this.metrics[label] = {
 			min: min,
+			max: value,
 			callback: callback
 		};
 	}
 
-	addPlayerAttack(spriteSheet, metric, probability, delta, successMsg, failMsg,playerAnimation) {
-		const sprite = createSprite(this.player.x, this.player.y + this.player.attacks.length * 100 + 100, 50, 50);
+	addPlayerAttack(spriteSheet, metric, probability, delta, successMsg, failMsg, playerAnimation) {
+		const sprite = createSprite(this.player.x + this.player.attacks.length * 100, this.player.y + 100, 50, 50);
 		sprite.addAnimation('default', spriteSheet);
 
 		this.player.attacks.push({ sprite: sprite });
@@ -70,6 +84,8 @@ class Combat {
 		this.turn = character.isPlayer ? 'player' : 'npc';
 		this.counter = this.timeout;
         
+//		console.trace();
+//		console.log(character);
         if(attack.playerAnimation){
             character.changeAnimation(attack.playerAnimation)
         }
@@ -112,10 +128,10 @@ class Combat {
 			}
 		} else if (this.state == 'win') {
 			this.counter--;
-			if (this.counter <= 0) this.onWin();
+			if (this.counter <= 0) this.onWin(this.npc.name);
 		} else if (this.state == 'lose') {
 			this.counter--;
-			if (this.counter <= 0) this.onLose();
+			if (this.counter <= 0) this.onLose(this.npc.name);
 		}
 	}
 }

@@ -75,6 +75,10 @@ class BattleScene extends Scene {
 		
 	}
 	
+	start() {
+		this.combat.reset();
+	}
+	
 	draw() {
 		background('#34c6eb');
 		
