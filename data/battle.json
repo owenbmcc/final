@@ -4,6 +4,8 @@
         
         
 		"thundercloud": {
+
+		"house": {
 			"img":	"images/nick/thundercloud.png",
 			"width": 66,
 			"height": 60,
@@ -17,4 +19,11 @@
     
 }
     
+}
+				{ "x": 50, "y": 100 }
+
+			]
+		}
+
+  }
 }

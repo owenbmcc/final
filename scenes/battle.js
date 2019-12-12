@@ -12,6 +12,8 @@ class BattleScene extends Scene {
         this.map = new Map();
 		this.map.preload('data/battle.json');
         
+        this.bg = loadSound('sounds/nick/combatmusic.m4a');
+        
 		// character graphics
 		this.playerSpriteSheet = loadSpriteSheet('images/nick/idle.png', 68, 104, 12);
 		this.attack1SpriteSheet = loadSpriteSheet('images/nick/animateslash.png', 80, 88, 3);
@@ -82,7 +84,11 @@ class BattleScene extends Scene {
 	start() {
 		this.combat.reset();
         this.map.start();
+        this.bg.loop();
 	}
+    end() {
+		this.bg.pause();
+    }
 	
 	draw() {
         
