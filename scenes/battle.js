@@ -98,12 +98,13 @@ class BattleScene extends Scene {
         this.map.start();
         this.bg.loop();
 	}
+	
     end() {
 		this.bg.pause();
     }
 	
 	draw() {
-        
+        camera.off();
 		background('#4d0505');
 		this.map.display();
 		this.combat.update();

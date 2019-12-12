@@ -21,7 +21,6 @@ class Combat {
 	}
 	
 	reset() {
-		console.log('reset');
 		this.state = 'turn';
 		this.turn = 'player';
 		this.counter = this.timeout;
