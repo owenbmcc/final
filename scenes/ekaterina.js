@@ -88,10 +88,12 @@ class ekaterina extends Scene {
 
 
 
+
     }
 
     start() {
         /* need to start the map */
+        this.map.start();
         this.sky.start();
 
         /* 
@@ -186,6 +188,7 @@ class ekaterina extends Scene {
         this.sky.display();
         camera.on();
 
+        if (this.characterLion.x > this.characterMouse.x) {
             this.obstacles.move(this.characterLion);
         } else {
             this.obstacles.move(this.characterMouse);
