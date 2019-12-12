@@ -20,12 +20,16 @@ class BattleScene extends Scene {
 		this.npcSpriteSheet = loadSpriteSheet('images/nick/ben.png', 68, 104, 7);
 		
 		// action choices graphics
-		this.slashSheet = loadSpriteSheet('images/nick/slash.png', 80, 80, 1);
-		this.cloudSheet = loadSpriteSheet('images/nick/fire.png', 80, 80, 1);
-		this.kiteSheet = loadSpriteSheet('images/nick/lightning.png', 80, 80, 1);
+		this.slashSheet = loadSpriteSheet('images/nick/slash.png', 110, 110, 1);
+		this.fireSheet = loadSpriteSheet('images/nick/fire.png', 110, 110, 1);
+		this.lightningSheet = loadSpriteSheet('images/nick/lightning.png', 110, 110, 1);
 	}
 	
 	setup() {
+        
+        this.map.setup();
+        
+        
 		var playerAnimations = {
 			idle: this.playerSpriteSheet,
             attack1: this.attack1SpriteSheet
@@ -56,9 +60,9 @@ class BattleScene extends Scene {
 		});
 		
 		// graphics, metric, probability, damage
-		this.combat.addPlayerAttack(this.slashSheet, 'health', 0.5, -20,'success','missed','attack1');
-		this.combat.addPlayerAttack(this.cloudSheet, 'health', 0.2, -40);
-		this.combat.addPlayerAttack(this.kiteSheet, 'health', 0.8, -10);
+		this.combat.addPlayerAttack(this.slashSheet, 'health', 0.9, -20,'slashed','missed','attack1');
+		this.combat.addPlayerAttack(this.fireSheet, 'health', 0.7, -40,'fireball','missed','attack1');
+		this.combat.addPlayerAttack(this.lightningSheet, 'health', 0.2, -90,'lightning','missed','attack1');
 		
         for (let i = 0; i < this.attacks.length; i++) {
             var attack = this.attacks[i];
@@ -77,11 +81,13 @@ class BattleScene extends Scene {
 	
 	start() {
 		this.combat.reset();
+        this.map.start();
 	}
 	
 	draw() {
-		background('#34c6eb');
-		
+        
+		background('#4d0505');
+		this.map.display();
 		this.combat.update();
 		this.combat.display();
 		
@@ -89,11 +95,11 @@ class BattleScene extends Scene {
 		textSize(40);
 		textAlign(CENTER, CENTER);
 		noStroke();
-		fill('blue');
+		fill('#054d36');
 		text(this.combat.message, width/2, height - 100);
 		
 		// this.combat.counter 
-		fill('blue');
+		fill('#054d36');
 		ellipse(width - 100, height - 100, this.combat.counter * 2);
 		noFill();
 		stroke('green');

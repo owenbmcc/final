@@ -3,18 +3,18 @@
         
         
         
-		"house": {
+		"thundercloud": {
 			"img":	"images/nick/thundercloud.png",
 			"width": 66,
 			"height": 60,
-			"frames": 1,
+			"frames": 6,
 			"positions": [
-				{ "x": 50, "y": 100 },
-				
-			]
-		},
+				{ "x": 150, "y": 150 } ]
+		}
     
     
     
+    
+}
     
 }
