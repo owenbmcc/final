@@ -1,10 +1,11 @@
 class Combat {
-	constructor(player, npc, npcName, timeout) {
+	constructor(player, npc, npcName, timeout, openingMessage) {
 		this.state = 'turn'; // states turn, message, win, lose
 		this.turn = 'player';
 		this.timeout = timeout;
 		this.counter = timeout;
-		this.message = 'Choose an attack.';
+		this.message = openingMessage;
+		this.openingMessage = openingMessage;
 
 		this.player = player;
 		
@@ -24,7 +25,7 @@ class Combat {
 		this.state = 'turn';
 		this.turn = 'player';
 		this.counter = this.timeout;
-		this.message = "Choose an attack.";
+		this.message = this.openingMessage;
 		
 		for (const metric in this.metrics) {
 			this.player[metric]	= this.metrics[metric].max;

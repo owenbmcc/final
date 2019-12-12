@@ -52,7 +52,7 @@ class BattleScene extends Scene {
 		
 		/* setting up combat */
 		// player, npc, npc name, timeout duration
-		this.combat = new Combat(this.player, this.npc, this.name, 50);
+		this.combat = new Combat(this.player, this.npc, this.name, 50, "opening message");
 		// possible states turn, message, win, lose
 		
 		// name, max value, min value, callback
