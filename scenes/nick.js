@@ -22,9 +22,10 @@ class nick extends Scene {
 		this.walk = loadSpriteSheet('images/nick/walk.png', 48, 68, 3);
 		this.idle = loadSpriteSheet('images/nick/idle.png', 48, 68, 4);
 		
-        /* 
-		this.bg = loadSound('sounds/owen/ketsa.mp3');
+         
+		this.bg = loadSound('sounds/nick/retrogame3.m4a');
 		
+        /*
 		this.walkSounds = [];
 		this.walkSounds[0] = loadSound('sounds/owen/walk0.wav');
 		this.walkSounds[1] = loadSound('sounds/owen/walk1.wav');
@@ -57,12 +58,19 @@ class nick extends Scene {
 	
 	start() {
 //		this.bg.play();
-//		this.bg.loop();
+		this.bg.loop();
 		this.map.start();
 	}
 	
 	end() {
-//		this.bg.pause();	
+
+        
+        super.end();
+		this.bg.pause();	
+
+		this.bg.pause();
+		this.map.end();
+		console.log(camera.position);
 	}
 	
 	draw() {

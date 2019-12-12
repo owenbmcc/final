@@ -9,24 +9,43 @@ class BattleScene extends Scene {
 	
 	preload() {
 		
+        this.map = new Map();
+		
+		/* 
+			test your json data before committing
+			its creating errors breaking the project
+		*/
+		
+//		this.map.preload('data/battle.json');
+        
+        this.bg = loadSound('sounds/nick/combatmusic.m4a');
+        
 		// character graphics
 		this.playerSpriteSheet = loadSpriteSheet('images/nick/idle.png', 68, 104, 12);
 		this.attack1SpriteSheet = loadSpriteSheet('images/nick/animateslash.png', 80, 88, 3);
-		this.npcSpriteSheet = loadSpriteSheet('images/nick/ben.png', 68, 104, 1);
+		this.attack2SpriteSheet = loadSpriteSheet('images/nick/animatefire.png', 80, 68, 7);
+		this.attack3SpriteSheet = loadSpriteSheet('images/nick/animatelightning.png', 69, 66, 4);
+		this.npcSpriteSheet = loadSpriteSheet('images/nick/ben.png', 68, 104, 7);
 		
 		// action choices graphics
-		this.slashSheet = loadSpriteSheet('images/nick/slash.png', 80, 80, 1);
-		this.cloudSheet = loadSpriteSheet('images/nick/fire.png', 80, 80, 1);
-		this.kiteSheet = loadSpriteSheet('images/paralax/kite.png', 128, 128, 1);
+		this.slashSheet = loadSpriteSheet('images/nick/slash.png', 110, 110, 1);
+		this.fireSheet = loadSpriteSheet('images/nick/fire.png', 110, 110, 1);
+		this.lightningSheet = loadSpriteSheet('images/nick/lightning.png', 110, 110, 1);
 	}
 	
 	setup() {
+        
+        this.map.setup();
+        
+        
 		var playerAnimations = {
 			idle: this.playerSpriteSheet,
-            attack1: this.attack1SpriteSheet
-            
+            attack1: this.attack1SpriteSheet,
+            attack2: this.attack2SpriteSheet,
+            attack3: this.attack3SpriteSheet
 		};
 		this.player = new Character(playerAnimations, 200, height/2);
+		
 		
 		var npcAnimations = {
 			idle: this.npcSpriteSheet	
@@ -36,6 +55,10 @@ class BattleScene extends Scene {
 		/* setting up combat */
 		// player, npc, npc name, timeout duration
 		this.combat = new Combat(this.player, this.npc, this.name, 50);
+        
+      //  this.combat.message = "blah blah";
+
+		this.combat = new Combat(this.player, this.npc, this.name, 50, "opening message");
 		// possible states turn, message, win, lose
 		
 		// name, max value, min value, callback
@@ -51,9 +74,9 @@ class BattleScene extends Scene {
 		});
 		
 		// graphics, metric, probability, damage
-		this.combat.addPlayerAttack(this.slashSheet, 'health', 0.5, -20,'success','missed','attack1');
-		this.combat.addPlayerAttack(this.cloudSheet, 'health', 0.2, -40);
-		this.combat.addPlayerAttack(this.kiteSheet, 'health', 0.8, -10);
+		this.combat.addPlayerAttack(this.slashSheet, 'health', 0.9, -20,'slashed','missed','attack1');
+		this.combat.addPlayerAttack(this.fireSheet, 'health', 0.7, -40,'fireball','missed','attack2');
+		this.combat.addPlayerAttack(this.lightningSheet, 'health', 0.2, -90,'lightning','missed','attack3');
 		
         for (let i = 0; i < this.attacks.length; i++) {
             var attack = this.attacks[i];
@@ -72,11 +95,18 @@ class BattleScene extends Scene {
 	
 	start() {
 		this.combat.reset();
+        this.map.start();
+        this.bg.loop();
 	}
 	
+    end() {
+		this.bg.pause();
+    }
+	
 	draw() {
-		background('#34c6eb');
-		
+        camera.off();
+		background('#4d0505');
+		this.map.display();
 		this.combat.update();
 		this.combat.display();
 		
@@ -84,11 +114,11 @@ class BattleScene extends Scene {
 		textSize(40);
 		textAlign(CENTER, CENTER);
 		noStroke();
-		fill('blue');
+		fill('#054d36');
 		text(this.combat.message, width/2, height - 100);
 		
 		// this.combat.counter 
-		fill('blue');
+		fill('#054d36');
 		ellipse(width - 100, height - 100, this.combat.counter * 2);
 		noFill();
 		stroke('green');

@@ -9,13 +9,7 @@ class Thing {
 		this.sprite.position.x += this.speedX;
 		this.sprite.position.y += this.speedY;
 
-		if (this.onClick) {
-			this.sprite.mouseUpdate();
-			console.log(this.sprite.mouseIsOver);
-			if (this.sprite.mouseIsOver) {
-				console.log('mouse over');
-			}
-		}
+
 	}
 
 
