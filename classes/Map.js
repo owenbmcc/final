@@ -110,6 +110,7 @@ class Map {
 			var list = this.sprites.scenery[key];
 			for (var i = 0; i < list.length; i++) {
 				list[i].display();
+                list[i].update();
 			}
 		}
 
