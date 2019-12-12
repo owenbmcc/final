@@ -63,6 +63,8 @@ class nick extends Scene {
 	}
 	
 	end() {
+        
+        super.end();
 		this.bg.pause();	
 	}
 	

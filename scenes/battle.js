@@ -23,8 +23,8 @@ class BattleScene extends Scene {
 		// character graphics
 		this.playerSpriteSheet = loadSpriteSheet('images/nick/idle.png', 68, 104, 12);
 		this.attack1SpriteSheet = loadSpriteSheet('images/nick/animateslash.png', 80, 88, 3);
-		this.attack2SpriteSheet = loadSpriteSheet('images/nick/animatefire.png', 60, 51, 7);
-		this.attack2SpriteSheet = loadSpriteSheet('images/nick/animatelightning.png', 69, 66, 4);
+		this.attack2SpriteSheet = loadSpriteSheet('images/nick/animatefire.png', 80, 68, 7);
+		this.attack3SpriteSheet = loadSpriteSheet('images/nick/animatelightning.png', 69, 66, 4);
 		this.npcSpriteSheet = loadSpriteSheet('images/nick/ben.png', 68, 104, 7);
 		
 		// action choices graphics
@@ -40,7 +40,9 @@ class BattleScene extends Scene {
         
 		var playerAnimations = {
 			idle: this.playerSpriteSheet,
-            attack1: this.attack1SpriteSheet
+            attack1: this.attack1SpriteSheet,
+            attack2: this.attack2SpriteSheet,
+            attack3: this.attack3SpriteSheet
 		};
 		this.player = new Character(playerAnimations, 200, height/2);
 		
@@ -53,6 +55,8 @@ class BattleScene extends Scene {
 		/* setting up combat */
 		// player, npc, npc name, timeout duration
 		this.combat = new Combat(this.player, this.npc, this.name, 50);
+        
+      //  this.combat.message = "blah blah";
 		// possible states turn, message, win, lose
 		
 		// name, max value, min value, callback
@@ -69,8 +73,8 @@ class BattleScene extends Scene {
 		
 		// graphics, metric, probability, damage
 		this.combat.addPlayerAttack(this.slashSheet, 'health', 0.9, -20,'slashed','missed','attack1');
-		this.combat.addPlayerAttack(this.fireSheet, 'health', 0.7, -40,'fireball','missed','attack1');
-		this.combat.addPlayerAttack(this.lightningSheet, 'health', 0.2, -90,'lightning','missed','attack1');
+		this.combat.addPlayerAttack(this.fireSheet, 'health', 0.7, -40,'fireball','missed','attack2');
+		this.combat.addPlayerAttack(this.lightningSheet, 'health', 0.2, -90,'lightning','missed','attack3');
 		
         for (let i = 0; i < this.attacks.length; i++) {
             var attack = this.attacks[i];
