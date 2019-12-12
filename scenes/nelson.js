@@ -17,7 +17,13 @@ class nelson extends Scene {
 
 
         //        this.woodsSheet = loadSpriteSheet('images/Nelson/background.png', 224, 224, 2);
-
+        var npcSheet = loadSpriteSheet('images/Nelson/monster1.png', 48, 204, 4);
+        this.npc = new NPC(500, 500, npcSheet);
+        var npcSheet = loadSpriteSheet('images/Nelson/monster2.png', 192, 352, 5);
+        this.npc = new NPC(800, 800, npcSheet);
+        var npcSheet = loadSpriteSheet('images/Nelson/monster3.png', 192, 282, 4);
+        this.npc = new NPC(600, 600, npcSheet);
+        //make sure to change name of npcsheetand this.npc
     }
 
     setup() {
@@ -35,6 +41,10 @@ class nelson extends Scene {
         //this.woods = new Scenery(width / 2, height / 2, this.woodsSheet);
         //this.woods.sprite.scale = 3;
         //this.woods.setup();
+        
+        this.npc.setup();
+        this.npc.speedX = 5;
+        
     }
 
     start() {
@@ -92,6 +102,18 @@ class nelson extends Scene {
         
         this.character.update();
         this.character.display();
+        
+        this.npc.update();
+        if (this.npc.x > width* 2) {
+            this.npc.x = 0;   
+        }
+        //make sure to change name of npcsheetand this.npc
+        
+        this.npc.display();
+        if (this.npc.overlap(this.character)) {
+            console.log('you died');   
+        }
+        //make sure to change name of npcsheetand this.npc
 
         /* update map */
         this.map.collide(this.character);
