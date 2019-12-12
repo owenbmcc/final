@@ -7,16 +7,29 @@ class Scenery extends Thing {
 
 	setup() {
 		this.sprite.addAnimation('default', this.anim);
+		this.sprite.mouseActive = true;
+		this.mouseDown = false;
 	}
 
 	display() {
 		this.sprite.display();
 	}
 
+	update() {
+		if (this.onClick) {
+			if (this.sprite.mouseIsPressed && !this.mouseDown) {
+				this.mouseDown = true;
+				this.onClick();
+			} else if (!this.sprite.mouseIsPressed) {
+				this.mouseDown = false;
+			}
+		}
+	}
+
 	collide(other) {
 		this.sprite.collide(other.sprite);
 	}
-	
+
 	overlap(other) {
 		return this.sprite.overlap(other.sprite);
 	}
