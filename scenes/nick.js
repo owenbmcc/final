@@ -23,7 +23,7 @@ class nick extends Scene {
 		this.idle = loadSpriteSheet('images/nick/idle.png', 48, 68, 4);
 		
          
-		this.bg = loadSound('sounds/nick/retro game 3.m4a');
+		this.bg = loadSound('sounds/nick/retrogame3.m4a');
 		
         /*
 		this.walkSounds = [];
