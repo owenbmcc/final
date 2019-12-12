@@ -10,7 +10,13 @@ class BattleScene extends Scene {
 	preload() {
 		
         this.map = new Map();
-		this.map.preload('data/battle.json');
+		
+		/* 
+			test your json data before committing
+			its creating errors breaking the project
+		*/
+		
+//		this.map.preload('data/battle.json');
         
         this.bg = loadSound('sounds/nick/combatmusic.m4a');
         
@@ -35,9 +41,9 @@ class BattleScene extends Scene {
 		var playerAnimations = {
 			idle: this.playerSpriteSheet,
             attack1: this.attack1SpriteSheet
-            
 		};
 		this.player = new Character(playerAnimations, 200, height/2);
+		
 		
 		var npcAnimations = {
 			idle: this.npcSpriteSheet	
