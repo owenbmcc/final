@@ -7,7 +7,7 @@ class nelson extends Scene {
 		this.map = new Map();
 		this.map.preload('data/nelson.json');
 
-		this.bg = loadSound('sounds/Nelson/retromusic4.m4a');
+		this.bg = loadSound('sounds/nelson/retromusic4.m4a');
 
 
 		this.walkSound = loadSound('sounds/nelson/walking.wav');
@@ -119,8 +119,5 @@ class nelson extends Scene {
 		//this.map.move(this.character);
 		this.map.update(this.character);
 		this.map.display();
-
-
-
 	}
 }
