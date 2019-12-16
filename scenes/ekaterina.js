@@ -163,6 +163,8 @@ class ekaterina extends Scene {
         this.wolf5.setup();
         this.wolf6.setup();
 
+//        this.wolves.obstacles[0].speedX = -10;
+
         this.map.setup();
         this.gateway.setup();
         this.endgame.setup();
@@ -192,11 +194,6 @@ class ekaterina extends Scene {
     }
 
     draw() {
-
-
-
-
-
 
         /* user input - move character around */
         var isWalkingRightLion = false;
@@ -270,7 +267,6 @@ class ekaterina extends Scene {
         this.characterMouse.y_velocity *= 0.9;
 
         if (this.characterMouse.y > 550) {
-
             isJumpingMouse = false;
             this.characterMouse.y = 550;
             this.characterMouse.y_velocity = 0;
@@ -381,6 +377,17 @@ class ekaterina extends Scene {
         this.wolf6.display();
 
         //wolves
+
+//        if (-10245 < this.characterMouse.x) {
+//            var wolf = this.wolves.overlap(this.characterMouse)
+//            if (wolf) {
+//                this.wolfSound.play();
+//                this.burst.x = wolf.x;
+//                this.burst.display();
+//                this.characterMouse.x = -10250;
+//            }
+//        }
+
         if (this.wolf1.overlap(this.characterMouse) && -10245 < this.characterMouse.x) {
             this.wolfSound.play();
             this.burst.x = this.wolf1.x;
