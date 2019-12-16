@@ -127,12 +127,11 @@ class Combat {
 			if (this.counter <= 0) {
 				if (this.turn == 'player') {
 					this.message = this.message = 'It is your turn.';
-					this.counter = this.timeout;
 				} else {
 					this.player.changeAnimation('idle');
 					this.message = this.npc.name + "'s turn.";
-					this.counter = this.timeout;
 				}
+                this.counter = this.timeout;
 				this.state = 'turn';
 			}
 		} else if (this.state == 'turn') {
