@@ -54,7 +54,10 @@ class ekaterina extends Scene {
         this.count = new NPCimage(-10270, 350, count);
 
         var wolf1 = loadSpriteSheet('images/ekaterina/wolf.png', 300, 192, 8);
-        this.wolf1 = new NPC(8500, 500, wolf1);
+        this.wolf1 = new NPC(-9800, 500, wolf1);
+        
+        //var wolf1 = loadSpriteSheet('images/ekaterina/wolf.png', 300, 192, 8);
+        //this.wolf1 = new NPC(8500, 500, wolf1);
         
         var wolf2 = loadSpriteSheet('images/ekaterina/wolf.png', 300, 192, 8);
         this.wolf2 = new NPC(9000, 500, wolf2);
