@@ -1,4 +1,3 @@
-
 class nelson extends Scene {
 
     preload() {
@@ -142,3 +141,4 @@ class nelson extends Scene {
         this.map.update(this.character);
         this.map.display();
     }
+}
