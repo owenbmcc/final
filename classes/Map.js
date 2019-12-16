@@ -153,4 +153,5 @@ class Map {
         this.sprites[type][label].push(sprite);
     }
 
+
 }

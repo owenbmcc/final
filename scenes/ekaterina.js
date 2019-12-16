@@ -801,5 +801,4 @@ class ekaterina extends Scene {
         this.map.end();
         this.sky.end();
     }
-
 }
