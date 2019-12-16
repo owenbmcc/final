@@ -7,18 +7,19 @@
 
 
 
-var scene = 'owen';
+var scene = 'ekaterinaStart';
 
 var sceneManager = {};
 sceneManager['owen'] = new owen();
 sceneManager['paralax'] = new ParalaxScene();
-
-sceneManager['mousewins'] = new MousewinsScene();
-sceneManager['lionwins'] = new LionwinsScene();
 sceneManager['nick'] = new nick();
 sceneManager['marsii'] = new marsii();
 sceneManager['nelson'] = new nelson();
+sceneManager['ekaterinaStart'] = new ekaterinaStart();
+sceneManager['ekaterinaInstructions'] = new ekaterinaInstructions();
 sceneManager['ekaterina'] = new ekaterina();
+sceneManager['mousewins'] = new mousewins();
+sceneManager['lionwins'] = new lionwins();
 sceneManager['jonathan'] = new Scene();
 sceneManager['adonis'] = new adonis();
 sceneManager['maryam'] = new maryam();

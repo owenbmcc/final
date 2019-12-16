@@ -1,45 +1,55 @@
-class MousewinsScene extends Scene {
-	
+//mousewins scene
+class mousewins extends Scene {
+
     preload() {
-                
-		this.map = new ParalaxMap();
-		this.map.preload('data/mousewins.json');	
         
-        var spriteSheet = loadSpriteSheet('images/ekaterina/mouse.png', 900, 900, 46);
-		this.sceneLink = new NPC(0, 100, spriteSheet);
+        this.nextSound = loadSound('sounds/ekaterina/next.mp3');
+        this.nextSound.setVolume(1.0);
         
-        var spriteSheet = loadSpriteSheet('images/ekaterina/restart.png', 900, 67, 8);
-		this.restartLink = new NPC(0, -300, spriteSheet);
+        this.mousewins = new EkaterinaMap();
+        this.mousewins.preload('data/ekaterina/mousewins.json');
+        
+        var next = loadImage('images/ekaterina/next.gif');
+        this.next = new NPCimage(0, 680, next);
+        
+        var confetti = loadImage('images/ekaterina/confetti.gif');
+        this.confetti = new NPCimage(0, 305, confetti);
+        
+        var mouse = loadSpriteSheet('images/ekaterina/mouse.png', 700, 324, 11);
+        this.mouse = new NPC(-200, 400, mouse);
+    }
+
+    setup() {
+
+        createCanvas(1435, 735);
+        
+        this.mousewins.setup();
+        this.confetti.setup();
+        this.mouse.setup();
+        this.next.setup();
+    }
+
+     start() {
+
+         this.mousewins.start();
+      }
+
+    draw() {
+
+        this.mousewins.display();
+        this.mouse.display();
+        this.confetti.display();
+        this.next.display();
+
+        if (keyIsDown(32)) {
+                changeScene('owen');
+                this.nextSound.play();
+    	}
+    }
+    
+    end() {
+
+        this.mousewins.end();
 	}
-	
-	setup() {
-        
-		this.map.setup();
-        this.sceneLink.setup();
-        this.restartLink.setup();
-	}
-	
-	start() {
-		this.map.start();	
-	}
-	
-	draw() {
-        background('white');
-        
-        textAlign(CENTER);
-		textSize(150);
-        textFont("Krungthep");
-        fill('black');
-        stroke('red');
-        strokeWeight(15);
-		text('MOUSE WINS', 0, -120);
-        
-        if (keyIsDown(ENTER)) {
-            changeScene('ekaterina');
-			}
-        
-        this.restartLink.display();
-        this.sceneLink.display();
-        this.map.display();
-	}
+
 }
