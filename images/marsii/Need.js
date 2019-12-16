@@ -8,12 +8,12 @@ class need {
 
     }
 
-    firstupdate(listenfor1) {
+    update(listenfor1) {
         this.thing = this.nextstate;
 
     }
 
-    secondupdate(listenfor2) {
+    update(listenfor2) {
         this.thing = this.endstate;
 
     }
