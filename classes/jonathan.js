@@ -1,28 +1,28 @@
-class nelson extends Scene {
+class Jonathan extends Scene {
 
 	preload() {
 
-		this.walk = loadSpriteSheet('images/Nelson/walking.png', 192, 199, 3);
-		this.stand = loadSpriteSheet('images/Nelson/standing.png', 192, 206, 2);
+		this.walk = loadSpriteSheet('images/jonathan/walk_cycle.png', 192, 199, 3);
+		this.stand = loadSpriteSheet('images/jonathan/gladiator_idle.png', 192, 206, 2);
 		this.map = new Map();
-		this.map.preload('data/nelson.json');
+		this.map.preload('data/jonathan.json');
 
-		this.bg = loadSound('sounds/nelson/retromusic4.m4a');
+	//	this.bg = loadSound('sounds/nelson/retromusic4.m4a');
 
 
-		this.walkSound = loadSound('sounds/nelson/walking.wav');
+	//	this.walkSound = loadSound('sounds/nelson/walking.wav');
 
 
 		this.walkSound.playMode('sustain');
 
 
 		//        this.woodsSheet = loadSpriteSheet('images/Nelson/background.png', 224, 224, 2);
-		var npcSheet = loadSpriteSheet('images/Nelson/monster1.png', 48, 204, 4);
-		this.npc = new NPC(500, 500, npcSheet);
-		var npcSheet = loadSpriteSheet('images/Nelson/monster2.png', 192, 352, 5);
-		this.npc = new NPC(800, 800, npcSheet);
-		var npcSheet = loadSpriteSheet('images/Nelson/monster3.png', 192, 282, 4);
-		this.npc = new NPC(600, 600, npcSheet);
+	//	var npcSheet = loadSpriteSheet('images/Nelson/monster1.png', 48, 204, 4);
+	//	this.npc = new NPC(500, 500, npcSheet);
+	//	var npcSheet = loadSpriteSheet('images/Nelson/monster2.png', 192, 352, 5);
+	//	this.npc = new NPC(800, 800, npcSheet);
+	//	var npcSheet = loadSpriteSheet('images/Nelson/monster3.png', 192, 282, 4);
+	//	this.npc = new NPC(600, 600, npcSheet);
 		//make sure to change name of npcsheetand this.npc
 	}
 
@@ -33,7 +33,7 @@ class nelson extends Scene {
 			standing: loadAnimation(this.stand)
 		};
 		this.character = new Character(animations);
-		this.character.changeAnimation('standing');
+		this.character.changeAnimation('gladiator_idle');
 
 		this.map.setup();
 		//this.sceneLink.setup();
@@ -58,8 +58,8 @@ class nelson extends Scene {
 	}
 
 	draw() {
-		background('green');
-		//this.woods.display();
+		background('yellow');
+		//this.sand.display();
 
 		/*instructions*/
 		textAlign(CENTER);
@@ -90,12 +90,12 @@ class nelson extends Scene {
 		}
 
 		if (isWalking) {
-			this.character.changeAnimation('walking');
+			this.character.changeAnimation('walk_cycle');
 			if (this.walkSound.isPlaying() == false) {
 				this.walkSound.play();
 			}
 		} else {
-			this.character.changeAnimation('standing');
+			this.character.changeAnimation('gladiator_idle');
 		}
 
 
