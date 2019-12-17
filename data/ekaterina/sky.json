@@ -1,7 +1,7 @@
 {
     "scenery": {
             "sky": {
-			"img":	"images/ekaterina/sky.png",
+			"img":	"images/ekaterina/Sky.png",
 			"width": 1550,
 			"height": 735,
 			"frames": 1,
