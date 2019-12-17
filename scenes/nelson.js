@@ -17,7 +17,7 @@ class nelson extends Scene {
 
 
         //        this.woodsSheet = loadSpriteSheet('images/Nelson/background.png', 224, 224, 2);
-        var npcSheet1 = loadSpriteSheet('images/Nelson/monster1.png', 48, 204, 4);
+        var npcSheet1 = loadSpriteSheet('images/Nelson/monster1.png', 192, 102, 4);
         this.npc1 = new NPC(500, 500, npcSheet1);
         var npcSheet2 = loadSpriteSheet('images/Nelson/monster2.png', 192, 352, 5);
         this.npc2 = new NPC(800, 800, npcSheet2);
@@ -32,7 +32,7 @@ class nelson extends Scene {
             walking: loadAnimation(this.walk),
             standing: loadAnimation(this.stand)
         };
-        this.character = new Character(animations);
+        this.character = new Character(animations); // (animation,x,y)
         this.character.changeAnimation('standing');
 
         this.map.setup();
@@ -44,7 +44,7 @@ class nelson extends Scene {
         this.npc1.setup();
         this.npc1.speedX = 5;
         this.npc2.setup();
-        this.npc2.speedX = 2;
+        this.npc2.speedX = 6;
         this.npc3.setup();
         this.npc3.speedX = 9;
 
@@ -124,14 +124,17 @@ class nelson extends Scene {
         this.npc1.display();
         if (this.npc1.overlap(this.character)) {
             console.log('you died');
+            //changeScene ('') //just make a easyscene
         }
         this.npc2.display();
         if (this.npc2.overlap(this.character)) {
             console.log('you died');
+            ('')//just make a easyscene
         }
         this.npc3.display();
         if (this.npc3.overlap(this.character)) {
             console.log('you died');
+            ('')//just make a easyscene
         }
 
 
