@@ -21,7 +21,7 @@ class lionwins extends Scene {
 
     setup() {
 
-        createCanvas(1435, 735);
+//        createCanvas(1435, 735);
         
         this.lionwins.setup();
         this.confetti.setup();

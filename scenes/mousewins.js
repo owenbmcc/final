@@ -21,7 +21,7 @@ class mousewins extends Scene {
 
     setup() {
 
-        createCanvas(1435, 735);
+//        createCanvas(1435, 735);
         
         this.mousewins.setup();
         this.confetti.setup();

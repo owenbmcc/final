@@ -213,14 +213,14 @@ class marsii extends Scene {
         // Needed for Liquid Alien
         var blackhole = false;
         var bhNeed = false;
-        this.bhNeed = new need(this.liquidAlien.dialogCount == 4, this.cosmicAlien.dialogCount == 25, bhNeed, true, false);
+        //this.bhNeed = new need(this.liquidAlien.dialogCount == 4, this.cosmicAlien.dialogCount == 25, bhNeed, true, false);
 
         var icepick = false;
         // Needed from Liquid Alien
         var frozenmap = false;
         var frozenkey = false;
         var unmarkedmap = false;
-        this.unmarkedmap = new need(this.liquidAlien.dialogCount == 8, this.cosmicAlien.dialogCount == 25, unmarkedmap, true, false);
+        //this.unmarkedmap = new need(this.liquidAlien.dialogCount == 8, this.cosmicAlien.dialogCount == 25, unmarkedmap, true, false);
         // Needed for Cosmic Alien
         var logneed = false;
         var fakelog = false;
