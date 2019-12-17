@@ -42,11 +42,7 @@ class Map {
                     var c = characters[key];
                     var spriteSheet = loadSpriteSheet(c.img, c.width, c.height, c.frames);
                     _this.sprites.characters[key] = new NPC(c.x, c.y, spriteSheet, c.dialog, key);
-
-                    _this.sprites.characters[key] = new NPC(c.x, c.y, spriteSheet, c.dialog);
                 }
-
-
             });
     }
 
@@ -86,22 +82,11 @@ class Map {
         for (var key in this.sprites.characters) {
             var character = this.sprites.characters[key];
             if (other.sprite.overlap(character.sprite)) {
+                console.log(key);
                 return character;
             }
         }
-
-
-    overlap(other) {
-        for (var key in this.sprites.obstacles) {
-            var list = this.sprites.obstacles[key];
-            for (var i = 0; i < list.length; i++) {
-                if (other.sprite.overlap(list[i].sprite)) {
-                    return list[i];
-                }
-            }
-        }
     }
-
 
     collide(other) {
         var isColliding = false;
@@ -165,7 +150,5 @@ class Map {
         this.sprites[type][label] = [];
         this.sprites[type][label].push(sprite);
     }
-
-}
 
 }

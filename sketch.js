@@ -9,9 +9,6 @@
 
 var scene = 'nick';
 
-
-var scene = 'ekaterinaStart';
-
 var sceneManager = {};
 sceneManager['owen'] = new owen();
 sceneManager['paralax'] = new ParalaxScene();
