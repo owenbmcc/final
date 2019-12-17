@@ -201,7 +201,6 @@ class ekaterina extends Scene {
 
         var isWalkingRightMouse = false;
         var isWalkingLeftMouse = false;
-
         this.wolf1.speedX = -10;
         this.wolf2.speedX = -6;
         this.wolf4.speedX = -9;
