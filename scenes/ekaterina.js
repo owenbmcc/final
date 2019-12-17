@@ -52,10 +52,7 @@ class ekaterina extends Scene {
         this.count = new NPCimage(-10270, 350, count);
 
         var wolf1 = loadSpriteSheet('images/ekaterina/wolf.png', 300, 192, 8);
-        this.wolf1 = new NPC(-9800, 500, wolf1);
-
-        //var wolf1 = loadSpriteSheet('images/ekaterina/wolf.png', 300, 192, 8);
-        //this.wolf1 = new NPC(8500, 500, wolf1);
+        this.wolf1 = new NPC(8500, 500, wolf1);
 
         var wolf2 = loadSpriteSheet('images/ekaterina/wolf.png', 300, 192, 8);
         this.wolf2 = new NPC(9000, 500, wolf2);
@@ -72,7 +69,7 @@ class ekaterina extends Scene {
         var burst = loadSpriteSheet('images/ekaterina/burst.png', 385, 367, 5);
         this.burst = new NPC(-9500, 550, burst);
 
-        //invisible tiny rectangles which let characters be animated while on cactuses (otherwise characters behave as if they jump)
+        //invisible tiny rectangles which let characters be animated while on cactuses (otherwise characters             behave as if they jump)
         var block = loadSpriteSheet('images/ekaterina/block.png', 180, 5, 1);
         this.block = new NPC(-8100, 270, block);
 
@@ -163,6 +160,8 @@ class ekaterina extends Scene {
         this.wolf5.setup();
         this.wolf6.setup();
 
+//        this.wolves.obstacles[0].speedX = -10;
+
         this.map.setup();
         this.gateway.setup();
         this.endgame.setup();
@@ -193,18 +192,12 @@ class ekaterina extends Scene {
 
     draw() {
 
-
-
-
-
-
         /* user input - move character around */
         var isWalkingRightLion = false;
         var isWalkingLeftLion = false;
 
         var isWalkingRightMouse = false;
         var isWalkingLeftMouse = false;
-
         this.wolf1.speedX = -10;
         this.wolf2.speedX = -6;
         this.wolf4.speedX = -9;
@@ -270,7 +263,6 @@ class ekaterina extends Scene {
         this.characterMouse.y_velocity *= 0.9;
 
         if (this.characterMouse.y > 550) {
-
             isJumpingMouse = false;
             this.characterMouse.y = 550;
             this.characterMouse.y_velocity = 0;
@@ -381,6 +373,17 @@ class ekaterina extends Scene {
         this.wolf6.display();
 
         //wolves
+
+//        if (-10245 < this.characterMouse.x) {
+//            var wolf = this.wolves.overlap(this.characterMouse)
+//            if (wolf) {
+//                this.wolfSound.play();
+//                this.burst.x = wolf.x;
+//                this.burst.display();
+//                this.characterMouse.x = -10250;
+//            }
+//        }
+
         if (this.wolf1.overlap(this.characterMouse) && -10245 < this.characterMouse.x) {
             this.wolfSound.play();
             this.burst.x = this.wolf1.x;
@@ -794,5 +797,4 @@ class ekaterina extends Scene {
         this.map.end();
         this.sky.end();
     }
-
 }

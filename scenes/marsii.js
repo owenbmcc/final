@@ -13,12 +13,12 @@ class marsii extends Scene {
 
         //Sounds
 
-        /*  
+        /*
         this.walkSounds = [];
 		this.walkSounds[0] = loadSound('sounds/marsii/asttalk.wav');
-		
+
 		this.walkSounds[0].playMode('sustain');
-        
+
         this.talkSounds = [];
 		this.talkSounds[0] = loadSound('sounds/marsii/footsteps.wav');
 
@@ -147,37 +147,37 @@ class marsii extends Scene {
         //Scenery
         this.pond.setup();
         this.watertree.setup();
-        
+
         //this.ship.setup();
-        
+
         // Items
-        
+
         // Needed for Liquid Alien
         this.bhNeed = false;
-        
+
         // Needed from Liquid Alien
         this.frozenmap = false;
         this.frozenkey = false;
         this.unmarkedmap = false;
-        
-        
+
+
         // Needed for Cosmic Alien
         this.reallog = false;
         this.fakelog = false;
         this.logneed = false;
         this.blackhole = false;
-        
+
         // Needed from Cosmic Alien
         this.markedmap = false;
         this.cJournal = false;
         this.anomalyPiece = false;
         this.astJournalNeed = false;
         this.astJournal = false;
-        
+
         // Needed from Creepy Alien
         this.shipUprighted = false;
         this.unfrozenkey = false;
-        
+
         //Needed for Creepy Alien
         this.deviceNeed = false;
         this.cJournalNeed = false;
@@ -193,7 +193,7 @@ class marsii extends Scene {
     }
 
     end() {
-        //this.bg.pause();	
+        //this.bg.pause();
     }
 
     draw() {
@@ -207,14 +207,14 @@ class marsii extends Scene {
         /*
     //bg = this.startSet;
          //.5 zoom is zooming out (50% of the normal size)
-            
-    
+
+
    */
 
 
         //LOOK INTO EVENT LISTENERS
         //FINISH UP STORIES (EVEN IF YOU CAN'T MAKE THEM WORK YET)
-        
+
         //IF WORSE COMES TO WORSE, EXTRACT STATIC ALIEN FROM THE GAME TO SAVE TIME
 
         // background(this.startSet);
@@ -237,23 +237,23 @@ class marsii extends Scene {
         */
 
 
-        // user input - move character around 
-        
+        // user input - move character around
+
         //this.this.bhNeed = new need(this.liquidAlien.dialogCount == 4, this.cosmicAlien.dialogCount == 25, this.bhNeed, true, false);
 
         var icepick = false;
 
         //this.this.unmarkedmap = new need(this.liquidAlien.dialogCount == 8, this.cosmicAlien.dialogCount == 25, this.unmarkedmap, true, false);
-        
-        
-//        var reallog = false;
-        
-        
-        
 
-        
-        
-        
+
+//        var reallog = false;
+
+
+
+
+
+
+
         // Needed for Plant Alien
         var anomalyNeed = false;
         var backupneed = false;
@@ -274,7 +274,7 @@ class marsii extends Scene {
 
 
 
-        // user input - move character around 
+        // user input - move character around
         var isWalkingR = false;
         var isWalkingL = false;
         var isWalkingU = false;
@@ -472,7 +472,7 @@ class marsii extends Scene {
                 dialog = "Maybe like a black hole? But it would have to be small and contained. I don't want to completely freeze.";
                 this.bhNeed = true;
                 console.log("Black Hole Need", this.bhNeed);
-                //this.bgSounds[1].play(); 
+                //this.bgSounds[1].play();
             } else if (this.liquidAlien.dialogCount == 4.5) {
                 humanDialogL = "That sounds hard to find, is there anything else you would want?";
             } else if (this.liquidAlien.dialogCount == 5) {
@@ -516,7 +516,7 @@ class marsii extends Scene {
                 dialog = "!!!";
                 //liquidAlienSheet = loadSpriteSheet('/images/marsii/npcs/liquidAlienF.png', 64, 128, 1);
                 //freezes alien
-                //liquid 
+                //liquid
                 if (icepick == true) {
                     this.liquidAlien.dialogCount = 9.5;
                 } else {
@@ -1087,7 +1087,7 @@ class marsii extends Scene {
 
 
             if (this.astShip.dialogCount == 11) {
-                
+
                 dialog = "You recieved your journal."
                 this.astJournal = true;
                 this.astJournalNeed = false;
@@ -1117,7 +1117,7 @@ class marsii extends Scene {
                 this.logneed = false;
                 this.astShip.dialogCount = 1;
             }
-            
+
 
 
 
@@ -1132,7 +1132,7 @@ class marsii extends Scene {
                     this.alienShip.dialogCount = 10;
                 }
             }
-            
+
 
             text(dialog, this.astShip.x, this.astShip.y - 100, 200, 200);
             text(humanDialogSh, this.character.x, this.character.y - 20, 200, 300);
@@ -1235,7 +1235,7 @@ class marsii extends Scene {
                     this.alienShip.dialogCount = 0;
                 }
             }
-            
+
             if(this.alienShip.dialogCount == 10){
                 dialog = "You have everything you need to go. Ready to go?"
             } else if (this.alienShip.dialogCount == 10.5){
@@ -1247,7 +1247,7 @@ class marsii extends Scene {
                     this.alienShip.dialogCount = 10;
                 }
             }
-            
+
 
 
             text(dialog, this.alienShip.x - 75, this.alienShip.y, 200, 200);
@@ -1269,7 +1269,7 @@ class marsii extends Scene {
         this.pond.display();
         this.watertree.display();
         this.lightning.display();
-        /* 
+        /*
                //this.cosmicAlien.displayDialog();
                //*/
         //this.ship.display();
@@ -1279,7 +1279,7 @@ class marsii extends Scene {
         /*
              this.ship.display();
             if (this.ship.overlap(this.character)) {
-            
+
             textSize(20);
             fill('gray');
             stroke('black');
@@ -1330,7 +1330,7 @@ class marsii extends Scene {
 			]
 		}
 	},
-    
+
     "scenery": {
         "background": {
 			"img":	"images/marsii/testset.png",
@@ -1342,9 +1342,9 @@ class marsii extends Scene {
 			]
 		}
 	},
-    
+
     //PARALLAX
-    
+
     "scenery": {
         "background": {
             "img": "images/marsii/skyback.png",
@@ -1401,13 +1401,13 @@ class marsii extends Scene {
 /*
         var spriteSheet = loadSpriteSheet('/images/marsii/npcs/staticAlien.png', 64, 128, 8);
 		this.sceneLinkS = new NPC(-900, 420, spriteSheet, "Hi. you need me for energy.");
-        
+
         var spriteSheet = loadSpriteSheet('/images/marsii/npcs/cosmicAlien.png', 64, 130, 6);
 		this.sceneLink = new NPC(1200, 1200, spriteSheet, "Hi");
 
         var spriteSheet = loadSpriteSheet('/images/marsii/npcs/liquidAlien.png', 64, 128, 4);
 		this.sceneLinkL = new NPC(200, 1200, spriteSheet, "Hi");
-        
+
             "scenery": {
         "background": {
             "img": "images/marsii/testmap.png",
@@ -1440,20 +1440,20 @@ class marsii extends Scene {
 Choices
 ex
 var map = false;
- 
+
  Choices.
  var this.unmarkedmap = false;
  this.this.unmarkedmap = new need(this.liquidAlien.dialogCount == 8, this.unmarkedmap, true, false )
- 
- 
+
+
  this.this.bhNeed = new need(this.liquidAlien.dialogCount == 4, this.cosmicAlien.dialogCount == 25, this.bhNeed, true, false)
- 
- 
+
+
   if (this.liquidAlien.dialogCount == 8) {
                 dialog = "Thank you very much, here's a map.";
                 this.unmarkedmap = true;
- 
- 
+
+
  this.creepAlien = new NPC(-1800, 1600, creepAlienSheet, "(Need to upright ship");
  class NPC extends Scenery {
 	constructor(x, y, spriteSheet, dialog) {
@@ -1479,7 +1479,7 @@ var map = false;
                         } else if (this.cosmicAlien.dialogCount == 2) {
                             dialog = "I doubt I have anything you would want, or that you would be able to give enough information for that, but what do you need?"
                             //this.logneed = true;
-                            humandialog = "I need a map, ship repairs and my ship uprighted."; 
+                            humandialog = "I need a map, ship repairs and my ship uprighted.";
                           /*  if (this.blackholeneed = false;)
                                  let font;
        // font = loadFont('.././p5.min.js/Regular.otf');
