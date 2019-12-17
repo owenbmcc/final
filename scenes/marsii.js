@@ -40,13 +40,13 @@ class marsii extends Scene {
         //        var this.shipUprighted = false;
         //        var navimap = false;
         //        var mapnoted = false;
-        //        var shipunattended = false;
+        //        var this.shipUnattended = false;
 
         //quest items
 
 
         //this.objective.good = "You need", shiprepair, map, this.shipUprighted;
-        //this.objective.bad = "You need", key, shipunattended;
+        //this.objective.bad = "You need", key, this.shipUnattended;
 
 
         //NPC
@@ -184,6 +184,27 @@ class marsii extends Scene {
         //(device fufilled)
         this.dfufilled = false;
 
+        // Needed for Plant Alien
+        this.anomalyNeed = false;
+        this.backupneed = false;
+        this.backuplog = false;
+        this.bfufilled = false;
+        this.afufilled = false;
+
+        // Needed from Plant Alien
+        this.shipUnattended = false;
+        this.shipRepaired = false;
+        this.gooddevice = false;
+        this.baddevice = false;
+
+        // Needed for Static Alien
+        this.emptyBattery = false;
+        this.ebatteryNeed = true;
+
+        // Needed from Static Alien
+        this.partBattery = false;
+        this.fullBattery = false;
+
     }
 
     start() {
@@ -197,6 +218,7 @@ class marsii extends Scene {
     }
 
     draw() {
+
         //Debugging stuff
         //map maybe big, helps to have camera
         if (mouseIsPressed)
@@ -207,22 +229,11 @@ class marsii extends Scene {
         /*
     //bg = this.startSet;
          //.5 zoom is zooming out (50% of the normal size)
-
-
    */
-
-
         //LOOK INTO EVENT LISTENERS
         //FINISH UP STORIES (EVEN IF YOU CAN'T MAKE THEM WORK YET)
 
         //IF WORSE COMES TO WORSE, EXTRACT STATIC ALIEN FROM THE GAME TO SAVE TIME
-
-        // background(this.startSet);
-        //textSize(10);
-        //background('DarkBlue');
-        //fill('black');
-        //textAlign(CENTER, 100);
-        //text("Naomi's Scene", width / 2, height / 2);
 
         //this.character.update();
         //this.character.display();
@@ -236,43 +247,8 @@ class marsii extends Scene {
         }
         */
 
-
-        // user input - move character around
-
-        //this.this.bhNeed = new need(this.liquidAlien.dialogCount == 4, this.cosmicAlien.dialogCount == 25, this.bhNeed, true, false);
-
         var icepick = false;
-
-        //this.this.unmarkedmap = new need(this.liquidAlien.dialogCount == 8, this.cosmicAlien.dialogCount == 25, this.unmarkedmap, true, false);
-
-
-//        var reallog = false;
-
-
-
-
-
-
-
-        // Needed for Plant Alien
-        var anomalyNeed = false;
-        var backupneed = false;
-        var backuplog = false;
-        var bfufilled = false;
-        var afufilled = false;
-        // Needed from Plant Alien
-        var shipUnattended = false;
-        var shipRepaired = false;
-        var gooddevice = false;
-        var baddevice = false;
-
-        // Needed for Static Alien
-        var emptyBattery;
-        // Needed from Static Alien
-        var partBattery = false;
-        var fullBattery = false;
-
-
+        //var reallog = false;
 
         // user input - move character around
         var isWalkingR = false;
@@ -280,6 +256,7 @@ class marsii extends Scene {
         var isWalkingU = false;
         var isWalkingD = false;
 
+        //Moves character around
         if (keyIsDown(RIGHT_ARROW)) {
             this.character.speedX = 8;
             isWalkingR = true;
@@ -327,6 +304,7 @@ class marsii extends Scene {
         var humanDialog;
 
         /* check npcs */
+        //Static Alien display, dialog and code
         this.staticAlien.display();
         if (this.staticAlien.overlap(this.character)) {
             /* style dialog */
@@ -335,7 +313,7 @@ class marsii extends Scene {
             if (this.staticAlien.dialogCount % 1 == .5) {
                 fill('black');
             } else {
-                fill('DimGray');
+                fill('Wheat');
             }
             stroke('black');
             strokeWeight(1);
@@ -374,7 +352,7 @@ class marsii extends Scene {
                 this.cJournal = false;
                 dialog = 'Thank you. What do you want me to do?';
             } else if (this.staticAlien.dialogCount = 7.5) {
-                humanDialog = 'Have refill battery [1]partially or [2]completely?'
+                humanDialog = 'Have refill battery [1]partially (safe for the alien, but will take longer and be harder to get home) or [2]completely (unsafe for the alien, but gives you all the energy you need)?'
                 if (key == 1) {
                     this.cosmicAlien.dialogCount = 9.5;
                 } else if (key == 2) {
@@ -386,7 +364,7 @@ class marsii extends Scene {
                 humanDialogS = "You will be safe, just touch here."
             } else if (this.staticAlien.dialogCount == 10) {
                 dialog = "*You refill the battery just enough to get home*"
-                partBattery = true;
+                this.partBattery = true;
             } else if (this.staticAlien.dialogCount == 10.5) {
                 this.staticAlien.dialogCount = 25;
             }
@@ -395,7 +373,7 @@ class marsii extends Scene {
                 humanDialogS = "You'll probably be okay, just touch here."
             } else if (this.staticAlien.dialogCount == 12) {
                 dialog = "*You refill the battery completely and the alien disappears*"
-                fullBattery = true;
+                this.fullBattery = true;
             } else if (this.staticAlien.dialogCount == 12.5) {
                 humanDialogS = "It dropped the chronicle of other aliens, It'll be great to take with me to earth. *You pick it up*"
                 this.cJournal = true;
@@ -408,8 +386,8 @@ class marsii extends Scene {
                 if (this.cJournal == true) {
                     this.staticAlien.dialogCount = 6;
                 } else {
-                this.staticAlien.dialogCount = 5;
-            }
+                    this.staticAlien.dialogCount = 5;
+                }
             }
 
             if (this.staticAlien.dialogCount == 15) {
@@ -422,8 +400,8 @@ class marsii extends Scene {
                 this.staticAlien.dialogCount = 25;
             }
 
-            text(dialog, this.staticAlien.x, this.staticAlien.y, 200, 200);
-            text(humanDialogS, this.character.x, this.character.y, 200, 200);
+            text(dialog, this.staticAlien.x, this.staticAlien.y - 50, 250, 200);
+            text(humanDialogS, this.character.x, this.character.y - 50, 300, 200);
             fill(255);
             text("hit enter", this.staticAlien.x, this.staticAlien.y + 50);
 
@@ -598,7 +576,7 @@ class marsii extends Scene {
                 this.deviceNeed = true;
             }
 
-            if (baddevice == true) {
+            if (this.baddevice == true) {
                 if (this.creepAlien.dialogCount == 7.5) {
                     humanDialogCr = "Here's a device that should make you less intimidating";
                 } else if (this.creepAlien.dialogCount == 8) {
@@ -673,8 +651,8 @@ class marsii extends Scene {
                 humanDialogP = "I don't really have much of my own tech on me.";
             } else if (this.plantAlien.dialogCount == 5) {
                 dialog = "Fine. Well give me whatever you can spare and if you get me a piece of that anomaly up there I'll fix your ship.";
-                anomalyNeed = true;
-                backupneed = true;
+                this.anomalyNeed = true;
+                this.backupneed = true;
             } else if (this.plantAlien.dialogCount == 5.5) {
                 humanDialogP = " I can probably manage that.";
             } else if (this.plantAlien.dialogCount == 6) {
@@ -684,19 +662,19 @@ class marsii extends Scene {
             }
 
 
-            if (backuplog == true) {
+            if (this.backuplog == true) {
                 if (this.plantAlien.dialogCount == 10) {
                     dialog = "I see you got your tech. It's different from what I've seen. I'll enjoy studying it."
-                    bfufilled = true;
+                    this.bfufilled = true;
                 } else if (this.plantAlien.dialogCount == 10.5) {
-                    backuplog = false;
+                    this.backuplog = false;
                     this.plantAlien.dialogCount = 7;
                 }
             }
             if (this.anomalyPiece == true) {
                 if (this.plantAlien.dialogCount == 11) {
                     dialog = "You got the anomaly piece. It'll be great to incorporate into future tech. Thanks."
-                    afufilled = true;
+                    this.afufilled = true;
                 } else if (this.plantAlien.dialogCount == 11.5) {
                     this.anomalyPiece = false;
                     this.plantAlien.dialogCount = 7;
@@ -709,7 +687,7 @@ class marsii extends Scene {
                 this.plantAlien.dialogCount = 7;
             }
 
-            if (afufilled == true && bfufilled == true) {
+            if (this.afufilled == true && this.bfufilled == true) {
                 this.plantAlien.dialogCount = 15;
             }
 
@@ -730,7 +708,7 @@ class marsii extends Scene {
                     humanDialogP = "Can I see a prototype?"
                 } else if (this.plantAlien.dialogCount == 23) {
                     dialog = "Sure, here you go."
-                    baddevice = true;
+                    this.baddevice = true;
                     this.deviceNeed = false;
                 }
 
@@ -742,7 +720,7 @@ class marsii extends Scene {
                 this.plantAlien.dialogCount = 17;
             }
 
-            text(dialog, this.plantAlien.x  - 30, this.plantAlien.y - 100, 250, 200);
+            text(dialog, this.plantAlien.x - 30, this.plantAlien.y - 100, 250, 200);
             text(humanDialogP, this.character.x, this.character.y, 250, 200);
             fill(255);
             text("hit enter", this.plantAlien.x - 20, this.plantAlien.y + 80);
@@ -782,25 +760,26 @@ class marsii extends Scene {
                 humanDialogC = "Can you give me something useful in exchange for some info?";
             } else if (this.cosmicAlien.dialogCount == 2) {
                 dialog = "I doubt I'd have anything you would want, but what do you need?";
+            } else if (this.cosmicAlien.dialogCount == 2.5) {
                 console.log("this.blackhole Need", this.bhNeed);
                 firstchatC = true;
                 console.log("First Chat", firstchatC);
             }
 
             if (this.bhNeed == false && firstchatC == true) {
-                this.cosmicAlien.dialogCount = 2.5;
+                this.cosmicAlien.dialogCount = 3.5;
             } else if (this.bhNeed == true && firstchatC == true) {
                 this.cosmicAlien.dialogCount = 5.5;
             }
 
 
-            if (this.cosmicAlien.dialogCount == 2.5) {
+            if (this.cosmicAlien.dialogCount == 3.5) {
                 humanDialogC = "I need a map, energy, ship repairs and my ship uprighted. Do you have any of those?";
-            } else if (this.cosmicAlien.dialogCount == 3) {
-                dialog = "No, but if you do get a map, I'll mark it for you. It's hard to navigate around here";
-            } else if (this.cosmicAlien.dialogCount == 3.5) {
-                humanDialogC = "Thanks, I don't really know how I got here. I'll come back when I have one.";
             } else if (this.cosmicAlien.dialogCount == 4) {
+                dialog = "No, but if you do get a map, I'll mark it for you. It's hard to navigate around here";
+            } else if (this.cosmicAlien.dialogCount == 4.5) {
+                humanDialogC = "Thanks, I don't really know how I got here. I'll come back when I have one.";
+            } else if (this.cosmicAlien.dialogCount == 5) {
                 this.cosmicAlien.dialogCount = 10;
             }
 
@@ -898,7 +877,7 @@ class marsii extends Scene {
                     this.cosmicAlien.dialogCount = 25;
                 } else if (this.cJournalNeed = true) {
                     this.cosmicAlien.dialogCount = 35.5;
-                } else if (anomalyNeed = true) {
+                } else if (this.anomalyNeed = true) {
                     this.cosmicAlien.dialogCount = 45.5;
                 } else if (this.astJournal = true) {
                     this.cosmicAlien.dialogCount = 40.5;
@@ -944,12 +923,12 @@ class marsii extends Scene {
             if (this.cosmicAlien.dialogCount == 45.5) {
                 humanDialogC = "Hey, you see that anomaly?"
             } else if (this.cosmicAlien.dialogCount == 46) {
-                dialog = "Yeah, I'm guessing you want a piece."
+                dialog = "Yes. I'm guessing you want a piece."
             } else if (this.cosmicAlien.dialogCount == 46.5) {
-                humanDialogC = "Can you get me a piece?"
+                humanDialogC = "Yeah, can I have one?"
             } else if (this.cosmicAlien.dialogCount == 47) {
                 dialog = "Sure."
-                anomalyNeed = false;
+                this.anomalyNeed = false;
                 this.anomalyPiece = true;
                 this.cosmicAlien.dialogCount = 25;
             }
@@ -997,8 +976,8 @@ class marsii extends Scene {
                 dialog = "Your Ship";
             } else if (this.astShip.dialogCount == 0.5) {
                 /*
-                                if (shipRepaired == true && this.shipUprighted == true) {
-                                    if (this.markedmap == true && partBattery == true) {
+                                if (this.shipRepaired == true && this.shipUprighted == true) {
+                                    if (this.markedmap == true && this.partBattery == true) {
                                         this.astShip.dialogCount = 30;
                                     }
                                 } else {
@@ -1032,9 +1011,9 @@ class marsii extends Scene {
             }
 
             if (this.astShip.dialogCount == 5) {
-                if (this.shipUprighted == true && shipRepaired == true){
-                    if(partBattery == true || fullBattery == true){
-                        if(this.markedmap == true){
+                if (this.shipUprighted == true && this.shipRepaired == true) {
+                    if (this.partBattery == true || this.fullBattery == true) {
+                        if (this.markedmap == true) {
                             this.alienShip.dialogCount = 30;
                         }
                     }
@@ -1043,11 +1022,11 @@ class marsii extends Scene {
             } else if (this.astShip.dialogCount == 5.5) {
                 this.astShip.dialogCount = 6;
             } else if (this.astShip.dialogCount == 6) {
-                console.log("Ship Repaired", shipRepaired);
-                if (shipRepaired == false) {
+                console.log("Ship Repaired", this.shipRepaired);
+                if (this.shipRepaired == false) {
                     fill('red');
                     text("You need ship repairs", this.astShip.x, this.astShip.y - 75);
-                } else if (shipRepaired == true) {
+                } else if (this.shipRepaired == true) {
                     fill('green');
                     text("You're ship has been repaired", this.astShip.x, this.astShip.y - 75);
                 }
@@ -1059,11 +1038,11 @@ class marsii extends Scene {
                     fill('green');
                     text("Your ship has been uprighted", this.astShip.x, this.astShip.y - 50);
                 }
-                console.log("Battery", fullBattery, partBattery);
-                if (fullBattery == false || partBattery == false) {
+                console.log("Battery", this.fullBattery, this.partBattery);
+                if (this.fullBattery == false || this.partBattery == false) {
                     fill('red');
                     text("You need a battery with energy", this.astShip.x, this.astShip.y - 25);
-                } else if (fullBattery == true || partBattery == true) {
+                } else if (this.fullBattery == true || this.partBattery == true) {
                     fill('green');
                     text("Your battery has energy", this.astShip.x, this.astShip.y - 25);
                 }
@@ -1078,10 +1057,16 @@ class marsii extends Scene {
             }
 
             if (this.astShip.dialogCount == 10) {
-                if (this.astJournalNeed = true) {
+                if (this.astJournalNeed == true) {
                     this.astShip.dialogCount = 11;
-                } else if (this.logneed = false) {
+                } else if (this.logneed == true) {
                     this.astShip.dialogCount = 12;
+                } else if (this.backupneed == true) {
+                    this.astShip.dialogCount = 15;
+                } else if (this.emptyBattery == true) {
+                    this.astShip.dialogCount = 17;
+                } else {
+                    this.astShip.dialogCount = 28;
                 }
             }
 
@@ -1103,30 +1088,53 @@ class marsii extends Scene {
                     this.astShip.dialogCount = 13.5;
                 } else if (key == "3") {
                     this.astShip.dialogCount = 0;
-                } else {this.astShip.dialogCount = 0}
+                } else {
+                    this.astShip.dialogCount = 0
+                }
             }
             if (this.astShip.dialogCount == 12.5) {
                 humanDialogSh = " *Takes the real log* "
                 this.reallog = true;
                 this.logneed = false;
-                this.astShip.dialogCount = 1;
+            } else if (this.astShip.dialogCount == 13) {
+                this.astShip.dialogCount = 10;
             }
             if (this.astShip.dialogCount == 13.5) {
                 humanDialogSh = " *Takes the fake log* "
                 this.fakelog = true;
                 this.logneed = false;
-                this.astShip.dialogCount = 1;
+            } else if (this.astShip.dialogCount == 14) {
+                this.astShip.dialogCount = 10;
             }
 
 
+            if (this.astShip.dialogCount == 15) {
+                dialog = "(You recieved your (non-functional) backup tech)"
+                this.backuplog = true;
+                this.backupneed = false;
+            } else if (this.astShip.dialogCount == 15.5) {
+                this.astShip.dialogCount = 10;
+            }
+            if (this.astShip.dialogCount == 17) {
+                humanDialogSh = " (You recieved the empty battery) "
+                this.emptyBattery = true;
+                this.ebatteryNeed = false;
+            } else if (this.astShip.dialogCount == 17.5) {
+                this.astShip.dialogCount = 10;
+            }
 
+            if (this.astShip.dialogCount == 28) {
+                dialog = "(You don't seem to need anything else right now)"
+            } else if (this.astShip.dialogCount == 28.5) {
+                this.astShip.dialogCount == 0;
+            }
 
             if (this.astShip.dialogCount == 30) {
                 dialog = "Take off?"
-            }  else if (this.alienShip.dialogCount == 10.5){
+            } else if (this.alienShip.dialogCount == 10.5) {
                 humanDialogUfo = " [1] Yes || [2] No ";
                 if (key == "1") {
-                   // this.alienShip.dialogCount = 5;
+                    // this.alienShip.dialogCount = 5;
                     // END GAME ("Good" end - you overall were good and helpful to the . They might be back for revenge)
                 } else if (key == "2") {
                     this.alienShip.dialogCount = 10;
@@ -1189,9 +1197,9 @@ class marsii extends Scene {
             }
 
             if (this.alienShip.dialogCount == 5) {
-                if (this.unfrozenkey == true && this.markedmap == true){
-                    if(partBattery == true || fullBattery == true){
-                        if(shipUnattended == true){
+                if (this.unfrozenkey == true && this.markedmap == true) {
+                    if (this.partBattery == true || this.fullBattery == true) {
+                        if (this.shipUnattended == true) {
                             this.alienShip.dialogCount = 10;
                         }
                     }
@@ -1216,32 +1224,32 @@ class marsii extends Scene {
                     fill('green');
                     text("You have an unfrozen key", this.alienShip.x - 50, this.alienShip.y - 50);
                 }
-                console.log("Battery", partBattery, fullBattery);
-                if (fullBattery == false || partBattery == false) {
+                console.log("Battery", this.partBattery, this.fullBattery);
+                if (this.fullBattery == false || this.partBattery == false) {
                     fill('red');
                     text("You need a battery with energy", this.alienShip.x - 50, this.alienShip.y - 25);
-                } else if (fullBattery == true || partBattery == true) {
+                } else if (this.fullBattery == true || this.partBattery == true) {
                     fill('green');
                     text("You have a battery with energy", this.alienShip.x - 50, this.alienShip.y - 25);
                 }
-                console.log("Ship free", shipUnattended);
-                if (shipUnattended == false) {
+                console.log("Ship free", this.shipUnattended);
+                if (this.shipUnattended == false) {
                     fill('red');
                     text("You need to be alone with the ship.", this.alienShip.x - 50, this.alienShip.y);
-                } else if (shipUnattended == true) {
+                } else if (this.shipUnattended == true) {
                     fill('green');
                     text("You're alone with the ship.", this.alienShip.x - 50, this.alienShip.y);
-                } else {
-                    this.alienShip.dialogCount = 0;
                 }
+            } else if (this.alienShip.dialogCount == 6.5) {
+                this.alienShip.dialogCount = 0;
             }
 
-            if(this.alienShip.dialogCount == 10){
+            if (this.alienShip.dialogCount == 10) {
                 dialog = "You have everything you need to go. Ready to go?"
-            } else if (this.alienShip.dialogCount == 10.5){
+            } else if (this.alienShip.dialogCount == 10.5) {
                 humanDialogUfo = " [1] Yes || [2] No ";
                 if (key == "1") {
-                   // this.alienShip.dialogCount = 5;
+                    // this.alienShip.dialogCount = 5;
                     // END GAME ("Bad" end - screwed some people over. They might be back for revenge)
                 } else if (key == "2") {
                     this.alienShip.dialogCount = 10;
