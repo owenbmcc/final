@@ -64,13 +64,15 @@ class Combat {
 		sprite.mouseDown = false;
 	}
 
-	addNPCAttack(metric, probability, delta, successMsg, failMsg) {
+	addNPCAttack(metric, probability, delta, successMsg, failMsg, npcAnimation) {
 		this.npc.attacks.push({
 			metric: metric,
 			probability: probability,
 			delta: delta,
 			successMsg: successMsg,
-			failMsg: failMsg 
+			failMsg: failMsg,
+            npcAnimation: npcAnimation
+            
 		});
 
 	}
@@ -89,6 +91,10 @@ class Combat {
         
         if (attack.playerAnimation){
 			this.player.changeAnimation(attack.playerAnimation);
+        }
+        
+        if (attack.npcAnimation) {
+            this.npc.changeAnimation(attack.npcAnimation);
         }
 
 		if (character[attack.metric] <= this.metrics[attack.metric].min) {
@@ -128,6 +134,7 @@ class Combat {
 				if (this.turn == 'player') {
 					this.message = this.message = 'It is your turn.';
 					this.counter = this.timeout;
+                    this.npc.changeAnimation('idle');
 				} else {
 					this.player.changeAnimation('idle');
 					this.message = this.npc.name + "'s turn.";

@@ -1,11 +1,8 @@
 class NPC extends Scenery {
-	constructor(x, y, spriteSheet, dialog) {
+	constructor(x, y, spriteSheet, dialog, name) {
 		super(x, y, spriteSheet);
 		this.dialog = dialog;
-	}
-
-	display() {
-		super.display();
+        this.name = name;
 	}
 	
 	displayDialog() {
