@@ -6,7 +6,7 @@ class ekaterinaInstructions extends Scene {
         this.instructions = new EkaterinaMap();
         this.instructions.preload('data/ekaterina/instructions.json');
 
-        var startGame = loadImage('images/ekaterina/start.gif');
+        var startGame = loadImage('images/ekaterina/begin.gif');
         this.startGame = new NPCimage(0, 685, startGame);
 
         this.press = loadSound('sounds/ekaterina/press.mp3');
