@@ -191,6 +191,8 @@ class ekaterina extends Scene {
     }
 
     draw() {
+        
+        background('pink');
 
         /* user input - move character around */
         var isWalkingRightLion = false;
@@ -348,7 +350,7 @@ class ekaterina extends Scene {
         this.characterLion.update();
         this.characterMouse.update();
 
-        this.startline.display();
+//        this.startline.display();
 
         //non moving map
         camera.off();
@@ -465,7 +467,6 @@ class ekaterina extends Scene {
 
 
         /* count down at the beginning of scene */
-        console.log(this.counter);
         if (this.counter > 0 && this.countDown > 0) {
             this.counter--;
         } else {

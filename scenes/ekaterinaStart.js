@@ -3,11 +3,12 @@ class ekaterinaStart extends Scene {
 
     preload() {
 
-        this.menu = new EkaterinaMap();
-        this.menu.preload('data/ekaterina/menu.json');
+//        this.menu = new EkaterinaMap();
+//        this.menu.preload('data/ekaterina/menu.json');
 
-        var begin = loadImage('images/ekaterina/begin.gif');
-        this.begin = new NPCimage(0, 620, begin);
+        this.begin = loadImage('images/ekaterina/begin.gif');
+        
+        this.bg = loadImage('images/ekaterina/menu.png');
 
         this.remix = loadSound('sounds/ekaterina/remix.mp3');
         this.remix.setVolume(0.3);
@@ -20,22 +21,22 @@ class ekaterinaStart extends Scene {
     setup() {
 
         //        createCanvas(1435, 735);
-
         this.nextScene = false;
-        
-        this.menu.setup();
-        this.begin.setup();
+
     }
 
     start() {
 
-        this.menu.start();
     }
 
     draw() {
 
-        this.menu.display();
-        this.begin.display();
+//        this.menu.display();
+        camera.off();
+//        imageMode(CENTER);
+        image(this.bg, 0, 0);
+        image(this.begin, 400, 600);
+        camera.on();
 
         if (keyIsPressed) {
             if (keyIsDown(ENTER)) {
@@ -50,7 +51,7 @@ class ekaterinaStart extends Scene {
 
     end() {
 
-        this.menu.end();
+//        this.menu.end();
     }
 
 }
