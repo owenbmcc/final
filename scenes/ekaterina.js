@@ -52,10 +52,7 @@ class ekaterina extends Scene {
         this.count = new NPCimage(-10270, 350, count);
 
         var wolf1 = loadSpriteSheet('images/ekaterina/wolf.png', 300, 192, 8);
-        this.wolf1 = new NPC(-9800, 500, wolf1);
-
-        //var wolf1 = loadSpriteSheet('images/ekaterina/wolf.png', 300, 192, 8);
-        //this.wolf1 = new NPC(8500, 500, wolf1);
+        this.wolf1 = new NPC(8500, 500, wolf1);
 
         var wolf2 = loadSpriteSheet('images/ekaterina/wolf.png', 300, 192, 8);
         this.wolf2 = new NPC(9000, 500, wolf2);
@@ -72,7 +69,7 @@ class ekaterina extends Scene {
         var burst = loadSpriteSheet('images/ekaterina/burst.png', 385, 367, 5);
         this.burst = new NPC(-9500, 550, burst);
 
-        //invisible tiny rectangles which let characters be animated while on cactuses (otherwise characters behave as if they jump)
+        //invisible tiny rectangles which let characters be animated while on cactuses (otherwise characters             behave as if they jump)
         var block = loadSpriteSheet('images/ekaterina/block.png', 180, 5, 1);
         this.block = new NPC(-8100, 270, block);
 
