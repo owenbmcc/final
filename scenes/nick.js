@@ -102,7 +102,6 @@ class nick extends Scene {
 
         this.bg.pause();
         this.map.end();
-        console.log(camera.position);
     }
 
     draw() {

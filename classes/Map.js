@@ -82,7 +82,6 @@ class Map {
         for (var key in this.sprites.characters) {
             var character = this.sprites.characters[key];
             if (other.sprite.overlap(character.sprite)) {
-                console.log(key);
                 return character;
             }
         }
