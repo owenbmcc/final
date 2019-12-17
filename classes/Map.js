@@ -13,6 +13,8 @@ class Map {
             .then(function (response) {
                 return response.json();
             }).then(function (data) {
+
+
                 var scenery = data.scenery;
                 for (var key in scenery) {
                     var s = scenery[key];
@@ -40,6 +42,8 @@ class Map {
                     var c = characters[key];
                     var spriteSheet = loadSpriteSheet(c.img, c.width, c.height, c.frames);
                     _this.sprites.characters[key] = new NPC(c.x, c.y, spriteSheet, c.dialog, key);
+
+                    _this.sprites.characters[key] = new NPC(c.x, c.y, spriteSheet, c.dialog);
                 }
 
 
@@ -86,6 +90,16 @@ class Map {
             }
         }
 
+
+    overlap(other) {
+        for (var key in this.sprites.obstacles) {
+            var list = this.sprites.obstacles[key];
+            for (var i = 0; i < list.length; i++) {
+                if (other.sprite.overlap(list[i].sprite)) {
+                    return list[i];
+                }
+            }
+        }
     }
 
 
@@ -151,5 +165,7 @@ class Map {
         this.sprites[type][label] = [];
         this.sprites[type][label].push(sprite);
     }
+
+}
 
 }

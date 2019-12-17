@@ -1,42 +1,37 @@
-class LionwinsScene extends Scene {
-    	preload() {
-		this.map = new ParalaxMap();
-		this.map.preload('data/lionwins.json');
-        
-        var spriteSheet = loadSpriteSheet('images/ekaterina/lion.png', 900, 900, 83);
-		this.sceneLink = new NPC(0, 60, spriteSheet);
-            
-        var spriteSheet = loadSpriteSheet('images/ekaterina/restart.png', 900, 67, 8);
-		this.restartLink = new NPC(0, -300, spriteSheet);
-	}
+//lionwins scene
+class lionwins extends Scene {
 
-	setup() {
-		this.map.setup();
-        this.sceneLink.setup();
-        this.restartLink.setup();
-	}
-	
-	start() {
-		this.map.start();	
-	}
-	
-	draw() {
-        background('white');
+    preload() {
         
-        textAlign(CENTER);
-		textSize(150);
-        textFont("Krungthep");
-        fill('black');
-        stroke('red');
-        strokeWeight(15);
-		text('LION WINS', 0, -120);
+        this.nextSound = loadSound('sounds/ekaterina/next.mp3');
+        this.nextSound.setVolume(1.0);
+        this.lionwins = loadImage('images/ekaterina/lionwins.png');
+        this.next = loadImage('images/ekaterina/next.gif');
+        this.confetti = loadImage('images/ekaterina/confetti.gif');
+        var lion = loadSpriteSheet('images/ekaterina/lion.png', 520, 467, 22);
+        this.lion = new NPC(580, 420, lion);
+    }
+
+    setup() {
+
+        this.nextScene = false;        
+        this.lion.setup();
+    }
+
+    draw() {
         
-        if (keyIsDown(ENTER)) {
-            changeScene('ekaterina');
-			}
+        camera.off();
         
-        this.restartLink.display();
-        this.sceneLink.display();
-        this.map.display();
-	}
+        image(this.lionwins, 0, 0);
+        image(this.next, 180, 650);
+        image(this.confetti, -100, 0);
+        this.lion.display();
+        
+        camera.on();
+
+        if (keyIsDown(32)) {
+                changeScene('owen');
+                this.nextSound.play();
+    	}
+    }
 }

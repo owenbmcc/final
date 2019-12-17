@@ -16,6 +16,9 @@ class Scenery extends Thing {
 	}
 
 	update() {
+        super.update();
+        
+        
 		if (this.onClick) {
 			if (this.sprite.mouseIsPressed && !this.mouseDown) {
 				this.mouseDown = true;
