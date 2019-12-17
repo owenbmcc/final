@@ -3,53 +3,36 @@ class mousewins extends Scene {
 
     preload() {
         
+        this.mousewins = loadImage('images/ekaterina/mousewins.png');
+        this.next = loadImage('images/ekaterina/next.gif');
+        this.confetti = loadImage('images/ekaterina/confetti.gif');
+        var mouse = loadSpriteSheet('images/ekaterina/mouse.png', 700, 324, 11);
+        this.mouse = new NPC(500, 400, mouse);
         this.nextSound = loadSound('sounds/ekaterina/next.mp3');
         this.nextSound.setVolume(1.0);
-        
-        this.mousewins = new EkaterinaMap();
-        this.mousewins.preload('data/ekaterina/mousewins.json');
-        
-        var next = loadImage('images/ekaterina/next.gif');
-        this.next = new NPCimage(0, 680, next);
-        
-        var confetti = loadImage('images/ekaterina/confetti.gif');
-        this.confetti = new NPCimage(0, 305, confetti);
-        
-        var mouse = loadSpriteSheet('images/ekaterina/mouse.png', 700, 324, 11);
-        this.mouse = new NPC(-200, 400, mouse);
     }
 
     setup() {
-
-//        createCanvas(1435, 735);
         
-        this.mousewins.setup();
-        this.confetti.setup();
         this.mouse.setup();
-        this.next.setup();
+        this.nextScene = false;        
     }
 
-     start() {
-
-         this.mousewins.start();
-      }
-
     draw() {
-
-        this.mousewins.display();
+        
+        camera.off();
+        
+        image(this.mousewins, 0, 0);
+        image(this.next, 180, 650);
+        image(this.confetti, -100, 0);
+        
         this.mouse.display();
-        this.confetti.display();
-        this.next.display();
+        
+        camera.on();
 
         if (keyIsDown(32)) {
                 changeScene('owen');
                 this.nextSound.play();
     	}
     }
-    
-    end() {
-
-        this.mousewins.end();
-	}
-
 }

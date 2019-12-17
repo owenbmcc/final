@@ -69,7 +69,7 @@ class ekaterina extends Scene {
         var burst = loadSpriteSheet('images/ekaterina/burst.png', 385, 367, 5);
         this.burst = new NPC(-9500, 550, burst);
 
-        //invisible tiny rectangles which let characters be animated while on cactuses (otherwise characters             behave as if they jump)
+        //invisible tiny rectangles which let characters be animated while on cactuses (otherwise characters behave as if they jump)
         var block = loadSpriteSheet('images/ekaterina/block.png', 180, 5, 1);
         this.block = new NPC(-8100, 270, block);
 
@@ -112,8 +112,6 @@ class ekaterina extends Scene {
     }
 
     setup() {
-
-        //createCanvas(1435, 735); //if the screen is too big the non moving map may not fit the size
 
         this.counter = 60;
         this.countDown = 10;
@@ -160,8 +158,7 @@ class ekaterina extends Scene {
         this.wolf5.setup();
         this.wolf6.setup();
 
-//        this.wolves.obstacles[0].speedX = -10;
-
+        //this.wolves.obstacles[0].speedX = -10;
         this.map.setup();
         this.gateway.setup();
         this.endgame.setup();
@@ -192,7 +189,7 @@ class ekaterina extends Scene {
 
     draw() {
         
-        background('pink');
+        background('yellow');
 
         /* user input - move character around */
         var isWalkingRightLion = false;
@@ -349,8 +346,6 @@ class ekaterina extends Scene {
         this.characterLion.update();
         this.characterMouse.update();
 
-//        this.startline.display();
-
         //non moving map
         camera.off();
         this.sky.display();
@@ -367,7 +362,7 @@ class ekaterina extends Scene {
         }
 
         this.map.display();
-
+        
         this.wolf1.display();
         this.wolf2.display();
         this.wolf4.display();
@@ -638,7 +633,6 @@ class ekaterina extends Scene {
 
         if (this.block.overlap(this.characterLion) && isWalkingRightLion) {
             this.characterLion.changeAnimation('lionmovesright');
-
         }
 
         if (this.block.overlap(this.characterLion) && isWalkingLeftLion) {
