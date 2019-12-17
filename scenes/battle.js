@@ -4,7 +4,6 @@ class BattleScene extends Scene {
         super();
         this.name = name;
         this.attacks = attacks;
-
     }
 	
 	preload() {

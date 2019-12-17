@@ -39,10 +39,10 @@ class nick extends Scene {
         ];
         
         
-        sceneManager['ben-battle'] = new BattleScene("Ben", attacks1);
-        sceneManager['sam-battle'] = new BattleScene("Sam", attacks2);
-        sceneManager['ella-battle'] = new BattleScene("Ella", attacks3);
-        sceneManager['joe-battle'] = new BattleScene("Joe", attacks4);
+        sceneManager['ben-battle'] = new BattleScene("ben", attacks1);
+        sceneManager['sam-battle'] = new BattleScene("sam", attacks2);
+        sceneManager['ella-battle'] = new BattleScene("ella", attacks3);
+        sceneManager['joe-battle'] = new BattleScene("joe", attacks4);
 
     }
 
@@ -92,8 +92,6 @@ class nick extends Scene {
         //		this.bg.play();
         this.bg.loop();
         this.map.start();
-
-        console.log(this.map.sprites);
     }
 
     end() {
