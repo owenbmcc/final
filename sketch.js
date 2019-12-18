@@ -1,13 +1,21 @@
-/* 
-	final project	
-	mmp 310 
+/*
+	final project
+	mmp 310
 	fall 2019
 */
 
 
 
 
+
 var scene = 'collosseum';
+
+
+var scene = 'nelson';
+
+var scene = 'owen';
+
+
 
 var sceneManager = {};
 sceneManager['owen'] = new owen();
@@ -15,6 +23,7 @@ sceneManager['paralax'] = new ParalaxScene();
 sceneManager['nick'] = new nick();
 sceneManager['marsii'] = new marsii();
 sceneManager['nelson'] = new nelson();
+sceneManager['youlose'] = new youlose();
 sceneManager['ekaterinaStart'] = new ekaterinaStart();
 sceneManager['ekaterinaInstructions'] = new ekaterinaInstructions();
 sceneManager['ekaterina'] = new ekaterina();
@@ -23,6 +32,7 @@ sceneManager['lionwins'] = new lionwins();
 sceneManager['collosseum'] = new collosseum();
 sceneManager['adonis'] = new adonis();
 sceneManager['maryam'] = new maryam();
+
 
 
 

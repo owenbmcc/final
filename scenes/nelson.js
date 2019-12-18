@@ -32,7 +32,7 @@ class nelson extends Scene {
             walking: loadAnimation(this.walk),
             standing: loadAnimation(this.stand)
         };
-        this.character = new Character(animations); // (animation,x,y)
+        this.character = new Character(animations,2000,1000); // (animation,x,y)
         this.character.changeAnimation('standing');
 
         this.map.setup();
@@ -42,9 +42,9 @@ class nelson extends Scene {
         //this.woods.setup();
 
         this.npc1.setup();
-        this.npc1.speedX = 5;
+        this.npc1.speedX = 6;
         this.npc2.setup();
-        this.npc2.speedX = 6;
+        this.npc2.speedX = 10;
         this.npc3.setup();
         this.npc3.speedX = 9;
 
@@ -54,6 +54,11 @@ class nelson extends Scene {
         //		this.bg.play();
         this.bg.loop();
         this.map.start();
+        
+        this.character.x = 2000;
+        this.character.y = 1000;
+        
+        ;
     }
 
     end() {
@@ -62,6 +67,7 @@ class nelson extends Scene {
     }
 
     draw() {
+        camera.off();
         background('green');
         //this.woods.display();
 
@@ -143,7 +149,7 @@ class nelson extends Scene {
         /* update map */
         this.map.collide(this.character);
         //this.map.move(this.character);
-        this.map.update(this.character);
+        //this.map.update(this.character);
         this.map.display();
     }
 }
