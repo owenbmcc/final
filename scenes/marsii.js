@@ -64,9 +64,9 @@ class marsii extends Scene {
 
         this.liquidAlienSheet = loadSpriteSheet('images/marsii/npcs/liquidAlien.png', 64, 128, 4);
 
-        this.liquidAlienFrozen = loadSpriteSheet('/images/marsii/npcs/liquidAlienF.png', 64, 128, 1);
+        this.liquidAlienFrozen = loadSpriteSheet('images/marsii/npcs/liquidAlienF.png', 64, 128, 1);
 
-        this.liquidAlienFrozenCut = loadSpriteSheet('/images/marsii/npcs/liquidAlienFC.png', 64, 128, 1);
+        this.liquidAlienFrozenCut = loadSpriteSheet('images/marsii/npcs/liquidAlienFC.png', 64, 128, 1);
 
         this.liquidAlien = new NPC(150, 1200, this.liquidAlienSheet, "(Needed for map and key(if doing bad route))");
 
