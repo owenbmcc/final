@@ -1,9 +1,15 @@
 class youlose extends Scene {
-draw() {
-		background('black');
-		textSize(100);
-		textAlign(CENTER, CENTER);
-		text("You Lose", width/2, height/2);
-		text("Refresh Page To Try Again", width/2, height/2 + 100);
-            }
-            }
+    draw() {
+        camera.off();
+        background('black');
+        textSize(100);
+        textAlign(CENTER, CENTER);
+        fill('white');
+        text("You Lose", width / 2, height / 2);
+        text("Enter To Try Again", width / 2, height / 2 + 100);
+        
+        if (keyIsDown(ENTER)) {
+            changeScene('nelson');   
+        }
+    }
+}

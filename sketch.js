@@ -7,7 +7,7 @@
 
 
 
-var scene = 'ekaterinaStart';
+var scene = 'nelson';
 
 var sceneManager = {};
 sceneManager['owen'] = new owen();
@@ -15,6 +15,7 @@ sceneManager['paralax'] = new ParalaxScene();
 sceneManager['nick'] = new nick();
 sceneManager['marsii'] = new marsii();
 sceneManager['nelson'] = new nelson();
+sceneManager['youlose'] = new youlose();
 sceneManager['ekaterinaStart'] = new ekaterinaStart();
 sceneManager['ekaterinaInstructions'] = new ekaterinaInstructions();
 sceneManager['ekaterina'] = new ekaterina();
