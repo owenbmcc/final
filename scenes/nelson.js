@@ -135,7 +135,7 @@ class nelson extends Scene {
         this.npc2.display();
         if (this.npc2.overlap(this.character)) {
             console.log('you died');
-            //changeScene ('youlose');
+            changeScene ('youlose');
 
         }
         this.npc3.display();
