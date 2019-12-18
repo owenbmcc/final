@@ -52,9 +52,9 @@ class marsii extends Scene {
         //NPC
 
         this.staticAlienNorm = loadSpriteSheet('images/marsii/npcs/staticAlien.png', 64, 128, 8);
-        
+
         this.staticAlienSheet = this.staticAlienNorm
-        
+
         this.staticAlien = new NPC(400, -600, this.staticAlienSheet, "Hi. you need me for energy.");
         this.staticAlien.dialogCount = 0;
         //400, -600
@@ -96,7 +96,7 @@ class marsii extends Scene {
 
         this.astShipBroken = loadSpriteSheet('images/marsii/npcs/brokenship.png', 353, 188, 1);
         this.astShipFixed = loadSpriteSheet('images/marsii/npcs/fixedship.png', 152, 344, 1);
-        
+
         this.astShipSheet = this.astShipBroken
         this.astShip = new NPC(730, 500, this.astShipSheet, "Your ship");
         this.astShip.dialogCount = 0;
@@ -141,7 +141,7 @@ class marsii extends Scene {
             walkup: loadAnimation(this.walkup),
             walkdown: loadAnimation(this.walkdown),
             idle: loadAnimation(this.idle)
-            
+
 
         };
 
