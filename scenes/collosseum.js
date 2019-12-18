@@ -1,145 +1,179 @@
-class Map {
-	constructor(src) {
-		this.sprites = {
-			scenery: {},
-			characters: {},
-			obstacles: {}
-		};
-	}
+class collosseum extends Scene {
 
-	preload(src) {
-		var _this = this;
-		fetch(src)
-			.then(function (response) {
-				return response.json();
-			}).then(function (data) {
+	preload() {
 
-				var scenery = data.scenery;
-				for (var key in scenery) {
-					var s = scenery[key];
-					var spriteSheet = loadSpriteSheet(s.img, s.width, s.height, s.frames);
-					_this.sprites.scenery[key] = [];
-					for (var i = 0; i < s.positions.length; i++) {
-						var position = s.positions[i];
-						_this.sprites.scenery[key].push(new Scenery(position.x, position.y, spriteSheet));
-					}
-				}
+		this.walk = loadSpriteSheet('images/jonathan/walk.png', 299, 437, 3);
+		this.stand = loadSpriteSheet('images/jonathan/idle.png', 414, 506, 1);
+        this.attack = loadSpriteSheet('images/jonathan/attack.png', 533, 510, 2);
+		this.map = new Map();
+        this.characterKnight.idle = loadSpriteSheet('images/jonathan/knight_idle', 416, 448, 3);
+        this.characterKnight.walk = loadSpriteSheet('images/jonathan/knight_walk', 416, 432, 3);
+        this.characterKnight.attack = loadSpriteSheet('images/jonathan/knight_attack', 414, 477, 2);
+        this.map = new Map();
+	//	this.map.preload('data/jonathan.json');
 
-				var obstacles = data.obstacles;
-				for (var key in obstacles) {
-					var o = obstacles[key];
-					var spriteSheet = loadSpriteSheet(o.img, o.width, o.height, o.frames);
-					_this.sprites.obstacles[key] = [];
-					for (var i = 0; i < o.positions.length; i++) {
-						var position = o.positions[i];
-						_this.sprites.obstacles[key].push(new Scenery(position.x, position.y, spriteSheet));
-					}
-				}
-
-				var characters = data.npc;
-				for (var key in characters) {
-					var c = characters[key];
-					var spriteSheet = loadSpriteSheet(c.img, c.width, c.height, c.frames);
-					_this.sprites.characters[key] = new NPC(c.x, c.y, spriteSheet, c.dialog);
-				}
+	//	this.bg = loadSound('sounds/nelson/retromusic4.m4a');
 
 
-			});
+	//	this.walkSound = loadSound('sounds/nelson/walking.wav');
+
+
+	//	this.walkSound.playMode();
+
+
+		//        this.woodsSheet = loadSpriteSheet('images/Nelson/background.png', 224, 224, 2);
+	//	var npcSheet = loadSpriteSheet('images/Nelson/monster1.png', 48, 204, 4);
+	//	this.npc = new NPC(500, 500, npcSheet);
+	//	var npcSheet = loadSpriteSheet('images/Nelson/monster2.png', 192, 352, 5);
+	//	this.npc = new NPC(800, 800, npcSheet);
+	//	var npcSheet = loadSpriteSheet('images/Nelson/monster3.png', 192, 282, 4);
+	//	this.npc = new NPC(600, 600, npcSheet);
+		//make sure to change name of npcsheetand this.npc
 	}
 
 	setup() {
-		for (var key in this.sprites.obstacles) {
-			var list = this.sprites.obstacles[key];
-			for (var i = 0; i < list.length; i++) {
-				list[i].setup();
-			}
-		}
 
-		for (var key in this.sprites.scenery) {
-			var list = this.sprites.scenery[key];
-			for (var i = 0; i < list.length; i++) {
-				list[i].setup();
-			}
-		}
+		const animations = {
+			walking: loadAnimation(this.walk),
+			standing: loadAnimation(this.stand),
+            attack: loadAnimation(this.attack),
+            
+            knight_walk: loadAnimation(this.characterKnight.walk),
+            knight_idle: loadAnimation(this.characterKnight.idle),
+            knight_attack: loadAnimation(this.characterKnight.attack)
+		};
+		this.character = new Character(animations, 500,500);
+        //this.characterKnight = new Character(animations, 500,500);
+		//this.character.changeAnimation('idle');
 
-		for (var key in this.sprites.characters) {
-			this.sprites.characters[key].setup();
-		}
+		this.map.setup();
+		//this.sceneLink.setup();
+		//this.woods = new Scenery(width / 2, height / 2, this.woodsSheet);
+		//this.woods.sprite.scale = 3;
+		//this.woods.setup();
+
+	//	this.npc.setup();
+	//	this.npc.speedX = 5;
+
 	}
-	
+
 	start() {
-		camera.on();
-		camera.position.x = 0;
-		camera.position.y = 0;
+		//		this.bg.play();
+    //BGmusic   this.bg.loop();
+		this.map.start();
 	}
 
 	end() {
-		camera.position.x = 0;
-		camera.position.y = 0;
+		this.bg.pause();
+		this.map.end();
 	}
 
+	draw() {
+		background('tan');
+		//this.sand.display();
 
-	collide(other) {
-		var isColliding = false;
-		for (var key in this.sprites.obstacles) {
-			var list = this.sprites.obstacles[key];
-			for (var i = 0; i < list.length; i++) {
-				other.sprite.collide(list[i].sprite);
-			}
-		}
-		this.isColliding = isColliding;
+		/*instructions*/
+		textAlign(CENTER);
+		textSize(30);
+		text('move the character with arrows', width / 2, 100);
 
-		for (var key in this.sprites.characters) {
-			var character = this.sprites.characters[key];
-			if (character.sprite.overlap(other.sprite)) {
-				character.displayDialog();
-			}
-		}
-	}
 
-	display() {
-
-		for (var key in this.sprites.obstacles) {
-			var list = this.sprites.obstacles[key];
-			for (var i = 0; i < list.length; i++) {
-				list[i].display();
-			}
+		/* user input - move character around */
+		var isWalking = false;
+		if (keyIsDown(RIGHT_ARROW)) {
+			this.character.speedX = 5;
+			isWalking = true;
+		} else if (keyIsDown(LEFT_ARROW)) {
+			this.character.speedX = -5;
+			isWalking = true;
+		} else {
+			this.character.speedX = 0;
 		}
 
-		for (var key in this.sprites.scenery) {
-			var list = this.sprites.scenery[key];
-			for (var i = 0; i < list.length; i++) {
-				list[i].display();
-                list[i].update();
-			}
+		if (keyIsDown(DOWN_ARROW)) {
+			this.character.speedY = 5;
+			isWalking = true;
+		} else if (keyIsDown(UP_ARROW)) {
+			this.character.speedY = -5;
+			isWalking = true;
+		} else {
+			this.character.speedY = 0;
 		}
 
-		for (var key in this.sprites.characters) {
-			this.sprites.characters[key].display();
+		if (isWalking) {
+			 this.character.changeAnimation('walking');
+            
 		}
-	}
+        else if (keyIsDown(32)){
+            this.character.changeAnimation('attack');
+            
+        }
+        
+        else {
+			this.character.changeAnimation('standing');
+		}
 
-	move(character) {
-		camera.position.x = character.sprite.position.x;
-		camera.position.y = character.sprite.position.y;
-	}
 
-	update(character) {
-		var offsetX = floor(character.x / width);
-		camera.position.x = offsetX * width + width/2;
+		this.character.update();
+		this.character.display();
+        
+        
+        
+        //Knight controls
+        var isWalking = false;
+        if (keyIsDown(68)) {
+            this.characterKnight.walk.speedX = 1;
+            isWalkingRightKnight = true;
+        } else if (keyIsDown(65)) {
+            this.characterKnight.walk.speedX = -1;
+            isWalkingLeftKnight = true;
+        } else {
+            this.characterKnight.walk.speedX = 0;
+        }
 
-		var offsetY = floor(character.y / height);
-		camera.position.y = offsetY * height + height/2;
-	}
-	
-	center() {
-		camera.position.x = width/2;
-    	camera.position.y = width/2;
-	}
-	
-	addSprite(label, sprite, type) {
-		this.sprites[type][label] = [];
-		this.sprites[type][label].push(sprite);
-	}
+        
+		if (keyIsDown(83)) {
+			this.characterKnight.walk.speedY = 5;
+			isWalking = true;
+		} else if (keyIsDown(87)) {
+			this.characterKnight.walk.speedY = -5;
+			isWalking = true;
+		} else {
+			this.characterKnight.walk.speedY = 0;
+		}
 
+		if (isWalking) {
+			 this.characterKnight.walk.changeAnimation('knight_walk');
+            
+		}
+        else if (keyIsDown(16)){
+            this.characterKnight.attack.changeAnimation('knight_attack');
+            
+        }
+        
+        else {
+			this.characterKnight.idle.changeAnimation('knight_idle');
+		}
+
+
+		this.character.update();
+		this.character.display();
+		//this.npc.update();
+		//if (this.npc.x > width * 2) {
+		//	this.npc.x = 0;
+		
+		//make sure to change name of npcsheetand this.npc
+//
+//		this.npc.display();
+//		if (this.npc.overlap(this.character)) {
+//			console.log('you died');
+//		}
+//		//make sure to change name of npcsheetand this.npc
+
+		/* update map */
+		this.map.collide(this.character);
+		//this.map.move(this.character);
+		this.map.update(this.character);
+		this.map.display();
+	}
 }
