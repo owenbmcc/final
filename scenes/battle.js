@@ -23,10 +23,10 @@ class BattleScene extends Scene {
 		this.attack3SpriteSheet = loadSpriteSheet('images/nick/animatelightning.png', 69, 66, 4);
         
 		this.npcSpriteSheet = loadSpriteSheet('images/nick/' + this.name + '.png', 68, 104, 7);
-        // this.npcattackSheet = loadSpriteSheet('images/nick/shadowforce.png',90,66,12);
-        // this.samattackSheet = loadSpriteSheet('images/nick/energysphere.png',78,51,8);
-        // this.ellaattackSheet = loadSpriteSheet('images/nick/witchlance.png',87,48,14);
-        // this.joeattackSheet = loadSpriteSheet('images/nick/lavablasts.png',81,54,9);
+         this.npcattackSheet = loadSpriteSheet('images/nick/shadowforce.png',90,66,12);
+         this.samattackSheet = loadSpriteSheet('images/nick/energysphere.png',78,51,8);
+        this.ellaattackSheet = loadSpriteSheet('images/nick/witchlance.png',87,48,14);
+         this.joeattackSheet = loadSpriteSheet('images/nick/lavablasts.png',81,54,9);
 		
 		// action choices graphics
 		this.slashSheet = loadSpriteSheet('images/nick/slash.png',90, 90, 1);
@@ -50,10 +50,10 @@ class BattleScene extends Scene {
 		
 		var npcAnimations = {
 			idle: this.npcSpriteSheet,
-            // attack: this.npcattackSheet,
-            // samattack:this.samattackSheet,
-            // ellaattack:this.ellaattackSheet,
-            // joeattack:this.joeattackSheet
+             attack: this.npcattackSheet,
+             samattack:this.samattackSheet,
+             ellaattack:this.ellaattackSheet,
+             joeattack:this.joeattackSheet
             
 		};
 		this.npc = new Character(npcAnimations, width - 200, height/2);
