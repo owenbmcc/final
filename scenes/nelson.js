@@ -56,7 +56,7 @@ class nelson extends Scene {
         this.map.start();
         
         this.character.x = 2000;
-        this.character.y = 1100;
+        this.character.y = 1000;
         
         ;
     }
