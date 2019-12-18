@@ -50,17 +50,21 @@ class marsii extends Scene {
 
 
         //NPC
-
-        var staticAlienSheet = loadSpriteSheet('images/marsii/npcs/staticAlien.png', 64, 128, 8);
-        this.staticAlien = new NPC(400, -600, staticAlienSheet, "Hi. you need me for energy.");
+        this.staticAlienQC = loadSpriteSheet('images/marsii/npcs/staticAlienqc.png', 64, 128, 8);
+        this.staticAlienBQC = loadSpriteSheet('images/marsii/npcs/staticAlienbqc.png', 64, 128, 4);
+        this.staticAlienNorm = loadSpriteSheet('images/marsii/npcs/staticAlien.png', 64, 128, 8);
+        
+        this.staticAlienSheet = this.staticAlienNorm
+        
+        this.staticAlien = new NPC(400, -600, this.staticAlienSheet, "Hi. you need me for energy.");
         this.staticAlien.dialogCount = 0;
         //400, -600
 
         this.cosmicAlienNorm = loadSpriteSheet('images/marsii/npcs/cosmicAlien.png', 64, 130, 6);
         this.cosmicAlienQC = loadSpriteSheet('images/marsii/npcs/cosmicAlienqc.png', 64, 130, 6);
-        
+
         this.cosmicAlienSheet = this.cosmicAlienNorm;
-        
+
         this.cosmicAlien = new NPC(100, 1000, this.cosmicAlienSheet, "Hi. you need me for my power.");
         this.cosmicAlien.dialogCount = 0;
         //-2700, -570
@@ -69,7 +73,7 @@ class marsii extends Scene {
         this.liquidAlienNormal = loadSpriteSheet('images/marsii/npcs/liquidAlien.png', 64, 128, 4);
         this.liquidAlienFrozen = loadSpriteSheet('images/marsii/npcs/liquidAlienF.png', 64, 128, 1);
         this.liquidAlienFrozenCut = loadSpriteSheet('images/marsii/npcs/liquidAlienFC.png', 64, 128, 1);
-        
+
         this.liquidAlienSheet = this.liquidAlienNormal;
 
         this.liquidAlien = new NPC(150, 1200, this.liquidAlienSheet, "(Needed for map and key(if doing bad route))");
@@ -91,8 +95,11 @@ class marsii extends Scene {
         var trailSheet = loadSpriteSheet('images/marsii/scenery/crashtrail.png', 546, 90, 1);
         this.shipTrail = new Scenery(1177, 552, trailSheet);
 
-        var astShipSheet = loadSpriteSheet('images/marsii/npcs/brokenship.png', 353, 188, 1);
-        this.astShip = new NPC(730, 500, astShipSheet, "Your ship");
+        this.astShipBroken = loadSpriteSheet('images/marsii/npcs/brokenship.png', 353, 188, 1);
+        this.astShipFixed = loadSpriteSheet('images/marsii/npcs/fixedship.png', 152, 344, 1);
+        
+        this.astShipSheet = this.astShipBroken
+        this.astShip = new NPC(730, 500, this.astShipSheet, "Your ship");
         this.astShip.dialogCount = 0;
 
         var alienShipSheet = loadSpriteSheet('images/marsii/npcs/ufo.png', 359, 200, 1);
@@ -135,6 +142,7 @@ class marsii extends Scene {
             walkup: loadAnimation(this.walkup),
             walkdown: loadAnimation(this.walkdown),
             idle: loadAnimation(this.idle)
+            
 
         };
 
@@ -166,6 +174,7 @@ class marsii extends Scene {
 
         // Needed for Liquid Alien
         this.bhNeed = false;
+        this.icepick = false;
 
         // Needed from Liquid Alien
         this.frozenmap = false;
@@ -219,7 +228,7 @@ class marsii extends Scene {
         this.partBattery = false;
         this.fullBattery = false;
 
-        this.icepick = false;
+        
 
     }
 
@@ -327,9 +336,9 @@ class marsii extends Scene {
             console.log("Static Alien", this.staticAlien.dialogCount);
             textSize(15);
             if (this.staticAlien.dialogCount % 1 == .5) {
-                fill('LightCyan');
+                fill('CadetBlue');
             } else {
-                fill('Gold');
+                fill('DarkGoldenRod');
             }
             stroke('black');
             strokeWeight(1);
@@ -360,10 +369,10 @@ class marsii extends Scene {
                 this.staticAlien.dialogCount = 5.5;
             }
 
-            if (this.cJournal == true)
-                if (this.staticAlien.dialogCount = 6) {
-                    dialog = 'Oh, you got something';
-                } else if (this.staticAlien.dialogCount = 6.5) {
+
+            if (this.staticAlien.dialogCount == 6) {
+                dialog = 'Oh, you got something';
+            } else if (this.staticAlien.dialogCount = 6.5) {
                 humanDialogS = "Yup, it's a chronicle of numerous different species, exactly what you wanted.";
             } else if (this.staticAlien.dialogCount = 7) {
                 this.cJournal = false;
@@ -382,6 +391,8 @@ class marsii extends Scene {
             } else if (this.staticAlien.dialogCount == 10) {
                 dialog = "*You refill the battery just enough to get home*"
                 this.partBattery = true;
+                this.emptyBattery = true;
+                this.staticAlienSheet = this.staticAlienQC;
             } else if (this.staticAlien.dialogCount == 10.5) {
                 this.staticAlien.dialogCount = 25;
             }
@@ -391,6 +402,8 @@ class marsii extends Scene {
             } else if (this.staticAlien.dialogCount == 12) {
                 dialog = "*You refill the battery completely and the alien disappears*"
                 this.fullBattery = true;
+                this.emptyBattery = true;
+                this.staticAlienSheet = this.staticAlienBQC;
             } else if (this.staticAlien.dialogCount == 12.5) {
                 humanDialogS = "It dropped the chronicle of other aliens, It'll be great to take with me to earth. *You pick it up*"
                 this.cJournal = true;
@@ -399,24 +412,26 @@ class marsii extends Scene {
 
 
             if (this.staticAlien.dialogCount == 5.5) {
-                dialog = '(It has nothing else to say to you)';
-                if (this.cJournal == true) {
+                dialog = '(It has nothing else to say to you right now)';
+                if (this.cJournal == true && this.emptyBattery == true) {
                     this.staticAlien.dialogCount = 6;
+                } else if (this.ebatteryNeed == true) {
+                    humanDialogS = "I should go get my battery before I talk to it again"
                 }
                 this.staticAlien.dialogCount = 5.5;
             }
 
             if (this.staticAlien.dialogCount == 15) {
-                dialog = "There's nothing here.";
+                dialog = "There's nothing but static here.";
                 this.staticAlien.dialogCount = 15;
             }
 
             if (this.staticAlien.dialogCount == 25) {
-                dialog = "*It seems content and has nothing else to say*";
+                dialog = " (It seems content and has nothing else to say)";
                 this.staticAlien.dialogCount = 25;
             }
 
-            text(dialog, this.staticAlien.x, this.staticAlien.y - 50, 250, 200);
+            text(dialog, this.staticAlien.x, this.staticAlien.y + 50, 250, 200);
             text(humanDialogS, this.character.x - 30, this.character.y - 70, 300, 200);
             fill(255);
             text("hit enter", this.staticAlien.x, this.staticAlien.y + 50);
@@ -559,7 +574,7 @@ class marsii extends Scene {
 
 
             text(dialog, this.liquidAlien.x - 30, this.liquidAlien.y - 145, 200, 200);
-            text(humanDialogL, this.character.x, this.character.y - 40, 150, 200);
+            text(humanDialogL, this.character.x, this.character.y - 80, 150, 200);
             fill(255);
             text("hit enter", this.liquidAlien.x - 30, this.liquidAlien.y + 70);
 
@@ -929,6 +944,7 @@ class marsii extends Scene {
                 dialog = "Thank you very much human. I look forward to reading this. Here's a blackhole, be very careful with that.";
                 this.blackhole = true;
                 this.cosmicAlienSheet = this.cosmicAlienQC;
+            }else if (this.cosmicAlien.dialogCount == 28.5) {
                 this.cosmicAlien.dialogCount = 25;
             }
 
