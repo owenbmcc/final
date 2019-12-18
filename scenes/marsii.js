@@ -50,8 +50,7 @@ class marsii extends Scene {
 
 
         //NPC
-        this.staticAlienQC = loadSpriteSheet('images/marsii/npcs/staticAlienqc.png', 64, 128, 8);
-        this.staticAlienBQC = loadSpriteSheet('images/marsii/npcs/staticAlienbqc.png', 64, 128, 4);
+
         this.staticAlienNorm = loadSpriteSheet('images/marsii/npcs/staticAlien.png', 64, 128, 8);
         
         this.staticAlienSheet = this.staticAlienNorm
@@ -228,8 +227,9 @@ class marsii extends Scene {
         this.partBattery = false;
         this.fullBattery = false;
 
-        
-
+        this.staticAlienQC = loadSpriteSheet('images/marsii/npcs/staticAlienqc.png', 64, 128, 8);
+        this.staticAlienBQC = loadSpriteSheet('images/marsii/npcs/staticAlienbqc.png', 64, 128, 4);
+        this.staticAlienSheet = this.staticAlienNorm
     }
 
     start() {
@@ -372,12 +372,12 @@ class marsii extends Scene {
 
             if (this.staticAlien.dialogCount == 6) {
                 dialog = 'Oh, you got something';
-            } else if (this.staticAlien.dialogCount = 6.5) {
+            } else if (this.staticAlien.dialogCount == 6.5) {
                 humanDialogS = "Yup, it's a chronicle of numerous different species, exactly what you wanted.";
-            } else if (this.staticAlien.dialogCount = 7) {
+            } else if (this.staticAlien.dialogCount == 7) {
                 this.cJournal = false;
                 dialog = 'Thank you. What do you want me to do?';
-            } else if (this.staticAlien.dialogCount = 7.5) {
+            } else if (this.staticAlien.dialogCount == 7.5) {
                 humanDialog = 'Have refill battery [1]partially (safe for the alien, but will take longer and be harder to get home) or [2]completely (unsafe for the alien, but gives you all the energy you need)?'
                 if (key == 1) {
                     this.cosmicAlien.dialogCount = 9.5;
@@ -413,7 +413,7 @@ class marsii extends Scene {
 
             if (this.staticAlien.dialogCount == 5.5) {
                 dialog = '(It has nothing else to say to you right now)';
-                if (this.cJournal == true && this.emptyBattery == true) {
+                if (this.cJournal == true && this.ebatteryNeed == false) {
                     this.staticAlien.dialogCount = 6;
                 } else if (this.ebatteryNeed == true) {
                     humanDialogS = "I should go get my battery before I talk to it again"
