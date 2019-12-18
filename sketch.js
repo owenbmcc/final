@@ -7,7 +7,7 @@
 
 
 
-var scene = 'ekaterinaStart';
+var scene = 'collosseum';
 
 var sceneManager = {};
 sceneManager['owen'] = new owen();
@@ -20,7 +20,7 @@ sceneManager['ekaterinaInstructions'] = new ekaterinaInstructions();
 sceneManager['ekaterina'] = new ekaterina();
 sceneManager['mousewins'] = new mousewins();
 sceneManager['lionwins'] = new lionwins();
-sceneManager['jonathan'] = new Scene();
+sceneManager['collosseum'] = new collosseum();
 sceneManager['adonis'] = new adonis();
 sceneManager['maryam'] = new maryam();
 
@@ -47,7 +47,7 @@ function setup() {
 	}
 	sceneSelector.changed(selectScene);
 
-	sceneManager[scene].start();
+	sceneManager[scene].start("collosseum");
 }
 
 function changeScene(_scene) {
@@ -62,7 +62,7 @@ function selectScene() {
 }
 
 function draw() {
-	sceneManager[scene].draw(paralaxScroll);
+	sceneManager[scene].draw(collosseum);
 }
 
 var paralaxScroll = 0;

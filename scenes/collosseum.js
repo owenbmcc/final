@@ -1,179 +1,188 @@
 class collosseum extends Scene {
 
-	preload() {
+    preload() {
 
-		this.walk = loadSpriteSheet('images/jonathan/walk.png', 299, 437, 3);
-		this.stand = loadSpriteSheet('images/jonathan/idle.png', 414, 506, 1);
+        this.walk = loadSpriteSheet('images/jonathan/walk.png', 299, 437, 3);
+        this.stand = loadSpriteSheet('images/jonathan/idle.png', 414, 506, 1);
         this.attack = loadSpriteSheet('images/jonathan/attack.png', 533, 510, 2);
-		this.map = new Map();
-        this.characterKnight.idle = loadSpriteSheet('images/jonathan/knight_idle', 416, 448, 3);
-        this.characterKnight.walk = loadSpriteSheet('images/jonathan/knight_walk', 416, 432, 3);
-        this.characterKnight.attack = loadSpriteSheet('images/jonathan/knight_attack', 414, 477, 2);
         this.map = new Map();
-	//	this.map.preload('data/jonathan.json');
-
-	//	this.bg = loadSound('sounds/nelson/retromusic4.m4a');
 
 
-	//	this.walkSound = loadSound('sounds/nelson/walking.wav');
+
+        this.knightIdle = loadSpriteSheet('images/jonathan/knight_idle.png', 416, 448, 3);
+        this.knightWalk = loadSpriteSheet('images/jonathan/knight_walk.png', 416, 432, 3);
+        this.knightAttack = loadSpriteSheet('images/jonathan/knight_attack.png', 414, 477, 2);
+
+        //	this.map.preload('data/jonathan.json');
+
+        //	this.bg = loadSound('sounds/nelson/retromusic4.m4a');
 
 
-	//	this.walkSound.playMode();
+        //	this.walkSound = loadSound('sounds/nelson/walking.wav');
 
 
-		//        this.woodsSheet = loadSpriteSheet('images/Nelson/background.png', 224, 224, 2);
-	//	var npcSheet = loadSpriteSheet('images/Nelson/monster1.png', 48, 204, 4);
-	//	this.npc = new NPC(500, 500, npcSheet);
-	//	var npcSheet = loadSpriteSheet('images/Nelson/monster2.png', 192, 352, 5);
-	//	this.npc = new NPC(800, 800, npcSheet);
-	//	var npcSheet = loadSpriteSheet('images/Nelson/monster3.png', 192, 282, 4);
-	//	this.npc = new NPC(600, 600, npcSheet);
-		//make sure to change name of npcsheetand this.npc
-	}
+        //	this.walkSound.playMode();
 
-	setup() {
 
-		const animations = {
-			walking: loadAnimation(this.walk),
-			standing: loadAnimation(this.stand),
+        //this.woodsSheet = loadSpriteSheet('images/Nelson/background.png', 224, 224, 2);
+        //	var npcSheet = loadSpriteSheet('images/Nelson/monster1.png', 48, 204, 4);
+        //	this.npc = new NPC(500, 500, npcSheet);
+        //	var npcSheet = loadSpriteSheet('images/Nelson/monster2.png', 192, 352, 5);
+        //	this.npc = new NPC(800, 800, npcSheet);
+        //	var npcSheet = loadSpriteSheet('images/Nelson/monster3.png', 192, 282, 4);
+        //	this.npc = new NPC(600, 600, npcSheet);
+        //make sure to change name of npcsheetand this.npc
+    }
+
+    setup() {
+
+        const animations = {
+            walking: loadAnimation(this.walk),
+            standing: loadAnimation(this.stand),
             attack: loadAnimation(this.attack),
-            
-            knight_walk: loadAnimation(this.characterKnight.walk),
-            knight_idle: loadAnimation(this.characterKnight.idle),
-            knight_attack: loadAnimation(this.characterKnight.attack)
-		};
-		this.character = new Character(animations, 500,500);
-        //this.characterKnight = new Character(animations, 500,500);
-		//this.character.changeAnimation('idle');
 
-		this.map.setup();
-		//this.sceneLink.setup();
-		//this.woods = new Scenery(width / 2, height / 2, this.woodsSheet);
-		//this.woods.sprite.scale = 3;
-		//this.woods.setup();
+        };
 
-	//	this.npc.setup();
-	//	this.npc.speedX = 5;
+        const knightAnimations = {
+            knightWalk: loadAnimation(this.knightWalk),
+            knightIdle: loadAnimation(this.knightIdle),
+            knightAttack: loadAnimation(this.knightAttack)
+        };
 
-	}
+        this.character = new Character(animations, 500, 50);
+        this.knight = new Character(knightAnimations, -500, 50);
+        // this.knightIdleSpriteSheet.changeAnimation('images/jonathan/knight_idle.png');
 
-	start() {
-		//		this.bg.play();
-    //BGmusic   this.bg.loop();
-		this.map.start();
-	}
+        this.map.setup();
+        //this.sceneLink.setup();
+        //this.woods = new Scenery(width / 2, height / 2, this.woodsSheet);
+        //this.woods.sprite.scale = 3;
+        //this.woods.setup();
 
-	end() {
-		this.bg.pause();
-		this.map.end();
-	}
+        //	this.npc.setup();
+        //	this.npc.speedX = 5;
 
-	draw() {
-		background('tan');
-		//this.sand.display();
+    }
 
-		/*instructions*/
-		textAlign(CENTER);
-		textSize(30);
-		text('move the character with arrows', width / 2, 100);
+    start() {
+        //		this.bg.play();
+        //BGmusic   this.bg.loop();
+        this.map.start('collosseum');
+    }
 
+    end() {
+        this.bg.pause();
+        this.map.end();
+    }
 
-		/* user input - move character around */
-		var isWalking = false;
-		if (keyIsDown(RIGHT_ARROW)) {
-			this.character.speedX = 5;
-			isWalking = true;
-		} else if (keyIsDown(LEFT_ARROW)) {
-			this.character.speedX = -5;
-			isWalking = true;
-		} else {
-			this.character.speedX = 0;
-		}
+    draw() {
+        background('tan');
+        //this.sand.display();
 
-		if (keyIsDown(DOWN_ARROW)) {
-			this.character.speedY = 5;
-			isWalking = true;
-		} else if (keyIsDown(UP_ARROW)) {
-			this.character.speedY = -5;
-			isWalking = true;
-		} else {
-			this.character.speedY = 0;
-		}
-
-		if (isWalking) {
-			 this.character.changeAnimation('walking');
-            
-		}
-        else if (keyIsDown(32)){
-            this.character.changeAnimation('attack');
-            
-        }
-        
-        else {
-			this.character.changeAnimation('standing');
-		}
+        /*instructions*/
+        textAlign(CENTER);
+        textSize(30);
+        text('move the character with arrows SPACE for attack', 150, -225);
 
 
-		this.character.update();
-		this.character.display();
-        
-        
-        
-        //Knight controls
+        /* user input - move character around */
         var isWalking = false;
-        if (keyIsDown(68)) {
-            this.characterKnight.walk.speedX = 1;
-            isWalkingRightKnight = true;
-        } else if (keyIsDown(65)) {
-            this.characterKnight.walk.speedX = -1;
-            isWalkingLeftKnight = true;
+        if (keyIsDown(RIGHT_ARROW)) {
+            this.character.speedX = 5;
+            isWalking = true;
+        } else if (keyIsDown(LEFT_ARROW)) {
+            this.character.speedX = -5;
+            isWalking = true;
         } else {
-            this.characterKnight.walk.speedX = 0;
+            this.character.speedX = 0;
         }
 
-        
-		if (keyIsDown(83)) {
-			this.characterKnight.walk.speedY = 5;
-			isWalking = true;
-		} else if (keyIsDown(87)) {
-			this.characterKnight.walk.speedY = -5;
-			isWalking = true;
-		} else {
-			this.characterKnight.walk.speedY = 0;
-		}
-
-		if (isWalking) {
-			 this.characterKnight.walk.changeAnimation('knight_walk');
-            
-		}
-        else if (keyIsDown(16)){
-            this.characterKnight.attack.changeAnimation('knight_attack');
-            
+        if (keyIsDown(DOWN_ARROW)) {
+            this.character.speedY = 5;
+            isWalking = true;
+        } else if (keyIsDown(UP_ARROW)) {
+            this.character.speedY = -5;
+            isWalking = true;
+        } else {
+            this.character.speedY = 0;
         }
-        
-        else {
-			this.characterKnight.idle.changeAnimation('knight_idle');
-		}
+
+        if (isWalking) {
+            this.character.changeAnimation('walking');
+
+        } else if (keyIsDown(32)) {
+            this.character.changeAnimation('attack');
+
+        } else {
+            this.character.changeAnimation('standing');
+        }
 
 
-		this.character.update();
-		this.character.display();
-		//this.npc.update();
-		//if (this.npc.x > width * 2) {
-		//	this.npc.x = 0;
-		
-		//make sure to change name of npcsheetand this.npc
-//
-//		this.npc.display();
-//		if (this.npc.overlap(this.character)) {
-//			console.log('you died');
-//		}
-//		//make sure to change name of npcsheetand this.npc
+        this.character.update();
+        this.character.display();
 
-		/* update map */
-		this.map.collide(this.character);
-		//this.map.move(this.character);
-		this.map.update(this.character);
-		this.map.display();
-	}
+
+
+        //Knight controls
+
+        textAlign(CENTER);
+        textSize(30);
+        text('move the character with WASD keys E for attack', -150, -250);
+
+        if (keyIsDown(68)) {
+            this.knight.speedX = 5;
+            isWalking = true;
+        } else if (keyIsDown(65)) {
+            this.knight.speedX = -5;
+            isWalking = true;
+        } else
+            this.knight.speedX = 0;
+
+
+
+        if (keyIsDown(83)) {
+            this.knight.speedY = 5;
+            isWalking = true;
+        } else if (keyIsDown(87)) {
+            this.knight.speedY = -5;
+            isWalking = true;
+        } else {
+            this.knight.speedY = 0;
+        }
+
+        if (isWalking) {
+            this.knight.changeAnimation('knightWalk');
+
+        } else if (keyIsDown(69)) {
+            this.knight.changeAnimation('knightAttack');
+
+        } else {
+            this.knight.changeAnimation('knightIdle');
+        }
+
+
+        this.knight.update();
+        this.knight.display();
+        //this.npc.update();
+        //if (this.npc.x > width * 2) {
+        //	this.npc.x = 0;
+
+        //make sure to change name of npcsheetand this.npc
+        //
+        //		this.npc.display();
+        //		if (this.npc.overlap(this.character)) {
+        //			console.log('you died');
+        //		}
+        //		//make sure to change name of npcsheetand this.npc
+
+        /* update map */
+        //this.map.collide(this.character);
+        //this.map.move(this.character);
+        //this.map.update(this.character);
+        //this.map.display();
+
+        //        this.map.collide(this.Knight);
+        //        //this.map.move(this.character);
+        //        this.map.update(this.Knight);
+    }
 }
