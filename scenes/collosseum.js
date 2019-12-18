@@ -71,7 +71,7 @@ class collosseum extends Scene {
     }
 
     end() {
-        this.bg.pause();
+//        this.bg.pause();
         this.map.end();
     }
 

@@ -6,8 +6,8 @@ class ekaterinaStart extends Scene {
         this.begin = loadImage('images/ekaterina/begin.gif');
         this.zoom = loadImage('images/ekaterina/zoom.png');
         this.bg = loadImage('images/ekaterina/menu.png');
-        this.remix = loadSound('sounds/ekaterina/remix.mp3');
-        this.remix.setVolume(0.3);
+//        this.remix = loadSound('sounds/ekaterina/remix.mp3');
+//        this.remix.setVolume(0.3);
         this.press = loadSound('sounds/ekaterina/press.mp3');
         this.press.setVolume(1.0);
     }
@@ -32,7 +32,7 @@ class ekaterinaStart extends Scene {
             
         } else if (this.nextScene) {
             changeScene('ekaterinaInstructions');
-            this.remix.loop();
+//            this.remix.loop();
             this.press.play();
         }
     }

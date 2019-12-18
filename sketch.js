@@ -5,17 +5,7 @@
 */
 
 
-
-
-<<<<<<< HEAD
-var scene = 'collosseum';
-=======
-
-var scene = 'nelson';
-
 var scene = 'owen';
-
->>>>>>> 55b7232beb6e1eeb907dc3f7a49433a3e90e1449
 
 var sceneManager = {};
 sceneManager['owen'] = new owen();
@@ -29,14 +19,12 @@ sceneManager['ekaterinaInstructions'] = new ekaterinaInstructions();
 sceneManager['ekaterina'] = new ekaterina();
 sceneManager['mousewins'] = new mousewins();
 sceneManager['lionwins'] = new lionwins();
-<<<<<<< HEAD
 sceneManager['collosseum'] = new collosseum();
 sceneManager['adonis'] = new adonis();
 sceneManager['maryam'] = new maryam();
 
 
-=======
->>>>>>> 55b7232beb6e1eeb907dc3f7a49433a3e90e1449
+
 
 function preload() {
 	for (var s in sceneManager) {
