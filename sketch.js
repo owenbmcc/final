@@ -7,7 +7,7 @@
 
 
 
-var scene = 'owen';
+var scene = 'marsii';
 
 var sceneManager = {};
 sceneManager['owen'] = new owen();
