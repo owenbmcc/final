@@ -56,17 +56,21 @@ class marsii extends Scene {
         this.staticAlien.dialogCount = 0;
         //400, -600
 
-        var cosmicAlienSheet = loadSpriteSheet('images/marsii/npcs/cosmicAlien.png', 64, 130, 6);
-        this.cosmicAlien = new NPC(100, 1000, cosmicAlienSheet, "Hi. you need me for my power.");
+        this.cosmicAlienNorm = loadSpriteSheet('images/marsii/npcs/cosmicAlien.png', 64, 130, 6);
+        this.cosmicAlienQC = loadSpriteSheet('images/marsii/npcs/cosmicAlienqc.png', 64, 130, 6);
+        
+        this.cosmicAlienSheet = this.cosmicAlienNorm;
+        
+        this.cosmicAlien = new NPC(100, 1000, this.cosmicAlienSheet, "Hi. you need me for my power.");
         this.cosmicAlien.dialogCount = 0;
         //-2700, -570
 
-
-        this.liquidAlienSheet = loadSpriteSheet('images/marsii/npcs/liquidAlien.png', 64, 128, 4);
-
+        //Liquid Alien States
+        this.liquidAlienNormal = loadSpriteSheet('images/marsii/npcs/liquidAlien.png', 64, 128, 4);
         this.liquidAlienFrozen = loadSpriteSheet('images/marsii/npcs/liquidAlienF.png', 64, 128, 1);
-
         this.liquidAlienFrozenCut = loadSpriteSheet('images/marsii/npcs/liquidAlienFC.png', 64, 128, 1);
+        
+        this.liquidAlienSheet = this.liquidAlienNormal;
 
         this.liquidAlien = new NPC(150, 1200, this.liquidAlienSheet, "(Needed for map and key(if doing bad route))");
 
@@ -323,16 +327,16 @@ class marsii extends Scene {
             console.log("Static Alien", this.staticAlien.dialogCount);
             textSize(15);
             if (this.staticAlien.dialogCount % 1 == .5) {
-                fill('white');
+                fill('LightCyan');
             } else {
-                fill('LimeGreen');
+                fill('Gold');
             }
             stroke('black');
             strokeWeight(1);
             var dialog;
             var humanDialogS;
             if (this.staticAlien.dialogCount == 0) {
-                dialog = 'hi...';
+                dialog = 'Hi...';
             } else if (this.staticAlien.dialogCount == 0.5) {
                 humanDialogS = "Hello...? Are you ok?";
             } else if (this.staticAlien.dialogCount == 1) {
@@ -346,7 +350,7 @@ class marsii extends Scene {
             } else if (this.staticAlien.dialogCount == 3) {
                 dialog = "I want to learn about other alien species.";
             } else if (this.staticAlien.dialogCount == 3.5) {
-                humanDialogS = "If I help you do that, will you help me and give some energy";
+                humanDialogS = "If I help you do that, will you help me and give some energy?";
             } else if (this.staticAlien.dialogCount == 4) {
                 dialog = "Okay, I can't give you too much though, I don't want to cease to exist.";
             } else if (this.staticAlien.dialogCount == 4.5) {
@@ -395,12 +399,11 @@ class marsii extends Scene {
 
 
             if (this.staticAlien.dialogCount == 5.5) {
-                dialog = 'It has nothing else to say to you';
+                dialog = '(It has nothing else to say to you)';
                 if (this.cJournal == true) {
                     this.staticAlien.dialogCount = 6;
-                } else {
-                    this.staticAlien.dialogCount = 5.5;
                 }
+                this.staticAlien.dialogCount = 5.5;
             }
 
             if (this.staticAlien.dialogCount == 15) {
@@ -631,43 +634,47 @@ class marsii extends Scene {
                 this.creepAlien.dialogCount = 15;
             }
 
-             if (this.creepAlien.dialogCount == 10){
+            if (this.creepAlien.dialogCount == 10) {
                 if (this.frozenkey == true && this.frozenmap == true) {
                     this.creepAlien.dialogCount == 10.5
-                } else {this.creepAlien.dialogCount = 15;}
+                } else {
+                    this.creepAlien.dialogCount = 15;
                 }
-                 
-                    if (this.creepAlien.dialogCount == 10.5) {
-                        humanDialogCr = "Can you melt the ice around this map and key for me?";
-                    } else if (this.creepAlien.dialogCount == 11) {
-                        dialog = "Of course";
-                        this.unfrozenkey = true;
-                        this.unmarkedmap = true;
-                    } else if (this.creepAlien.dialogCount == 11.5) {
-                        humanDialogCr = "Thanks"
-                        this.frozenkey = false;
-                        this.frozenmap = false;
-                        this.dfufilled = false;
-                    } else if (this.creepAlien.dialogCount == 12){
-                        this.creepAlien.dialogCount = 15;
-                    }
+            }
 
-            
+            if (this.creepAlien.dialogCount == 10.5) {
+                humanDialogCr = "Can you melt the ice around this map and key for me?";
+            } else if (this.creepAlien.dialogCount == 11) {
+                dialog = "Of course";
+                this.unfrozenkey = true;
+                this.unmarkedmap = true;
+            } else if (this.creepAlien.dialogCount == 11.5) {
+                humanDialogCr = "Thanks"
+                this.frozenkey = false;
+                this.frozenmap = false;
+                this.dfufilled = false;
+            } else if (this.creepAlien.dialogCount == 12) {
+                this.creepAlien.dialogCount = 15;
+            }
+
+
 
             if (this.creepAlien.dialogCount == 15) {
                 if (this.gooddevice == true) {
                     this.creepAlien.dialogCount = 12.5;
                 } else if (this.baddevice == true) {
                     this.creepAlien.dialogCount = 7.5
-                } else if (this.dfufilled == true) { this.creepAlien.dialogCount = 10;
-                }else { 
-                    dialog = "(He has nothing else to say to you right now)" }
+                } else if (this.dfufilled == true) {
+                    this.creepAlien.dialogCount = 10;
+                } else {
+                    dialog = "(He has nothing else to say to you right now)"
+                }
             } else if (this.creepAlien.dialogCount == 15.5) {
                 this.creepAlien.dialogCount = 15;
             }
 
-            text(dialog, this.creepAlien.x - 50, this.creepAlien.y - 80, 300, 200);
-            text(humanDialogCr, this.character.x - 20, this.character.y - 20, 200, 200);
+            text(dialog, this.creepAlien.x - 50, this.creepAlien.y - 120, 300, 200);
+            text(humanDialogCr, this.character.x - 20, this.character.y - 80, 200, 200);
             fill(255);
             text("hit enter", this.creepAlien.x, this.creepAlien.y + 150);
 
@@ -766,23 +773,25 @@ class marsii extends Scene {
                 this.plantAlien.dialogCount = 17;
             }
 
-            if (this.deviceNeed == true) {
-                this.plantAlien.dialogCount = 21.5;
-                if (this.plantAlien.dialogCount == 21.5) {
-                    humanDialogP = "Do you have anything that could make someone come off as less intimidating?"
-                } else if (this.plantAlien.dialogCount == 22) {
-                    dialog = "Yeah, I'm working on a device to do that. It works, but it's not quite finished. I can give you a complete one later."
-                } else if (this.plantAlien.dialogCount == 22.5) {
-                    humanDialogP = "Can I see a prototype?"
-                } else if (this.plantAlien.dialogCount == 23) {
-                    dialog = "Sure, here you go."
-                    this.baddevice = true;
-                    this.deviceNeed = false;
-                }
 
+            if (this.plantAlien.dialogCount == 21.5) {
+                humanDialogP = "Do you have anything that could make someone come off as less intimidating?"
+            } else if (this.plantAlien.dialogCount == 22) {
+                dialog = "Yeah, I'm working on a device to do that. It works, but it's not quite finished. I can give you a complete one later."
+            } else if (this.plantAlien.dialogCount == 22.5) {
+                humanDialogP = "Can I see a prototype?"
+            } else if (this.plantAlien.dialogCount == 23) {
+                dialog = "Sure, here you go."
+                this.baddevice = true;
+                this.deviceNeed = false;
             }
 
+
+
             if (this.plantAlien.dialogCount == 17) {
+                if (this.deviceNeed == true) {
+                    this.plantAlien.dialogCount = 21.5;
+                }
                 dialog = "*They're currently fixing your ship and you have nothing to say to them*"
             } else if (this.plantAlien.dialogCount == 17.5) {
                 this.plantAlien.dialogCount = 17;
@@ -846,7 +855,7 @@ class marsii extends Scene {
                 humanDialogC = "Thanks, I don't really know how I got here. I'll come back when I have one.";
             } else if (this.cosmicAlien.dialogCount == 5) {
                 this.secondchatC = true;
-                this.cosmicAlien.dialogCount = 9;
+                this.cosmicAlien.dialogCount = 10;
             }
 
 
@@ -863,15 +872,15 @@ class marsii extends Scene {
             }
 
 
-            if (this.cosmicAlien.dialogCount == 9) {
+            if (this.cosmicAlien.dialogCount == 10) {
                 dialog = "(She currently has nothing else to say to you)"
                 if (this.bhNeed == true && this.secondchatC == true) {
                     this.cosmicAlien.dialogCount = 15.5;
                 } else if (this.bhNeed == true && this.secondchatC == false) {
                     this.cosmicAlien.dialogCount = 0;
                 }
-            } else if (this.cosmicAlien.dialogCount == 9.5) {
-                this.cosmicAlien.dialogCount = 9;
+            } else if (this.cosmicAlien.dialogCount == 10.5) {
+                this.cosmicAlien.dialogCount = 10;
             }
 
             if (this.cosmicAlien.dialogCount == 15.5) {
@@ -883,8 +892,9 @@ class marsii extends Scene {
                 humanDialogC = "Ok. I should have something that should work on my ship. I'll be back."
             } else if (this.cosmicAlien.dialogCount == 17) {
                 this.cosmicAlien.dialogCount = 19;
-            } else if (this.bhNeed == true && this.secondchatC == false) {
-                this.cosmicAlien.dialogCount = 13;
+                if (this.bhNeed == true && this.secondchatC == false) {
+                    this.cosmicAlien.dialogCount = 13;
+                }
             }
 
             if (this.cosmicAlien.dialogCount == 21) {
@@ -918,6 +928,7 @@ class marsii extends Scene {
             } else if (this.cosmicAlien.dialogCount == 28) {
                 dialog = "Thank you very much human. I look forward to reading this. Here's a blackhole, be very careful with that.";
                 this.blackhole = true;
+                this.cosmicAlienSheet = this.cosmicAlienQC;
                 this.cosmicAlien.dialogCount = 25;
             }
 
@@ -926,25 +937,26 @@ class marsii extends Scene {
             } else if (this.cosmicAlien.dialogCount == 19.5) {
                 this.cosmicAlien.dialogCount = 21;
             }
+
             if (this.cosmicAlien.dialogCount == 13) {
                 dialog = "She has nothing more to say to you right now"
-                this.cosmicAlien.dialogCount = 9;
+                this.cosmicAlien.dialogCount = 10;
             }
 
             if (this.cosmicAlien.dialogCount == 25) {
-                if (this.unmarkedmap = true) {
+                if (this.unmarkedmap == true) {
                     dialog = "I see you have the map, I'll mark it";
                     this.markedmap = true;
                     this.unmarkedmap = false;
                     this.cosmicAlien.dialogCount = 25;
-                } else if (this.cJournalNeed = true) {
+                } else if (this.cJournalNeed == true) {
                     this.cosmicAlien.dialogCount = 35.5;
-                } else if (this.anomalyNeed = true) {
+                } else if (this.anomalyNeed == true) {
                     this.cosmicAlien.dialogCount = 45.5;
-                } else if (this.astJournal = true) {
+                } else if (this.astJournal == true) {
                     this.cosmicAlien.dialogCount = 40.5;
                 } else {
-                    dialog = "She's grateful, but has nothing more to say to you for now"
+                    dialog = "(She's grateful, but has nothing more to say to you for now)"
                 }
             } else if (this.cosmicAlien.dialogCount == 25.5) {
                 this.cosmicAlien.dialogCount = 25;
@@ -997,8 +1009,8 @@ class marsii extends Scene {
             }
 
 
-            text(dialog, this.cosmicAlien.x + 20, this.cosmicAlien.y - 85, 200, 200);
-            text(humanDialogC, this.character.x, this.character.y, 200, 200);
+            text(dialog, this.cosmicAlien.x + 20, this.cosmicAlien.y - 125, 250, 200);
+            text(humanDialogC, this.character.x, this.character.y - 125, 200, 200);
             fill(255);
             text("hit enter", this.cosmicAlien.x, this.cosmicAlien.y + 70);
 
@@ -1149,9 +1161,9 @@ class marsii extends Scene {
                     this.astShip.dialogCount = 13.5;
                 } else if (key == "4") {
                     this.astShip.dialogCount = 0;
-                } else {
-                    this.astShip.dialogCount = 0
                 }
+            } else if (this.astShip.dialogCount == 23) {
+                this.astShip.dialogCount = 0;
             }
             if (this.astShip.dialogCount == 12.5) {
                 humanDialogSh = " *Takes the real log* "
