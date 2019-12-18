@@ -64,9 +64,9 @@ class marsii extends Scene {
 
         this.cosmicAlienSheet = this.cosmicAlienNorm;
 
-        this.cosmicAlien = new NPC(100, 1000, this.cosmicAlienSheet, "Hi. you need me for my power.");
+        this.cosmicAlien = new NPC(-2700, -570, this.cosmicAlienSheet, "Hi. you need me for my power.");
         this.cosmicAlien.dialogCount = 0;
-        //-2700, -570
+        //100, 1000
 
         //Liquid Alien States
         this.liquidAlienNormal = loadSpriteSheet('images/marsii/npcs/liquidAlien.png', 64, 128, 4);
