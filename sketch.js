@@ -4,6 +4,7 @@
 	fall 2019
 */
 
+
 var scene = 'owen';
 
 var sceneManager = {};
@@ -18,6 +19,12 @@ sceneManager['ekaterinaInstructions'] = new ekaterinaInstructions();
 sceneManager['ekaterina'] = new ekaterina();
 sceneManager['mousewins'] = new mousewins();
 sceneManager['lionwins'] = new lionwins();
+sceneManager['collosseum'] = new collosseum();
+sceneManager['adonis'] = new adonis();
+sceneManager['maryam'] = new maryam();
+
+
+
 
 function preload() {
 	for (var s in sceneManager) {
@@ -40,7 +47,7 @@ function setup() {
 	}
 	sceneSelector.changed(selectScene);
 
-	sceneManager[scene].start();
+	sceneManager[scene].start("collosseum");
 }
 
 function changeScene(_scene) {
@@ -55,7 +62,7 @@ function selectScene() {
 }
 
 function draw() {
-	sceneManager[scene].draw(paralaxScroll);
+	sceneManager[scene].draw(collosseum);
 }
 
 var paralaxScroll = 0;
