@@ -2,7 +2,7 @@
     "scenery": 
     {
         "background": {
-			"img":	"images/ekaterina/background.png",
+			"img":	"images/ekaterina/Background.png",
 			"width": 23300,
 			"height": 1200,
 			"frames": 1,

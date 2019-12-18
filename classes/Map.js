@@ -14,6 +14,7 @@ class Map {
                 return response.json();
             }).then(function (data) {
 
+
                 var scenery = data.scenery;
                 for (var key in scenery) {
                     var s = scenery[key];
@@ -40,10 +41,8 @@ class Map {
                 for (var key in characters) {
                     var c = characters[key];
                     var spriteSheet = loadSpriteSheet(c.img, c.width, c.height, c.frames);
-                    _this.sprites.characters[key] = new NPC(c.x, c.y, spriteSheet, c.dialog);
+                    _this.sprites.characters[key] = new NPC(c.x, c.y, spriteSheet, c.dialog, key);
                 }
-
-
             });
     }
 
@@ -78,17 +77,15 @@ class Map {
         camera.position.y = 0;
     }
 
+
     overlap(other) {
-        for (var key in this.sprites.obstacles) {
-            var list = this.sprites.obstacles[key];
-            for (var i = 0; i < list.length; i++) {
-                if (other.sprite.overlap(list[i].sprite)) {
-                    return list[i];
-                }
+        for (var key in this.sprites.characters) {
+            var character = this.sprites.characters[key];
+            if (other.sprite.overlap(character.sprite)) {
+                return character;
             }
         }
     }
-
 
     collide(other) {
         var isColliding = false;
@@ -152,6 +149,5 @@ class Map {
         this.sprites[type][label] = [];
         this.sprites[type][label].push(sprite);
     }
-
 
 }
