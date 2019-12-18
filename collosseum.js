@@ -9,9 +9,9 @@ class collosseum extends Scene {
 
 
 
-        this.knightIdle = loadSpriteSheet('images/jonathan/knight_idle.png', 832, 896, 3);
-        this.knightWalk = loadSpriteSheet('images/jonathan/knight_walk.png', 832, 864, 3);
-        this.knightAttacks = loadSpriteSheet('images/jonathan/knight_attack.png', 828, 477, 2);
+        this.knightIdle = loadSpriteSheet('images/jonathan/knight_idle.png', 416, 448, 3);
+        this.knightWalk = loadSpriteSheet('images/jonathan/knight_walk.png', 416, 432, 3);
+        this.knightAttack = loadSpriteSheet('images/jonathan/knight_attack.png', 414, 477, 2);
 
         //	this.map.preload('data/jonathan.json');
 
@@ -41,12 +41,16 @@ class collosseum extends Scene {
             standing: loadAnimation(this.stand),
             attack: loadAnimation(this.attack),
 
-            knightWalkSpriteSheet: loadAnimation(this.knightWalkSpriteSheet),
-            knightIdleSpriteSheet: loadAnimation(this.knightIdleSpriteSheet),
-            knightAttacksSpriteSheet: loadAnimation(this.knightAttacksSpriteSheet)
         };
-        this.character = new Character(animations, 500, 500);
-        this.Knight = new Character(animations);
+
+        const knightAnimations = {
+            knightWalk: loadAnimation(this.knightWalk),
+            knightIdle: loadAnimation(this.knightIdle),
+            knightAttack: loadAnimation(this.knightAttack)
+        };
+
+        this.character = new Character(animations, 500, 50);
+        this.knight = new Character(knightAnimations, -500, 50);
         // this.knightIdleSpriteSheet.changeAnimation('images/jonathan/knight_idle.png');
 
         this.map.setup();
@@ -78,7 +82,7 @@ class collosseum extends Scene {
         /*instructions*/
         textAlign(CENTER);
         textSize(30);
-        text('move the character with arrows', width / 2, 100);
+        text('move the character with arrows SPACE for attack', 150, -225);
 
 
         /* user input - move character around */
@@ -121,36 +125,39 @@ class collosseum extends Scene {
 
         //Knight controls
 
+        textAlign(CENTER);
+        textSize(30);
+        text('move the character with WASD keys E for attack', -150, -250);
 
         if (keyIsDown(68)) {
-            this.knight.speedX = 1;
+            this.knight.speedX = 5;
             isWalking = true;
         } else if (keyIsDown(65)) {
-            this.knight.speedX = -1;
+            this.knight.speedX = -5;
             isWalking = true;
         } else
-            this.knightIdleSpriteSheet.speedX = 0;
+            this.knight.speedX = 0;
 
 
 
         if (keyIsDown(83)) {
-            this.knight.walk.speedY = 5;
+            this.knight.speedY = 5;
             isWalking = true;
         } else if (keyIsDown(87)) {
-            this.knight.walk.speedY = -5;
+            this.knight.speedY = -5;
             isWalking = true;
         } else {
-            this.knightIdleSpriteSheet.speedY = 0;
+            this.knight.speedY = 0;
         }
 
         if (isWalking) {
-            this.knight.changeAnimation(('images/jonathan/knight_walk.png'));
+            this.knight.changeAnimation('knightWalk');
 
         } else if (keyIsDown(69)) {
-            this.knight.changeAnimation(('images/jonathan/knight_attack.png'));
+            this.knight.changeAnimation('knightAttack');
 
         } else {
-            this.knight.changeAnimation =(('images/jonathan/knight_idle.png'));
+            this.knight.changeAnimation('knightIdle');
         }
 
 
@@ -169,13 +176,13 @@ class collosseum extends Scene {
         //		//make sure to change name of npcsheetand this.npc
 
         /* update map */
-        this.map.collide(this.character);
+        //this.map.collide(this.character);
         //this.map.move(this.character);
-        this.map.update(this.character);
-        this.map.display();
+        //this.map.update(this.character);
+        //this.map.display();
 
-        this.map.collide(this.Knight);
-        //this.map.move(this.character);
-        this.map.update(this.Knight);
+        //        this.map.collide(this.Knight);
+        //        //this.map.move(this.character);
+        //        this.map.update(this.Knight);
     }
 }
