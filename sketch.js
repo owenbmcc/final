@@ -7,7 +7,7 @@
 
 
 
-var scene = 'ekaterinaStart';
+var scene = 'owen';
 
 var sceneManager = {};
 sceneManager['owen'] = new owen();
@@ -20,11 +20,6 @@ sceneManager['ekaterinaInstructions'] = new ekaterinaInstructions();
 sceneManager['ekaterina'] = new ekaterina();
 sceneManager['mousewins'] = new mousewins();
 sceneManager['lionwins'] = new lionwins();
-sceneManager['jonathan'] = new Scene();
-sceneManager['adonis'] = new adonis();
-sceneManager['maryam'] = new maryam();
-
-
 
 function preload() {
 	for (var s in sceneManager) {
