@@ -9,9 +9,9 @@ class collosseum extends Scene {
 
 
 
-        this.knightIdleSpriteSheet = loadSpriteSheet('images/jonathan/knight_idle.png', 832, 896, 3);
-        this.knightWalkSpriteSheet = loadSpriteSheet('images/jonathan/knight_walk.png', 832, 864, 3);
-        this.knightAttacksSpriteSheet = loadSpriteSheet('images/jonathan/knight_attack.png', 828, 477, 2);
+        this.knightIdle = loadSpriteSheet('images/jonathan/knight_idle.png', 832, 896, 3);
+        this.knightWalk = loadSpriteSheet('images/jonathan/knight_walk.png', 832, 864, 3);
+        this.knightAttacks = loadSpriteSheet('images/jonathan/knight_attack.png', 828, 477, 2);
 
         //	this.map.preload('data/jonathan.json');
 
@@ -46,8 +46,8 @@ class collosseum extends Scene {
             knightAttacksSpriteSheet: loadAnimation(this.knightAttacksSpriteSheet)
         };
         this.character = new Character(animations, 500, 500);
-        this.Knight = new Character(animations, 100, 500);
-       // this.knightIdleSpriteSheet.changeAnimation('images/jonathan/knight_idle.png');
+        this.Knight = new Character(animations);
+        // this.knightIdleSpriteSheet.changeAnimation('images/jonathan/knight_idle.png');
 
         this.map.setup();
         //this.sceneLink.setup();
@@ -63,7 +63,7 @@ class collosseum extends Scene {
     start() {
         //		this.bg.play();
         //BGmusic   this.bg.loop();
-        this.map.start();
+        this.map.start('collosseum');
     }
 
     end() {
@@ -144,18 +144,18 @@ class collosseum extends Scene {
         }
 
         if (isWalking) {
-            this.knightWalkSpriteSheet.changeAnimation(('images/jonathan/knight_walk.png'));
+            this.knight.changeAnimation(('images/jonathan/knight_walk.png'));
 
         } else if (keyIsDown(69)) {
-            this.knightAttacksSpriteSheet.changeAnimation(('images/jonathan/knight_attack.png'));
+            this.knight.changeAnimation(('images/jonathan/knight_attack.png'));
 
         } else {
-            this.knight.changeAnimation(('images/jonathan/knight_idle.png'));
+            this.knight.changeAnimation =(('images/jonathan/knight_idle.png'));
         }
 
 
-        this.character.update();
-        this.character.display();
+        this.knight.update();
+        this.knight.display();
         //this.npc.update();
         //if (this.npc.x > width * 2) {
         //	this.npc.x = 0;
@@ -173,5 +173,9 @@ class collosseum extends Scene {
         //this.map.move(this.character);
         this.map.update(this.character);
         this.map.display();
+
+        this.map.collide(this.Knight);
+        //this.map.move(this.character);
+        this.map.update(this.Knight);
     }
 }
