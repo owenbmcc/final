@@ -10,6 +10,7 @@ class lionwins extends Scene {
         this.confetti = loadImage('images/ekaterina/confetti.gif');
         var lion = loadSpriteSheet('images/ekaterina/lion.png', 520, 467, 22);
         this.lion = new NPC(580, 420, lion);
+        this.remix;
     }
 
     setup() {

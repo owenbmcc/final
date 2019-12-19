@@ -5,7 +5,7 @@
 */
 
 
-var scene = 'owen';
+var scene = 'ekaterinaStart';
 
 var sceneManager = {};
 sceneManager['owen'] = new owen();

@@ -21,6 +21,9 @@ class ekaterina extends Scene {
         this.lionjumpsright = loadSpriteSheet('images/ekaterina/lionjumpsright.png', 395, 140, 3);
 
         this.countSound = loadSound('sounds/ekaterina/count.mp3');
+        
+        this.remix = loadSound('sounds/ekaterina/remix.mp3');
+        this.remix.setVolume(0.3);
 
         this.mouseSound = loadSound('sounds/ekaterina/mousemoves.mp3');
         this.lionSound = loadSound('sounds/ekaterina/lionmoves.mp3');
@@ -185,6 +188,8 @@ class ekaterina extends Scene {
         this.sky.start();
         this.map.start();
         this.countSound.play();
+        this.remix.loop();
+
     }
 
     draw() {
@@ -791,5 +796,6 @@ class ekaterina extends Scene {
     end() {
         this.map.end();
         this.sky.end();
+        this.remix.stop();
     }
 }
