@@ -230,6 +230,11 @@ class marsii extends Scene {
         this.staticAlienQC = loadSpriteSheet('images/marsii/npcs/staticAlienqc.png', 64, 128, 8);
         this.staticAlienBQC = loadSpriteSheet('images/marsii/npcs/staticAlienbqc.png', 64, 128, 4);
         this.staticAlienSheet = this.staticAlienNorm
+        
+        this.fixcounter = 0;
+        this.savedTime = millis();
+        this.totalTime = 1000;      
+        
     }
 
     start() {
@@ -359,9 +364,9 @@ class marsii extends Scene {
             } else if (this.staticAlien.dialogCount == 3) {
                 dialog = "I want to learn about other alien species.";
             } else if (this.staticAlien.dialogCount == 3.5) {
-                humanDialogS = "If I help you do that, will you help me and give some energy?";
+                humanDialogS = "If I help you do that, will you help me and give me some energy?";
             } else if (this.staticAlien.dialogCount == 4) {
-                dialog = "Okay, I can't give you too much though, I don't want to cease to exist.";
+                dialog = "Okay, I can't give you too much though, I don't want to die ;(.";
             } else if (this.staticAlien.dialogCount == 4.5) {
                 humanDialogS = "Alright, I'll be back";
                 this.cJournalNeed = true;
@@ -423,11 +428,13 @@ class marsii extends Scene {
 
             if (this.staticAlien.dialogCount == 15) {
                 dialog = "There's nothing but static here.";
+            } else if (this.staticAlien.dialogCount == 15.5) {
                 this.staticAlien.dialogCount = 15;
             }
 
             if (this.staticAlien.dialogCount == 25) {
                 dialog = " (It seems content and has nothing else to say)";
+            } else if (this.staticAlien.dialogCount == 25.5) {
                 this.staticAlien.dialogCount = 25;
             }
 
@@ -463,7 +470,7 @@ class marsii extends Scene {
             if (this.liquidAlien.dialogCount == 0) {
                 dialog = 'hello';
             } else if (this.liquidAlien.dialogCount == 0.5) {
-                humanDialogL = "Hello, do you have something I can use to get out of here? I need help."
+                humanDialogL = "Hello, do you have something I can use to get out of here? I need help.";
             } else if (this.liquidAlien.dialogCount == 1) {
                 dialog = "I have a map. I also have a key, but I don't know what it unlocks. Anyway, what can you give me in return?";
             } else if (this.liquidAlien.dialogCount == 1.5) {
@@ -715,6 +722,7 @@ class marsii extends Scene {
             strokeWeight(1);
             var dialog;
             var humanDialogP;
+            this.savedTime = millis();
 
             if (this.plantAlien.dialogCount == 0) {
                 dialog = "Hey, what's up?";
@@ -811,6 +819,14 @@ class marsii extends Scene {
             } else if (this.plantAlien.dialogCount == 17.5) {
                 this.plantAlien.dialogCount = 17;
             }
+            
+            var passedTime = millis() - this.savedTime;
+            if (passedTime > this.totalTime) {
+            counter++;
+            this.savedTime = millis(); // Save the current time to restart the timer!
+            }
+            
+
 
             text(dialog, this.plantAlien.x - 30, this.plantAlien.y - 100, 250, 200);
             text(humanDialogP, this.character.x, this.character.y, 250, 200);
@@ -1170,7 +1186,7 @@ class marsii extends Scene {
             if (this.astShip.dialogCount == 22) {
                 dialog = "You need to take a log."
             } else if (this.astShip.dialogCount == 22.5) {
-                dialog = " [2] Take real log (your only actual record of your travels) || [3] Take fake log (with inaccuarate information, usually used to mislead enemies) || [4] Cancel Interaction ";
+                dialog = " [2] Take real log (your only actual record of your travels) || [3] Take fake log (with inaccuarate misleading information) || [4] Cancel Interaction ";
                 if (key == "2") {
                     this.astShip.dialogCount = 12.5;
                 } else if (key == "3") {
