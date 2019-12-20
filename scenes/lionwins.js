@@ -29,10 +29,11 @@ class lionwins extends Scene {
         this.lion.display();
         
         camera.on();
-
+        
         if (keyIsDown(32)) {
-                changeScene('owen');
-                this.nextSound.play();
-    	}
+            location.reload(); 
+            changeScene('collosseum');
+            this.nextSound.play();
+        } 
     }
 }
