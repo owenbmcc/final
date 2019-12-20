@@ -14,8 +14,9 @@ class collosseum extends Scene {
         this.knightAttack = loadSpriteSheet('images/jonathan/knight_attack.png', 414, 477, 2);
 
         //	this.map.preload('data/jonathan.json');
-
-        //	this.bg = loadSound('sounds/nelson/retromusic4.m4a');
+            var bg = "background";
+        	
+            this.bg = loadSound('sounds/jonathan/combatmusic.m4a');
 
 
         //	this.walkSound = loadSound('sounds/nelson/walking.wav');
@@ -77,6 +78,8 @@ class collosseum extends Scene {
 
     draw() {
         background('tan');
+        this.bg = loadSound('sounds/jonathan/combatmusic.m4a');       
+
         //this.sand.display();
 
         /*instructions*/
