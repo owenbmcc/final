@@ -5,11 +5,12 @@
 */
 
 
-var scene = 'ekaterinaStart';
+var scene = 'splash';
 
 var sceneManager = {};
-sceneManager['owen'] = new owen();
-sceneManager['paralax'] = new ParalaxScene();
+sceneManager['splash'] = new Splash();
+// sceneManager['owen'] = new owen();
+// sceneManager['paralax'] = new ParalaxScene();
 sceneManager['nick'] = new nick();
 sceneManager['marsii'] = new marsii();
 //sceneManager['marsiiGE'] = new marsiiGE(); 
@@ -21,10 +22,6 @@ sceneManager['ekaterina'] = new ekaterina();
 sceneManager['mousewins'] = new mousewins();
 sceneManager['lionwins'] = new lionwins();
 sceneManager['collosseum'] = new collosseum();
-sceneManager['adonis'] = new adonis();
-sceneManager['maryam'] = new maryam();
- 
-
 
 
 function preload() {
