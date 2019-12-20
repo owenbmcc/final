@@ -1,6 +1,12 @@
 class marsii extends Scene {
-
-
+/*
+    constructor() {
+		super();
+		sceneManager['goodend'] = new Scene("GoodEnd");
+        sceneManager['badend'] = new Scene("EvilEnd");
+	}
+    //When I come back I'll figure out how to get the sounds to work, make sure everything works right, and make sure the animations work correctly
+*/    
     preload() {
 
         //Main character - Astronaut
@@ -52,7 +58,8 @@ class marsii extends Scene {
         //NPC
 
         this.staticAlienNorm = loadSpriteSheet('images/marsii/npcs/staticAlien.png', 64, 128, 8);
-
+        this.staticAlienQC = loadSpriteSheet('images/marsii/npcs/staticAlienqc.png', 64, 128, 8);
+        this.staticAlienBad = loadSpriteSheet('images/marsii/npcs/staticAlienbqc.png', 64, 128, 8);
         this.staticAlienSheet = this.staticAlienNorm
 
         this.staticAlien = new NPC(400, -600, this.staticAlienSheet, "Hi. you need me for energy.");
@@ -61,7 +68,6 @@ class marsii extends Scene {
 
         this.cosmicAlienNorm = loadSpriteSheet('images/marsii/npcs/cosmicAlien.png', 64, 130, 6);
         this.cosmicAlienQC = loadSpriteSheet('images/marsii/npcs/cosmicAlienqc.png', 64, 130, 6);
-
         this.cosmicAlienSheet = this.cosmicAlienNorm;
 
         this.cosmicAlien = new NPC(-2700, -570, this.cosmicAlienSheet, "Hi. you need me for my power.");
@@ -141,9 +147,22 @@ class marsii extends Scene {
             walkup: loadAnimation(this.walkup),
             walkdown: loadAnimation(this.walkdown),
             idle: loadAnimation(this.idle)
-
+            
+            
+            //CosmicNorm: loadAnimation(this.cosmicAlienNorm),
+            //CosmicQC: loadAnimation(this.cosmicAlienQC),
 
         };
+        /*
+        		var npcAnimations = {
+			idle: this.npcSpriteSheet,
+             attack: this.npcattackSheet,
+             samattack:this.samattackSheet,
+             ellaattack:this.ellaattackSheet,
+             joeattack:this.joeattackSheet
+            
+		};*/
+		this.npc = new Character(npcAnimations, width - 200, height/2);
 
         this.character = new Character(animations);
         this.character.changeAnimation('idle');
@@ -226,11 +245,13 @@ class marsii extends Scene {
         // Needed from Static Alien
         this.partBattery = false;
         this.fullBattery = false;
-
+        
+        
         this.staticAlienQC = loadSpriteSheet('images/marsii/npcs/staticAlienqc.png', 64, 128, 8);
         this.staticAlienBQC = loadSpriteSheet('images/marsii/npcs/staticAlienbqc.png', 64, 128, 4);
-        this.staticAlienSheet = this.staticAlienNorm
+        this.staticAlienSheet = this.staticAlienNorm;
         
+        this.startcounter = false;
         this.fixcounter = 0;
         this.savedTime = millis();
         this.totalTime = 1000;      
@@ -450,7 +471,7 @@ class marsii extends Scene {
                 this.hitEnter = false;
             }
         }
-
+        //this.staticAlien.update();
         this.liquidAlien.display();
         if (this.liquidAlien.overlap(this.character)) {
             /* style dialog */
@@ -592,7 +613,7 @@ class marsii extends Scene {
                 this.hitEnter = false;
             }
         }
-
+        //this.liquidAlien.update();
         this.creepAlien.display();
         if (this.creepAlien.overlap(this.character)) {
             /* style dialog */
@@ -707,6 +728,7 @@ class marsii extends Scene {
                 this.hitEnter = false;
             }
         }
+        //this.creepAlien.update();
 
         this.plantAlien.display();
         if (this.plantAlien.overlap(this.character)) {
@@ -793,6 +815,7 @@ class marsii extends Scene {
                 dialog = "Alright, I'll start fixing your ship"
                 // Position needs to change to near ship.
             } else if (this.plantAlien.dialogCount == 15.5) {
+                this.startcounter = true;
                 this.plantAlien.dialogCount = 17;
             }
 
@@ -820,12 +843,19 @@ class marsii extends Scene {
                 this.plantAlien.dialogCount = 17;
             }
             
+            
+            
+            
+            
+            /*
+            if (this.startcounter = true){
             var passedTime = millis() - this.savedTime;
             if (passedTime > this.totalTime) {
             counter++;
             this.savedTime = millis(); // Save the current time to restart the timer!
             }
-            
+            }
+            */
 
 
             text(dialog, this.plantAlien.x - 30, this.plantAlien.y - 100, 250, 200);
@@ -840,7 +870,7 @@ class marsii extends Scene {
                 this.hitEnter = false;
             }
         }
-
+        //this.plantAlien.update();
         this.cosmicAlien.display();
         if (this.cosmicAlien.overlap(this.character)) {
             /* style dialog */
@@ -1053,7 +1083,7 @@ class marsii extends Scene {
                 this.hitEnter = false;
             }
         }
-
+        //this.cosmicAlien.update();
         this.astShip.display();
         if (this.astShip.overlap(this.character)) {
             /* style dialog */
@@ -1247,8 +1277,11 @@ class marsii extends Scene {
             } else if (this.alienShip.dialogCount == 10.5) {
                 humanDialogUfo = " [1] Yes || [2] No ";
                 if (key == "1") {
+                   // changeScene('goodend');
                     // this.alienShip.dialogCount = 5;
                     // END GAME ("Good" end - you overall were good and helpful to the . They might be back for revenge)
+                    //I was going to implement a scene here but the example of how to do it is gone :/ I'll see if I can figure it out.
+                    //I might end up just doing it in my own branch since I can't get this to run right now.
                 } else if (key == "2") {
                     this.alienShip.dialogCount = 10;
                 }
@@ -1362,6 +1395,7 @@ class marsii extends Scene {
             } else if (this.alienShip.dialogCount == 10.5) {
                 humanDialogUfo = " [1] Yes || [2] No ";
                 if (key == "1") {
+                    //changeScene('badend');
                     // this.alienShip.dialogCount = 5;
                     // END GAME ("Bad" end - screwed some people over. They might be back for revenge)
                 } else if (key == "2") {

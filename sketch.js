@@ -12,6 +12,7 @@ sceneManager['owen'] = new owen();
 sceneManager['paralax'] = new ParalaxScene();
 sceneManager['nick'] = new nick();
 sceneManager['marsii'] = new marsii();
+//sceneManager['marsiiGE'] = new marsiiGE(); 
 sceneManager['nelson'] = new nelson();
 sceneManager['youlose'] = new youlose();
 sceneManager['ekaterinaStart'] = new ekaterinaStart();
@@ -22,7 +23,7 @@ sceneManager['lionwins'] = new lionwins();
 sceneManager['collosseum'] = new collosseum();
 sceneManager['adonis'] = new adonis();
 sceneManager['maryam'] = new maryam();
-
+ 
 
 
 
