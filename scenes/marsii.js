@@ -162,7 +162,7 @@ class marsii extends Scene {
              joeattack:this.joeattackSheet
             
 		};*/
-		this.npc = new Character(npcAnimations, width - 200, height/2);
+		// this.npc = new Character(npcAnimations, width - 200, height/2);
 
         this.character = new Character(animations);
         this.character.changeAnimation('idle');
